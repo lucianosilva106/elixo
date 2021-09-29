@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-
+import { orange, green } from '@material-ui/core/colors';
 
 const theme = createTheme({
-  status: {
-    danger: green[500],
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
   },
 });
 
