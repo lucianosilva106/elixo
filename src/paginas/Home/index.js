@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import './home.css'
+import { createTheme, ThemeProvider, responsiveFontSizes  } from '@material-ui/core/styles';
+import CustomCheckbox from '@material-ui/core/Checkbox'
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 export default function Home() {
     return (

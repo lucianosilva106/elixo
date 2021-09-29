@@ -8,6 +8,7 @@ import Nossoapp from './paginas/Nossoapp';
 import Contato from './paginas/Contato';
 import Erro from './paginas/Erro';
 import Arearestrita from './paginas/Arearestrita';
+import teste from './paginas/teste';
 
 const Routes = () => {
     return(
@@ -21,6 +22,7 @@ const Routes = () => {
                 <Route exact path="/nossoapp" component={Nossoapp} />
                 <Route exact path="/contato" component={Contato} />
                 <Route exact path="/arearestrita" component={Arearestrita} />
+                <Route exact path="/teste" component={teste} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>

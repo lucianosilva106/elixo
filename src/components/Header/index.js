@@ -11,6 +11,7 @@ export default function Header(){
             <Link className="links" to="/nossoapp">Nosso Aplicativo</Link>
             <Link className="links" to="/contato">Fale Conosco</Link>
             <Link className="links" to="/arearestrita">Área restrita</Link>
+            <Link className="links" to="/teste">Login</Link>
         </header>
     )
 }

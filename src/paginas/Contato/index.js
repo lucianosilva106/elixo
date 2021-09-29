@@ -22,7 +22,7 @@ function Contato() {
 //        email: email
 //      })
       .then(()=>{
-        console.log('MENSAGEM CADASTRADA COM SUCESSO!');i
+        console.log('MENSAGEM CADASTRADA COM SUCESSO!');
         setEmail('');
         setMensagem('');
         setNome('');
