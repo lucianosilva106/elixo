@@ -1,17 +1,42 @@
 import './header.css';
 import { Link } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 export default function Header(){
     return(
-        <header>
-            <Link className="links" to="/">O Projeto</Link>
-            <Link className="links" to="/reciclavel">Os Recicláveis</Link>
-            <Link className="links" to="/dano">Os danos</Link>
-            <Link className="links" to="/acao">As ações</Link>
-            <Link className="links" to="/nossoapp">Nosso Aplicativo</Link>
-            <Link className="links" to="/contato">Fale Conosco</Link>
-            <Link className="links" to="/arearestrita">Área restrita</Link>
-            <Link className="links" to="/teste">Login</Link>
-        </header>
+        
+<header>
+ <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          
+          <Typography>
+            <Button color="inherit" href="/">O Projeto</Button>
+            <Button color="inherit" href="/reciclavel">Os Recicláveis</Button>
+            <Button color="inherit" href="/dano">Os danos</Button>
+            <Button color="inherit" href="/acao">As ações</Button>
+            <Button color="inherit" href="/nossoapp">Nosso Aplicativo</Button>
+            <Button color="inherit" href="/contato">Fale Conosco</Button>          
+            <Button color="inherit" href="/login">Login</Button>
+           </Typography>         
+        </Toolbar>
+      </AppBar>
+    </Box>
+    </header>
     )
 }

@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import Header from './components/Header';
 import Home from './paginas/Home';
 import Reciclavel from './paginas/Reciclavel';
@@ -7,13 +7,13 @@ import Acao from './paginas/Acao';
 import Nossoapp from './paginas/Nossoapp';
 import Contato from './paginas/Contato';
 import Erro from './paginas/Erro';
-import Arearestrita from './paginas/Arearestrita';
-import teste from './paginas/teste';
+import Login from './paginas/Login';
+
 
 const Routes = () => {
     return(
         <BrowserRouter>
-            <Header/>
+        <Header/>
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/reciclavel" component={Reciclavel} />
@@ -21,12 +21,13 @@ const Routes = () => {
                 <Route exact path="/acao" component={Acao} />
                 <Route exact path="/nossoapp" component={Nossoapp} />
                 <Route exact path="/contato" component={Contato} />
-                <Route exact path="/arearestrita" component={Arearestrita} />
-                <Route exact path="/teste" component={teste} />
+                <Route exact path="/login" component={Login} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>
+               
     );
 }
+
 
 export default Routes;
