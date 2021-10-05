@@ -7,18 +7,19 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import { orange, green, white, grey } from '@material-ui/core/colors';
+import { orange, green, white, grey, purple, amber, cyan } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createTheme({
     palette: {
       primary: {
-        main: green[500],
+        main: '#fff',
       },
       secondary: {
-        main: '#fff',
+        main: green[500],
       },
     },
   });
@@ -77,17 +78,18 @@ export default function Header(){
             size="large"
             edge="start"
             color="secondary"
-            aria-label="menu"
+            aria-label="home"
             sx={{ mr: 2 }}
+            href="/"
           >
             <MenuIcon />
           </IconButton>
           
           <Typography>
-            <Button color="secondary" href="/">O Projeto</Button>
-            <Button color="secondary" href="/reciclavel">Os Recicláveis</Button>
-            <Button color="secondary" href="/dano">Os danos</Button>
-            <Button color="secondary" href="/acao">As ações</Button>
+            <Button color="secondary" href="/">Home</Button>
+            <Button color="secondary" href="/reciclavel">O Projeto</Button>
+            <Button color="secondary" href="/dano">Postos de Coleta</Button>
+            <Button color="secondary" href="/noticias">Notícias</Button>
             <Button color="secondary" href="/nossoapp">Nosso Aplicativo</Button>
             <Button color="secondary" href="/contato">Fale Conosco</Button>          
             <Button color="secondary" href="/login">Login</Button>

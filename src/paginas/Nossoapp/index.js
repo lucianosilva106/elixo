@@ -1,4 +1,5 @@
 import './nossoapp.css';
+
 export default function Nossoapp() {
     return (
       <div className="nossoimg">

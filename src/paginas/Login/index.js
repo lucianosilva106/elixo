@@ -13,13 +13,25 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { orange, green } from '@material-ui/core/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
+  },
+});
 
 function Copyright(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
+        <Link color="inherit" href="/">
+          eLixo
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -27,7 +39,6 @@ function Copyright(props) {
     );
   }
   
-  const theme = createTheme();
   
   export default function SignInSide() {
     const handleSubmit = (event) => {
@@ -50,7 +61,7 @@ function Copyright(props) {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: 'url(https://source.unsplash.com/random)',
+              backgroundImage: 'url(https://lh3.googleusercontent.com/proxy/usqTg6WRYROa8xmhFLGVKgkTKqwFZ8xGRZfpkY9uSu7a_-g3OO2mgVz45BHliFJaeTaoPMfMdDnsgZuPCJGpHzSPSaI)',
               backgroundRepeat: 'no-repeat',
               backgroundColor: (t) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -68,21 +79,21 @@ function Copyright(props) {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Login
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  label="Login"
+                  name="name"
+                  autoComplete="name"
                   autoFocus
                 />
                 <TextField
@@ -90,35 +101,24 @@ function Copyright(props) {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Senha"
                   type="password"
                   id="password"
                   autoComplete="current-password"
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  label="Lembrar-me"
                 />
-                <Button
+                <Button 
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 3, mb: 2 }}   
+                  color="primary"       
                 >
-                  Sign In
+                  Entrar
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>
