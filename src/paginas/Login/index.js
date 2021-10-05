@@ -131,7 +131,7 @@ function Copyright(props) {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -169,11 +169,11 @@ function Copyright(props) {
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  label="Lembrar-me"
                 />
                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 } }
-                onClick = { fazerLogin }
-                >Logar</Button>
+                onClick = { fazerLogin } 
+                >Entrar</Button>
 
                 
                 {user && (                      // renderizacao condicional se usuario estiver logado
