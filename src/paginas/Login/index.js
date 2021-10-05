@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+<<<<<<< HEAD
 import { orange, green } from '@material-ui/core/colors';
 
 const theme = createTheme({
@@ -25,6 +26,12 @@ const theme = createTheme({
     },
   },
 });
+=======
+import firebase from '../../firebaseConnection';
+import { useState, useEffect } from 'react';
+import 'firebase/auth';
+import { Redirect } from 'react-router';
+>>>>>>> b1360448004317288fc810790e5df3633256c949
 
 function Copyright(props) {
     return (
@@ -41,6 +48,36 @@ function Copyright(props) {
   
   
   export default function SignInSide() {
+
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [user, setUser] = useState(false);
+    const [userLogged, setUserLogged] = useState({});
+
+    useEffect(() => {
+      async function checkLogin(){
+        await firebase.auth().onAuthStateChanged((user) => {
+          if(user){
+//            alert('checkando login')
+            setUser(true);
+            setUserLogged({
+              uid: user.uid,
+              email: user.email
+            });
+          }else{
+//            alert('sem login')
+            setUser(false);
+            setUserLogged({});
+
+          }
+        })
+  
+      }
+  
+      checkLogin();
+      
+    }, []);
+  
     const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -49,7 +86,26 @@ function Copyright(props) {
         email: data.get('email'),
         password: data.get('password'),
       });
+//      alert(email + ' - ' + senha)
     };
+
+    async function fazerLogin(){
+//      alert('fazer login')
+      await firebase.auth().signInWithEmailAndPassword(email, senha)
+      .then( (value) => {
+        setUser(true);
+        setUserLogged({
+          uid: user.uid,
+          email: user.email
+        });
+      })
+      .catch( (error) => {
+        alert('Email e senha inválidos!')
+        firebase.auth().signOut();
+        setUser(false);
+        setUserLogged({});
+      })
+    }
   
     return (
       <ThemeProvider theme={theme}>
@@ -83,33 +139,62 @@ function Copyright(props) {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
+<<<<<<< HEAD
                 Login
               </Typography>
               <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+=======
+                Faça seu Login
+              </Typography>
+
+              {user && (
+                <div>
+                  <span>{userLogged.uid} - {userLogged.email}</span>
+                </div>
+              )}
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+>>>>>>> b1360448004317288fc810790e5df3633256c949
                 <TextField
                   margin="normal"
                   required
                   fullWidth
+<<<<<<< HEAD
                   id="email"
                   label="Login"
                   name="name"
                   autoComplete="name"
+=======
+//                  id="email"
+                  value={email}
+                  onChange={ (e) => setEmail(e.target.value)}
+                  label="Endereço de e-mail"
+//                  name="email"
+                  autoComplete="email"
+>>>>>>> b1360448004317288fc810790e5df3633256c949
                   autoFocus
                 />
                 <TextField
                   margin="normal"
                   required
                   fullWidth
+<<<<<<< HEAD
                   name="password"
+=======
+                  value={senha}
+                  onChange={ (e) => setSenha(e.target.value)}
+
+//                  name="password"
+>>>>>>> b1360448004317288fc810790e5df3633256c949
                   label="Senha"
                   type="password"
-                  id="password"
+//                  id="password"
                   autoComplete="current-password"
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Lembrar-me"
                 />
+<<<<<<< HEAD
                 <Button 
                   type="submit"
                   fullWidth
@@ -119,6 +204,30 @@ function Copyright(props) {
                 >
                   Entrar
                 </Button>
+=======
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 } }
+                onClick = { fazerLogin }
+                >Logar</Button>
+              
+                {user && (
+                  <div>
+                    <Redirect to="/gerenciamento" />
+                  </div>
+                )}
+
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
+>>>>>>> b1360448004317288fc810790e5df3633256c949
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>
