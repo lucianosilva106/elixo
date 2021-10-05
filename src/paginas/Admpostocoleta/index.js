@@ -1,7 +1,7 @@
 import firebase from '../../firebaseConnection';
 import { useEffect, useState } from 'react';
 
-function Postocoleta() {
+function Admpostocoleta() {
 
     const[idPosto, setIdPosto] = useState('');
     const[nome, setNome] = useState('');
@@ -31,6 +31,25 @@ function Postocoleta() {
 
     })
     
+    async function handleAdd(){
+      await firebase.firestore().collection('postoscoletas')
+      .add({
+        nome: nome,
+        cep: cep,
+        endereco: endereco
+      })
+      .then(()=>{
+        alert('POSTO DE COLETA CADASTRADO COM SUCESSO!');
+        setNome('');
+        setCep('');
+        setEndereco('');
+        buscaPostos();
+      })
+      .catch((error)=>{ 
+        console.log('ERRO: ' + error);
+      })
+    }
+
     async function buscaPostos(){
       await firebase.firestore().collection('postoscoletas')
       .get()
@@ -73,9 +92,23 @@ function Postocoleta() {
 
     return (
       <div className="container">
-        <h1>Relacao de Posto de Coleta</h1><br />
+        <h1>Cadastro de Posto de Coleta</h1><br />
 
+        <label>ID:</label>
+        <input type="text" value={ idPosto } onChange={ (e) => setIdPosto(e.target.value)} /> <br/>
+
+        <label>Nome:</label>
+        <input type="text" value={nome} onChange={ (e) => setNome(e.target.value)} /> <br />
+
+        <label>Cep:</label>
+        <input type="text" value={cep} onChange={ (e) => setCep(e.target.value)} /> <br />
+
+        <label>Endereço:</label>
+        <input type="text" value={endereco} onChange={ (e) => setEndereco(e.target.value)} /> <br />
+
+        <button onClick={ handleAdd }>Cadastrar</button> <br/>
         <button onClick={ buscaPostos }>Atualizar</button> <br/>
+        <button onClick={ editarPosto }>Editar</button>
 
         <ul>
           {postoscoletas.map((postocoleta) =>{
@@ -96,5 +129,5 @@ function Postocoleta() {
       </div>
     );
 }
-
-export default Postocoleta;
+  
+export default Admpostocoleta;
