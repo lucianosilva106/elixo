@@ -167,7 +167,7 @@ function Copyright(props) {
                 onClick = { fazerLogin }
                 >Logar</Button>
               
-                {user && (
+                {user && (                      // renderizacao condicional se usuario estiver logado
                   <div>
                     <Redirect to="/gerenciamento" />
                   </div>

@@ -84,12 +84,10 @@ export default function Header(){
           </IconButton>
           
           <Typography>
-            <Button color="secondary" href="/">O Projeto</Button>
-            <Button color="secondary" href="/reciclavel">Os Recicláveis</Button>
-            <Button color="secondary" href="/dano">Os danos</Button>
-            <Button color="secondary" href="/acao">As ações</Button>
-            <Button color="secondary" href="/nossoapp">Nosso Aplicativo</Button>
-            <Button color="secondary" href="/contato">Fale Conosco</Button>          
+            <Button color="secondary" href="/">Home</Button>
+            <Button color="secondary" href="/quemsomos">Quem Somos</Button>
+            <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
+            <Button color="secondary" href="/noticia">Notícias</Button>
            </Typography>         
            <Search>
             <SearchIconWrapper>
