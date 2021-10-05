@@ -90,7 +90,6 @@ export default function Header(){
             <Button color="secondary" href="/acao">As ações</Button>
             <Button color="secondary" href="/nossoapp">Nosso Aplicativo</Button>
             <Button color="secondary" href="/contato">Fale Conosco</Button>          
-            <Button color="secondary" href="/login">Login</Button>
            </Typography>         
            <Search>
             <SearchIconWrapper>
