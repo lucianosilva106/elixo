@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, green } from '@material-ui/core/colors';
 import firebase from 'firebase';
+import { Redirect } from 'react-router';
 
 const theme = createTheme({
   palette: {
@@ -130,28 +131,37 @@ function Copyright(props) {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Login
+                Faça seu Login
               </Typography>
-              <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              {user && (
+                <div>
+                  <span>{userLogged.uid} - {userLogged.email}</span>
+                </div>
+              )}
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Login"
-                  name="name"
-                  autoComplete="name"
+//                  id="email"
+                  value={email}
+                  onChange={ (e) => setEmail(e.target.value)}
+                  label="Endereço de e-mail"
+//                  name="email"
+                  autoComplete="email"
                   autoFocus
                 />
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
+                  value={senha}
+                  onChange={ (e) => setSenha(e.target.value)}
+//                  name="password"
                   label="Senha"
                   type="password"
 //                  id="password"
@@ -159,17 +169,18 @@ function Copyright(props) {
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Lembrar-me"
+                  label="Remember me"
                 />
-                <Button 
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}   
-                  color="primary"       
-                >
-                  Entrar
-                </Button>
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 } }
+                onClick = { fazerLogin }
+                >Logar</Button>
+
+                
+                {user && (                      // renderizacao condicional se usuario estiver logado
+                  <div>
+                    <Redirect to="/gerenciamento" />
+                  </div>
+                )}
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>

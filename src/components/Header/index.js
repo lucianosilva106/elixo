@@ -88,8 +88,8 @@ export default function Header(){
           <Typography>
             <Button color="secondary" href="/">Home</Button>
             <Button color="secondary" href="/reciclavel">O Projeto</Button>
-            <Button color="secondary" href="/dano">Postos de Coleta</Button>
-            <Button color="secondary" href="/noticias">Notícias</Button>
+            <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
+            <Button color="secondary" href="/noticia">Notícias</Button>
             <Button color="secondary" href="/nossoapp">Nosso Aplicativo</Button>
             <Button color="secondary" href="/contato">Fale Conosco</Button>          
            </Typography>         
