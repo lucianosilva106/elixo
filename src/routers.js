@@ -11,6 +11,9 @@ import Admpostocoleta from './paginas/Admpostocoleta';
 import Admnoticia from './paginas/Admnoticia';
 import Postocoleta from './paginas/Postocoleta';
 import Noticia from './paginas/Noticia';
+import Quemsomos from './paginas/Quemsomos';
+import Admproposta from './paginas/Admproposta';
+import Cadastre from './paginas/Cadastre';
 
 const Routes = () => {
     return(
@@ -27,6 +30,9 @@ const Routes = () => {
                 <Route exact path="/noticia" component={Noticia} />
                 <Route exact path="/admpostocoleta" component={Admpostocoleta} />
                 <Route exact path="/admnoticia" component={Admnoticia} />
+                <Route exact path="/quemsomos" component={Quemsomos} />
+                <Route exact path="/admproposta" component={Admproposta} />
+                <Route exact path="/cadastre" component={Cadastre} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>

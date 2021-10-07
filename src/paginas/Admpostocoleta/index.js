@@ -7,6 +7,8 @@ function Admpostocoleta() {
     const[nome, setNome] = useState('');
     const[cep, setCep] = useState('');
     const[endereco, setEndereco] = useState('');
+    const[bairro, setBairro] = useState('');
+    const[destino, setDestino] = useState('');
     const[postoscoletas, setPostoscoletas] = useState([]);
 
     useEffect(() => {
@@ -19,7 +21,9 @@ function Admpostocoleta() {
               id: item.id,
               nome: item.data().nome,
               cep: item.data().cep,
-              endereco: item.data().endereco
+              endereco: item.data().endereco,
+              bairro: item.data().bairro,
+              destino: item.data().destino
             })
           })
 
@@ -36,13 +40,17 @@ function Admpostocoleta() {
       .add({
         nome: nome,
         cep: cep,
-        endereco: endereco
+        endereco: endereco,
+        bairro: bairro,
+        destino: destino
       })
       .then(()=>{
         alert('POSTO DE COLETA CADASTRADO COM SUCESSO!');
         setNome('');
         setCep('');
         setEndereco('');
+        setBairro('');
+        setDestino('');
         buscaPostos();
       })
       .catch((error)=>{ 
@@ -61,7 +69,9 @@ function Admpostocoleta() {
             id: doc.id,
             nome: doc.data().nome,
             cep: doc.data().cep,
-            endereco: doc.data().endereco
+            endereco: doc.data().endereco,
+            bairro: doc.data().bairro,
+            destino: doc.data().destino
           })
         })
         setPostoscoletas(lista);
@@ -78,7 +88,9 @@ function Admpostocoleta() {
       .update({
         nome: nome,
         cep: cep,
-        endereco:endereco
+        endereco:endereco,
+        bairro: bairro,
+        destino: destino
       })
       .then(() => {
         alert('DADOS ATUALIZADOS COM SUCESSO!')
@@ -86,6 +98,11 @@ function Admpostocoleta() {
         setNome('');
         setCep('');
         setEndereco('');
+        setBairro('');
+        setDestino('');
+      })
+      .catch((error) => {
+        alert("Erro ao gravar alteração: " + error)
       })
 
     }
@@ -106,6 +123,12 @@ function Admpostocoleta() {
         <label>Endereço:</label>
         <input type="text" value={endereco} onChange={ (e) => setEndereco(e.target.value)} /> <br />
 
+        <label>Bairro:</label>
+        <input type="text" value={bairro} onChange={ (e) => setBairro(e.target.value)} /> <br />
+
+        <label>Destino:</label>
+        <textarea type="text" value={destino} onChange={ (e) => setDestino(e.target.value)} /> <br />
+
         <button onClick={ handleAdd }>Cadastrar</button> <br/>
         <button onClick={ buscaPostos }>Atualizar</button> <br/>
         <button onClick={ editarPosto }>Editar</button>
@@ -117,7 +140,9 @@ function Admpostocoleta() {
                 <span>ID: {postocoleta.id} </span> <br />
                 <span>Nome: {postocoleta.nome} </span> <br />
                 <span>Cep: {postocoleta.cep} </span> <br />
-                <span>Endereço: {postocoleta.endereco} </span> 
+                <span>Endereço: {postocoleta.endereco} </span> <br/>
+                <span>Bairro: {postocoleta.bairro} </span> <br/>
+                <span>Destino: {postocoleta.destino} </span> 
                 <hr />
 
               </li>

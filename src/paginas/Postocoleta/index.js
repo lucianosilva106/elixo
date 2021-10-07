@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 
 function Postocoleta() {
 
-    const[idPosto, setIdPosto] = useState('');
     const[nome, setNome] = useState('');
     const[cep, setCep] = useState('');
     const[endereco, setEndereco] = useState('');
+    const[bairro, setBairro] = useState('');
+    const[destino, setDestino] = useState('');
     const[postoscoletas, setPostoscoletas] = useState([]);
 
     useEffect(() => {
@@ -16,10 +17,11 @@ function Postocoleta() {
           let meusPostos = [];
           doc.forEach((item) => {
             meusPostos.push({
-              id: item.id,
               nome: item.data().nome,
               cep: item.data().cep,
-              endereco: item.data().endereco
+              endereco: item.data().endereco,
+              bairro: item.data().bairro,
+              destino: item.data().destino
             })
           })
 
@@ -39,10 +41,12 @@ function Postocoleta() {
 
         snapshot.forEach((doc) => {
           lista.push({
-            id: doc.id,
             nome: doc.data().nome,
             cep: doc.data().cep,
-            endereco: doc.data().endereco
+            endereco: doc.data().endereco,
+            bairro: doc.data().bairro,
+            destino: doc.data().destino
+
           })
         })
         setPostoscoletas(lista);
@@ -53,38 +57,21 @@ function Postocoleta() {
       })
     }
 
-    async function editarPosto(){
-      await firebase.firestore().collection('postoscoletas')
-      .doc(idPosto)
-      .update({
-        nome: nome,
-        cep: cep,
-        endereco:endereco
-      })
-      .then(() => {
-        alert('DADOS ATUALIZADOS COM SUCESSO!')
-        setIdPosto('');
-        setNome('');
-        setCep('');
-        setEndereco('');
-      })
-
-    }
-
     return (
       <div className="container">
         <h1>Relacao de Posto de Coleta</h1><br />
 
         <button onClick={ buscaPostos }>Atualizar</button> <br/>
-
+        
         <ul>
           {postoscoletas.map((postocoleta) =>{
             return(
               <li key={postocoleta.id}>
-                <span>ID: {postocoleta.id} </span> <br />
                 <span>Nome: {postocoleta.nome} </span> <br />
                 <span>Cep: {postocoleta.cep} </span> <br />
-                <span>Endereço: {postocoleta.endereco} </span> 
+                <span>Endereço: {postocoleta.endereco} </span> <br/>
+                <span>Bairro: {postocoleta.bairro} </span> <br/> 
+                <span>Destino: {postocoleta.destino} </span> 
                 <hr />
 
               </li>
@@ -94,6 +81,16 @@ function Postocoleta() {
         </ul>
 
       </div>
+
+//      <div>  
+//        <ReactTable  
+//          data={data}  
+//          columns={columns}  
+//          defaultPageSize = {2}  
+//        pageSizeOptions = {[2,4,6]}  
+//        />  
+//      </div>        
+
     );
 }
 

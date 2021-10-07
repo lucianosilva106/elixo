@@ -40,11 +40,12 @@ export default function Gerenciamento() {
         <div>
 
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" color="primary">
+                <AppBar position="static" color="default">
                   <Toolbar>
                     <Typography>
                     <Button color="secondary" href="/admpostocoleta">Postos de Coleta</Button>
                     <Button color="secondary" href="/admnoticia">Notícias</Button>
+                    <Button color="secondary" href="/admproposta">Solicitações para Posto de Coleta</Button>
                     </Typography>         
                 </Toolbar>
                 </AppBar>
