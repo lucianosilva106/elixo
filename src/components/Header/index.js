@@ -82,7 +82,9 @@ export default function Header(){
             sx={{ mr: 2 }}
             href="/"
           >
-            <MenuIcon />
+            <MenuIcon>
+            </MenuIcon>
+            
           </IconButton>
           
           <Typography>

@@ -43,9 +43,9 @@ export default function Gerenciamento() {
                 <AppBar position="static" color="default">
                   <Toolbar>
                     <Typography>
-                    <Button color="secondary" href="/admpostocoleta">Postos de Coleta</Button>
-                    <Button color="secondary" href="/admnoticia">Notícias</Button>
-                    <Button color="secondary" href="/admproposta">Solicitações para Posto de Coleta</Button>
+                    <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
+                    <Button color="success" href="/admnoticia">Notícias</Button>
+                    <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
                     </Typography>         
                 </Toolbar>
                 </AppBar>

@@ -1,7 +1,11 @@
 import firebase from '../../firebaseConnection';
+import React, {useMemo} from 'react';
 import { useEffect, useState } from 'react';
+import { useTable } from 'react-table';
+import { CellWifiOutlined } from '@material-ui/icons';
 
 function Postocoleta() {
+
 
     const[nome, setNome] = useState('');
     const[cep, setCep] = useState('');
@@ -32,7 +36,7 @@ function Postocoleta() {
       loadPostos();
 
     })
-    
+
     async function buscaPostos(){
       await firebase.firestore().collection('postoscoletas')
       .get()
@@ -50,6 +54,7 @@ function Postocoleta() {
           })
         })
         setPostoscoletas(lista);
+        alert('setou postos');
 
       })
       .catch(() => {
@@ -57,41 +62,32 @@ function Postocoleta() {
       })
     }
 
-    return (
+    return(
       <div className="container">
-        <h1>Relacao de Posto de Coleta</h1><br />
 
-        <button onClick={ buscaPostos }>Atualizar</button> <br/>
-        
-        <ul>
-          {postoscoletas.map((postocoleta) =>{
-            return(
-              <li key={postocoleta.id}>
-                <span>Nome: {postocoleta.nome} </span> <br />
-                <span>Cep: {postocoleta.cep} </span> <br />
-                <span>Endereço: {postocoleta.endereco} </span> <br/>
-                <span>Bairro: {postocoleta.bairro} </span> <br/> 
-                <span>Destino: {postocoleta.destino} </span> 
-                <hr />
+      <h1>Relacao de Posto de Coleta</h1><br />
 
-              </li>
-              
-            )
-          })}
-        </ul>
+      <button onClick={ buscaPostos }>Atualizar</button> <br/>
+      
+      <ul>
+        {postoscoletas.map((postocoleta) =>{
+          return(
+            <li key={postocoleta.id}>
+              <span>Nome: {postocoleta.nome} </span> <br />
+              <span>Cep: {postocoleta.cep} </span> <br />
+              <span>Endereço: {postocoleta.endereco} </span> <br/>
+              <span>Bairro: {postocoleta.bairro} </span> <br/> 
+              <span>Destino: {postocoleta.destino} </span> 
+              <hr />
 
-      </div>
+            </li>
+            
+          )
+        })}
+      </ul>
 
-//      <div>  
-//        <ReactTable  
-//          data={data}  
-//          columns={columns}  
-//          defaultPageSize = {2}  
-//        pageSizeOptions = {[2,4,6]}  
-//        />  
-//      </div>        
-
-    );
+    </div>
+  )
 }
 
 export default Postocoleta;
