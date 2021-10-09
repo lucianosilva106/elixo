@@ -3,6 +3,11 @@ import React, {useMemo} from 'react';
 import { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
 import { CellWifiOutlined } from '@material-ui/icons';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import { CardActionArea } from '@material-ui/core';
 
 function Postocoleta() {
 
@@ -73,13 +78,24 @@ function Postocoleta() {
         {postoscoletas.map((postocoleta) =>{
           return(
             <li key={postocoleta.id}>
-              <span>Nome: {postocoleta.nome} </span> <br />
-              <span>Cep: {postocoleta.cep} </span> <br />
+              <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          alt="green iguana"
+        />
+        <CardContent>
+        <Typography gutterBottom variant="h5" component="div"> {postocoleta.nome} </Typography> 
+        <Typography variant="body2" color="text.secondary"> {postocoleta.cep} </Typography>
               <span>Endereço: {postocoleta.endereco} </span> <br/>
               <span>Bairro: {postocoleta.bairro} </span> <br/> 
               <span>Destino: {postocoleta.destino} </span> 
-              <hr />
-
+              
+              </CardContent>
+      </CardActionArea>
+    </Card>
             </li>
             
           )

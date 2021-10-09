@@ -63,22 +63,24 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <br /><br /><br />
+      <br />
       <div>
         <img className="logohome"></img>
       </div>
 
       <div align="left">
         <h2>
-          <p> <font color="Green"> Você tem lixo eletrônico em casa?</font></p>
+          <p> <font color="Green"> Você tem lixo eletrônico em casa? </font></p>
         </h2>
-        <button>Entenda o que é...</button>
+        <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+        Saiba mais</Button>
       </div>
       <div align="right">
         <h2>
           <p> <font color="Green"> Sabe quanto vale seu lixo eletrônico? </font> </p>
         </h2>
-        <button>Saiba mais...</button>
+        <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+        Saiba mais</Button>
       </div>
       <div align="center">
         <h3>
@@ -99,15 +101,15 @@ export default function Home() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://lh3.googleusercontent.com/proxy/usqTg6WRYROa8xmhFLGVKgkTKqwFZ8xGRZfpkY9uSu7a_-g3OO2mgVz45BHliFJaeTaoPMfMdDnsgZuPCJGpHzSPSaI)',
+            backgroundImage: 'url(/src/img/sejapostocoleta.png)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: '',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
       
-        > <h1>Formulário de Solcitacao de Posto de Coleta</h1> </Grid>
+        > <h1>Seja um Parceiro</h1> </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
           <Box
             sx={{
