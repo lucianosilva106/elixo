@@ -1,15 +1,50 @@
 import firebase from '../../firebaseConnection';
 import { useState } from 'react';
+import React from 'react';
+import { useQuery } from "graphql-hooks";
+import { Box } from '@material-ui/system';
+import { Container } from 'react-bootstrap';
+import { Image } from 'react-datocms';
+
+const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
+  allArtigos(first: $limit) {
+    titulo
+    tumbnail {
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+}`;
 
 function Noticia() {
 
+  const { loading, error, data } = useQuery(HOMEPAGE_QUERY, {
+    variables: {
+      limit: 10
+    }
+  });
+  if (loading) return "Loading...";
+  if (error) return "Something Bad Happened";
+
     return (
-      <div className="container">
-        <br/><br/>
-        <a href={"https://www.uol.com.br/tilt/noticias/redacao/2021/10/07/lider-em-lixo-eletronico-na-america-latina-brasil-tem-so-seis-recicladoras.htm"}>
-        Líder em lixo eletrônico na América Latina, Brasil tem só seis recicladoras... 
-        </a>
-      </div>
+      <Container fixed>
+        {data.allArtigos.map(artigo => (
+        <Box>
+        
+        <h6>{artigo.titulo}</h6>
+      </Box>
+      ))}
+      </Container>
     );
 }
   
