@@ -21,6 +21,7 @@ import Alert from '@material-ui/core/Alert';
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const theme = createTheme({
@@ -90,6 +91,25 @@ export default function SignInSide() {
     //      alert(email + ' - ' + senha)
   };
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   async function fazerLogin() {
     //      alert('fazer login')
@@ -102,7 +122,7 @@ export default function SignInSide() {
         });
       })
       .catch((error) => {
-        alert('Login e senha incorretos!')
+        handleClick();
         firebase.auth().signOut();
         setUser(false);
         setUserLogged({});
@@ -177,9 +197,17 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Lembrar-me"
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, color: 'white' }}
                 onClick={fazerLogin}
               >Entrar</Button>
+
+              <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="error" sx={{ width: '100%'}}>
+                    Login ou senha incorretos!
+                  </Alert>
+                </Snackbar>
+              </Stack>
 
 
               {user && (                      // renderizacao condicional se usuario estiver logado

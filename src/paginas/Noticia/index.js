@@ -5,6 +5,7 @@ import { useQuery } from "graphql-hooks";
 import { Box } from '@material-ui/system';
 import { Container } from 'react-bootstrap';
 import { Image } from 'react-datocms';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
   allArtigos(first: $limit) {
@@ -33,7 +34,10 @@ function Noticia() {
       limit: 10
     }
   });
-  if (loading) return "Loading...";
+  if (loading) return (
+    <Box sx={{ display: 'flex' }}>
+  <CircularProgress />
+  </Box>);
   if (error) return "Something Bad Happened";
 
     return (

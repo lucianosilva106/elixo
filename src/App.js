@@ -4,6 +4,9 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, green } from '@material-ui/core/colors';
 import { useQuery } from "graphql-hooks";
 import { Image } from 'react-datocms';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Box } from '@material-ui/system';
+
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
   allArtigos(first: $limit) {
@@ -43,7 +46,14 @@ function App() {
       limit: 10
     }
   });
-  if (loading) return "Loading...";
+  if (loading) return (
+    <Box sx={{ display: 'flex', 
+    alignSelf: 'center', 
+    top: '50%', 
+    left: '50%', 
+    position: 'fixed' }}>
+  <CircularProgress />
+  </Box>);
   if (error) return "Something Bad Happened";
 
   return (
