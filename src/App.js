@@ -47,13 +47,15 @@ function App() {
     }
   });
   if (loading) return (
+    <ThemeProvider theme={theme}>
     <Box sx={{ display: 'flex', 
     alignSelf: 'center', 
     top: '50%', 
     left: '50%', 
     position: 'fixed' }}>
-  <CircularProgress />
-  </Box>);
+  <CircularProgress color="primary" />
+  </Box>
+  </ThemeProvider>);
   if (error) return "Something Bad Happened";
 
   return (
