@@ -21,6 +21,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Stack from '@material-ui/core/Stack';
+import Divider from '@material-ui/core/Divider';
 
 
 function Postocoleta() {
@@ -133,76 +134,77 @@ function Postocoleta() {
 
       <h1>Postos de Coleta</h1><br />
 
-      <Stack direction="row" spacing={2}>
+      <Stack direction={{ xs: 'column', sm: 'row' }}
+        divider={<Divider orientation="vertical" flexItem />}
+        spacing={{ sm: 2, md: 2 }}
+        alignItems="center"
+        ustifyContent="center">
 
-      {postoscoletas.map((postocoleta) => {
-        return (
-          <Box
-            spacing={2}
-            cols={3}
-            key={postocoleta.id}>
+        {postoscoletas.map((postocoleta) => {
+          return (
+            <Grid
+              key={postocoleta.id}>
 
-            <Card direction="row" sx={{ maxWidth: 250, backgroundColor: '#fafafa' }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="https://cdn.pixabay.com/photo/2021/01/30/14/23/man-5963976_960_720.jpg"
-                  alt="posto de coleta"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div"> {postocoleta.nome} </Typography>               
-                </CardContent>
-              </CardActionArea>
+              <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa' }}>
+                <CardActionArea onClick={handleClickOpen}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image="https://cdn.pixabay.com/photo/2021/01/30/14/23/man-5963976_960_720.jpg"
+                    alt="posto de coleta"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div"> {postocoleta.nome} </Typography>
+                  </CardContent>
+                </CardActionArea>
 
-              <IconButton sx={{
-                top: '50%', 
-                left: '42%',
-              }}
-              aria-label="circle" onClick={handleClickOpen}><AddCircleIcon /></IconButton>
-            </Card>
-            <br />
-          </Box>
-        )
-      })}
+                <IconButton sx={{
+                  top: '50%',
+                  left: '42%',
+                }}
+                  aria-label="circle" onClick={handleClickOpen}><AddCircleIcon /></IconButton>
+              </Card>
+              <br />
+            </Grid>
+          )
+        })}
       </Stack>
 
-{postoscoletas.map((postocoleta) => {
+      {postoscoletas.map((postocoleta) => {
 
-  <div>
-
-        <BootstrapDialog 
-          key={postocoleta.id}
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-            Modal title
-          </BootstrapDialogTitle>
-          <DialogContent dividers>
-            <Typography>
-            {postocoleta.nome}
-            </Typography>
-            <Typography>
-            {postocoleta.cep}
-            </Typography>
-            <Typography>
-            {postocoleta.endereco}
-            </Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Save changes
-            </Button>
-          </DialogActions>
-        </BootstrapDialog>
-      </div>
-})}
+        <div>
+          <BootstrapDialog
+            key={postocoleta.id}
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+          >
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+              Modal title
+            </BootstrapDialogTitle>
+            <DialogContent dividers>
+              <Typography>
+                {postocoleta.nome}
+              </Typography>
+              <Typography>
+                {postocoleta.cep}
+              </Typography>
+              <Typography>
+                {postocoleta.endereco}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={handleClose}>
+                Save changes
+              </Button>
+            </DialogActions>
+          </BootstrapDialog>
+        </div>
+      })}
 
     </Container>
   )
-  
+
 }
 
 export default Postocoleta;

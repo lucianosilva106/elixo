@@ -95,21 +95,17 @@ export default function Home() {
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
+        <Grid id="imgcontato"
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(/src/img/sejapostocoleta.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
       
-        > <h1>Seja um Parceiro</h1> </Grid>
+        />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
           <Box
             sx={{
@@ -121,7 +117,7 @@ export default function Home() {
             }}
           >
             <Box component="form" noValidate sx={{ mt: 1 }}>
-
+            <h2>Seja um Parceiro</h2>
               <TextField
                 fullWidth
                 margin="normal"
