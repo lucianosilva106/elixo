@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './login.css'
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
@@ -133,17 +134,14 @@ export default function SignInSide() {
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
+        <Grid id="loginbackground"
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://lh3.googleusercontent.com/proxy/usqTg6WRYROa8xmhFLGVKgkTKqwFZ8xGRZfpkY9uSu7a_-g3OO2mgVz45BHliFJaeTaoPMfMdDnsgZuPCJGpHzSPSaI)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
+            backgroundSize: 'auto',
             backgroundPosition: 'center',
           }}
         />

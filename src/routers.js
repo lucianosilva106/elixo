@@ -14,11 +14,13 @@ import Noticia from './paginas/Noticia';
 import Quemsomos from './paginas/Quemsomos';
 import Admproposta from './paginas/Admproposta';
 import Cadastre from './paginas/Cadastre';
+import ScrollToTop from './paginas/ScrollToTop';
 
 const Routes = () => {
     return(
         <BrowserRouter>
         <Header/>
+        <ScrollToTop/>
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/reciclavel" component={Reciclavel} />
