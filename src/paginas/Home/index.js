@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import './home.css'
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
-import firebase from '../../firebaseConnection';
+import firebase from "../../firebaseConnection";
 import { useEffect, useState } from 'react';
 import { TextField } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
@@ -27,22 +27,27 @@ const theme = createTheme({
   },
 });
 
-export default function Home() {
+function Home() {
 
   const [nome, setNome] = useState('');
   const [cep, setCep] = useState('');
   const [endereco, setEndereco] = useState('');
   const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
   const [tipolixo, setTipolixo] = useState('');
   const [mensagem, setMensagem] = useState('');
 
-  async function handleAdd() {
+  async function handleAdd(){
+    alert(nome + ',' + cep + ',' + endereco + ',' + bairro + ',' + cidade + ',' + estado + ',' + tipolixo + ',' + mensagem);
     await firebase.firestore().collection('propostas')
       .add({
         nome: nome,
         cep: cep,
         endereco: endereco,
         bairro: bairro,
+        cidade: cidade,
+        estado: estado,
         tipolixo: tipolixo,
         mensagem: mensagem
       })
@@ -52,6 +57,8 @@ export default function Home() {
         setCep('');
         setEndereco('');
         setBairro('');
+        setCidade('');
+        setEstado('');
         setTipolixo('');
         setMensagem('');
       })
@@ -146,8 +153,6 @@ export default function Home() {
                 type="text"
                 defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
 
-
-
               <TextField
                 fullWidth
                 margin="normal"
@@ -156,6 +161,33 @@ export default function Home() {
                 label="Bairro"
                 type="text"
                 defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
+
+              <TextField
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-required"
+                label="Cidade"
+                type="text"
+                defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
+
+              <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
+              <Select
+                fullWidth
+                margin="normal"
+                size="small"
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={estado}
+                label="Estado"
+                onChange={(e) => setEstado(e.target.value.toString())}
+              >
+                <MenuItem value="">
+                </MenuItem>
+                <MenuItem value={'SP'}>São Paulo</MenuItem>
+                <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
+                <MenuItem value={'MG'}>Minas Gerais</MenuItem>
+              </Select>
 
               <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
               <Select
@@ -176,8 +208,6 @@ export default function Home() {
               </Select>
               <FormHelperText>Tamanho do material recebido</FormHelperText>
 
-
-
               <TextField
                 fullWidth
                 margin="normal"
@@ -189,7 +219,7 @@ export default function Home() {
 
 
 
-              <Button type="submit" fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+              <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
                 onClick={handleAdd}>Enviar Formulário</Button><br />
 
             </Box>
@@ -200,3 +230,5 @@ export default function Home() {
 
   );
 }
+
+export default Home;

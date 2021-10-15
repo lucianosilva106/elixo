@@ -68,18 +68,13 @@ function Postocoleta() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    
   };
   const handleClose = () => {
     setOpen(false);
   };
 
-
-  const [nome, setNome] = useState('');
-  const [cep, setCep] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [destino, setDestino] = useState('');
-  const [postoscoletas, setPostoscoletas] = useState([]);
+const [postoscoletas, setPostoscoletas] = useState([]);
 
   useEffect(() => {
     async function loadPostos() {
@@ -103,31 +98,6 @@ function Postocoleta() {
     loadPostos();
 
   })
-
-  async function buscaPostos() {
-    await firebase.firestore().collection('postoscoletas')
-      .get()
-      .then((snapshot) => {
-        let lista = [];
-
-        snapshot.forEach((doc) => {
-          lista.push({
-            nome: doc.data().nome,
-            cep: doc.data().cep,
-            endereco: doc.data().endereco,
-            bairro: doc.data().bairro,
-            destino: doc.data().destino
-
-          })
-        })
-        setPostoscoletas(lista);
-        alert('setou postos');
-
-      })
-      .catch(() => {
-
-      })
-  }
 
   return (
     <Container fixed>

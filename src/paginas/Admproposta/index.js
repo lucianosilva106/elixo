@@ -1,5 +1,6 @@
 import firebase from '../../firebaseConnection';
 import { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
 
 function Admproposta() {
 
@@ -63,29 +64,53 @@ function Admproposta() {
     }
 
     return (
-      <div className="container">
-        <h1>Relacao de Solicitações para Posto de Coleta</h1><br />
 
-        <button onClick={ buscaPropostas }>Atualizar</button> <br/>
-        
-        <ul>
+      <Table striped bordered hover size="lg" variant="dark">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Bairro</th>
+            <th>Mensagem</th>
+          </tr>
+        </thead>
+        <tbody>
           {propostas.map((proposta) =>{
             return(
-              <li key={proposta.id}>
-                <span>ID: {proposta.id} </span> <br />
-                <span>Nome: {proposta.nome} </span> <br />
-                <span>Cep: {proposta.cep} </span> <br />
-                <span>Endereço: {proposta.endereco} </span> 
-                <hr />
+              <tr>
+                <td>{proposta.nome}</td>
+                <td>{proposta.endereco}</td>
+                <td>{proposta.bairro}</td>
+                <td>{proposta.mensagem}</td>
+              </tr>  
+          )})};
+        </tbody>
+      </Table>
 
-              </li>
-              
-            )
-          })}
-        </ul>
 
-      </div>
-
+//      <div className="container">
+//        <h1>Relacao de Solicitações para Posto de Coleta</h1><br />
+//
+//        <button onClick={ buscaPropostas }>Atualizar</button> <br/>
+//        
+//        <ul>
+//          {propostas.map((proposta) =>{
+//            return(
+//              <li key={proposta.id}>
+//                <span>ID: {proposta.id} </span> <br />
+//                <span>Nome: {proposta.nome} </span> <br />
+//                <span>Cep: {proposta.cep} </span> <br />
+//                <span>Endereço: {proposta.endereco} </span> 
+//                <hr />
+//
+//              </li>
+//              
+//            )
+//          })}
+//        </ul>
+//
+//      </div>
+//
     );
 }
 
