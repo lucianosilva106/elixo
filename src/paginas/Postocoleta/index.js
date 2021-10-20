@@ -22,7 +22,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Stack from '@material-ui/core/Stack';
 import Divider from '@material-ui/core/Divider';
-
+import Collapse from 'react-bootstrap/Collapse';
 
 function Postocoleta() {
 
@@ -139,15 +139,17 @@ function Postocoleta() {
                     alt="posto de coleta"
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div"> {postocoleta.nome} </Typography>
+                    <Typography gutterBottom component="div"> {postocoleta.nome} </Typography>
                   </CardContent>
                 </CardActionArea>
 
                 <IconButton sx={{
-                  top: '50%',
-                  left: '42%',
-                }}
-                  aria-label="circle" onClick={()=>handleOnOpen(postocoleta.id)}><AddCircleIcon /></IconButton>
+                    top: '50%',
+                    left: '42%',
+                  }}
+                  aria-label="circle" 
+                  onClick={()=>handleOnOpen(postocoleta.id)}><AddCircleIcon />
+                </IconButton>
               </Card>
               {open && (
                 <div>
@@ -157,7 +159,7 @@ function Postocoleta() {
                   <p>{postocoleta.bairro}</p>
                   <p>{postocoleta.cidade}</p>
                   <p>{postocoleta.estado}</p>
-                  <p>{postocoleta.isOpen}</p>
+                  <p>{postocoleta.destino}</p>
                   <button onClick={()=>handleOnClose(postocoleta.id)}>Fechar</button>
                 </div>
               )}

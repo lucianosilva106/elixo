@@ -159,7 +159,6 @@ function Admpostocoleta() {
       .catch((error) => {
         alert("Erro ao gravar alteração: " + error)
       })
-
     }
 
     function pegaPosto(id){
@@ -335,53 +334,6 @@ function Admpostocoleta() {
 
  
     );
-
-//    return (
-//      <div className="container">
-//        <h1>Cadastro de Posto de Coleta</h1><br />
-//
-//        <label>ID:</label>
-//        <input type="text" value={ idPosto } onChange={ (e) => setIdPosto(e.target.value)} /> <br/>
-//
-//        <label>Nome:</label>
-//        <input type="text" value={nome} onChange={ (e) => setNome(e.target.value)} /> <br />
-//
-//        <label>Cep:</label>
-//        <input type="text" value={cep} onChange={ (e) => setCep(e.target.value)} /> <br />
-//
-//        <input type="text" value={endereco} onChange={ (e) => setEndereco(e.target.value)} /> <br />
-//        <label>Endereço:</label>
-//
-//        <label>Bairro:</label>
-//        <input type="text" value={bairro} onChange={ (e) => setBairro(e.target.value)} /> <br />
-//
-//        <label>Destino:</label>
-//        <textarea type="text" value={destino} onChange={ (e) => setDestino(e.target.value)} /> <br />
-//
-//        <button onClick={ handleAdd }>Cadastrar</button> <br/>
-//        <button onClick={ buscaPostos }>Atualizar</button> <br/>
-//        <button onClick={ editarPosto }>Editar</button>
-//
-//        <ul>
-//          {postoscoletas.map((postocoleta) =>{
-//            return(
-//              <li key={postocoleta.id}>
-//                <span>ID: {postocoleta.id} </span> <br />
-//                <span>Nome: {postocoleta.nome} </span> <br />
-//                <span>Cep: {postocoleta.cep} </span> <br />
-//                <span>Endereço: {postocoleta.endereco} </span> <br/>
-//                <span>Bairro: {postocoleta.bairro} </span> <br/>
-//                <span>Destino: {postocoleta.destino} </span> 
-//                <hr />
-//
-//              </li>
-//              
-//            )
-//          })}
-//        </ul>
-//
-//      </div>
-//   );
 }
   
 export default Admpostocoleta;
