@@ -1,30 +1,29 @@
-import firebase from '../../firebaseConnection';
-import React, { useMemo } from 'react';
-import { useEffect, useState } from 'react';
-import { useTable } from 'react-table';
-import { CellWifiOutlined } from '@material-ui/icons';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { CardActionArea, Container } from '@material-ui/core';
-import { Box } from '@material-ui/system';
-import { Grid } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import { styled } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import Stack from '@material-ui/core/Stack';
-import Divider from '@material-ui/core/Divider';
+import firebase from '../../firebaseConnection'
+import React, { useMemo } from 'react'
+import { useEffect, useState } from 'react'
+import { useTable } from 'react-table'
+import { CellWifiOutlined } from '@material-ui/icons'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Typography from '@material-ui/core/Typography'
+import { CardActionArea, Container } from '@material-ui/core'
+import { Box } from '@material-ui/system'
+import { Grid } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
+import { styled } from '@material-ui/core/styles'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogActions from '@material-ui/core/DialogActions'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import Stack from '@material-ui/core/Stack'
+import Divider from '@material-ui/core/Divider'
 
-
-function Postocoleta() {
+function Postocoleta () {
 
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -33,10 +32,10 @@ function Postocoleta() {
     '& .MuiDialogActions-root': {
       padding: theme.spacing(1),
     },
-  }));
+  }))
 
   const BootstrapDialogTitle = (props) => {
-    const { children, onClose, ...other } = props;
+    const { children, onClose, ...other } = props
 
     return (
       <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -52,47 +51,31 @@ function Postocoleta() {
               color: (theme) => theme.palette.grey[500],
             }}
           >
-            <CloseIcon />
+            <CloseIcon/>
           </IconButton>
         ) : null}
       </DialogTitle>
-    );
-  };
+    )
+  }
 
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
-  };
+  }
 
-  const [postoscoletas, setPostoscoletas] = useState([]);
+  const [postoscoletas, setPostoscoletas] = useState([])
 
-  const [open, setOpen] = useState(false);
-
-  function handleToogle (id) {
-    const postos = postoscoletas.map(item => {
+  function handleOnClick (id) {
+    postoscoletas.map(item => {
       if (item.id === id) item.isOpen = !item.isOpen
-       return item
     })
-     setPostoscoletas(postos)
   }
-
-  function handleOnOpen(id){
-    setOpen(true)
-     return handleToogle(id)
-  }
-
-  function handleOnClose(id){
-    setOpen(false)
-     return handleToogle(id)
-
-  }
-
 
   useEffect(() => {
-    async function loadPostos() {
+    async function loadPostos () {
       await firebase.firestore().collection('postoscoletas')
         .onSnapshot((doc) => {
-          let meusPostos = [];
+          let meusPostos = []
           doc.forEach((item) => {
             meusPostos.push({
               id: item.id,
@@ -102,28 +85,28 @@ function Postocoleta() {
               bairro: item.data().bairro,
               cidade: item.data().cidade,
               estado: item.data().estado,
-              destino: item.data().destino,
+              destino: item.data().destino
             })
           })
 
-          setPostoscoletas(meusPostos);
+          setPostoscoletas(meusPostos)
         })
     }
 
-    loadPostos();
+    loadPostos()
 
   })
 
   return (
     <Container fixed>
 
-      <h1>Postos de Coleta</h1><br />
+      <h1>Postos de Coleta</h1><br/>
 
       <Stack direction={{ xs: 'column', sm: 'row' }}
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={{ sm: 2, md: 2 }}
-        alignItems="center"
-        ustifyContent="center">
+             divider={<Divider orientation="vertical" flexItem/>}
+             spacing={{ sm: 2, md: 2 }}
+             alignItems="center"
+             ustifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
           return (
@@ -145,11 +128,12 @@ function Postocoleta() {
 
                 <IconButton sx={{
                   top: '50%',
-                  left: '42%',
+                  left: '42%'
                 }}
-                  aria-label="circle" onClick={()=>handleOnOpen(postocoleta.id)}><AddCircleIcon /></IconButton>
+                            aria-label="circle"
+                            onClick={() => handleOnClick(postocoleta.id)}><AddCircleIcon/></IconButton>
               </Card>
-              {open && (
+              {postocoleta.isOpen && (
                 <div>
                   <p>{postocoleta.id}</p>
                   <p>{postocoleta.destino}</p>
@@ -157,12 +141,10 @@ function Postocoleta() {
                   <p>{postocoleta.bairro}</p>
                   <p>{postocoleta.cidade}</p>
                   <p>{postocoleta.estado}</p>
-                  <p>{postocoleta.isOpen}</p>
-                  <button onClick={()=>handleOnClose(postocoleta.id)}>Fechar</button>
+                  <button onClick={() => handleOnClick(postocoleta.id)}>Fechar</button>
                 </div>
               )}
-            
-              <br />
+              <br/>
             </Grid>
           )
         })}
@@ -172,4 +154,4 @@ function Postocoleta() {
 
 }
 
-export default Postocoleta;
+export default Postocoleta

@@ -1,8 +1,24 @@
 import firebase from '../../firebaseConnection';
+import 'firebase/auth';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import './admprop.css';
 
 function Admproposta() {
+
+    async function checkLogin(){
+      await firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          }else{
+            firebase.auth().signOut();
+            localStorage.clear();
+            window.location.href = '/login';
+          }
+        })
+     }
+
+  checkLogin();
+
 
     const[idProposta, setIdProposta] = useState('');
     const[nome, setNome] = useState('');
@@ -63,10 +79,21 @@ function Admproposta() {
       })
     }
 
-    return (
+    async function excluirProposta(id){
+      await firebase.firestore().collection('propostas').doc(id)
+      .delete()
+      .then(() =>{
+        alert('Proposta excluida com sucesso!');
+        buscaPropostas();
+      })
 
-      <Table striped bordered hover size="lg" variant="dark">
-        <thead>
+    }
+
+    return (
+      <div>
+        <h2>Interessados em tornar-se postos de coleta</h2>
+        <Table>
+        <thead className="customers">
           <tr>
             <th>Nome</th>
             <th>Endereço</th>
@@ -78,14 +105,16 @@ function Admproposta() {
           {propostas.map((proposta) =>{
             return(
               <tr>
-                <td>{proposta.nome}</td>
+                <th scope="row">{proposta.nome}</th>
                 <td>{proposta.endereco}</td>
                 <td>{proposta.bairro}</td>
                 <td>{proposta.mensagem}</td>
+                <button onClick={()=> excluirProposta(proposta.id)}>Excluir proposta</button>
               </tr>  
           )})};
         </tbody>
       </Table>
+    </div>
 
 
 //      <div className="container">

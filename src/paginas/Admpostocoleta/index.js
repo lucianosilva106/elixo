@@ -1,4 +1,5 @@
 import firebase from '../../firebaseConnection';
+import 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import { TextField } from "@material-ui/core";
@@ -28,6 +29,19 @@ const theme = createTheme({
 
 
 function Admpostocoleta() {
+
+    async function checkLogin(){
+      await firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          }else{
+            firebase.auth().signOut();
+            localStorage.clear();
+            window.location.href = '/login';
+        }
+      })
+    }
+
+    checkLogin();
 
     const[idPosto, setIdPosto] = useState('');
     const[nome, setNome] = useState('');
@@ -166,8 +180,8 @@ function Admpostocoleta() {
       await firebase.firestore().collection('postoscoletas').doc(id)
       .delete()
       .then(() => {
-        alert('Posto de Coleta excluído com sucesso!')
-        buscaPostos()
+        alert('Posto de Coleta excluído com sucesso!');
+        buscaPostos();
       })
     }
 

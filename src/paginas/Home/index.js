@@ -39,7 +39,6 @@ function Home() {
   const [mensagem, setMensagem] = useState('');
 
   async function handleAdd(){
-    alert(nome + ',' + cep + ',' + endereco + ',' + bairro + ',' + cidade + ',' + estado + ',' + tipolixo + ',' + mensagem);
     await firebase.firestore().collection('propostas')
       .add({
         nome: nome,
