@@ -17,6 +17,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -70,14 +71,15 @@ function Postocoleta() {
 
   const [open, setOpen] = useState(false);
 
-  function handleToogle (id) {
+  function handleToogle(id) {
     const postos = postoscoletas.map(item => {
       if (item.id === id) item.isOpen = !item.isOpen
-       return item
+      return item
     })
-     setPostoscoletas(postos)
+    setPostoscoletas(postos)
   }
 
+<<<<<<< HEAD
   function handleOnOpen(id){
     setOpen(true);
     return handleToogle(id)
@@ -85,6 +87,15 @@ function Postocoleta() {
 
   function handleOnClose(id){
     setOpen(false);
+=======
+  function handleOnOpen(id) {
+    setOpen(true)
+    return handleToogle(id)
+  }
+
+  function handleOnClose(id) {
+    setOpen(false)
+>>>>>>> 4a5693b1641e3ee4f4edb4323b0401cdada606e5
     return handleToogle(id)
 
   }
@@ -149,24 +160,58 @@ function Postocoleta() {
                 </CardActionArea>
 
                 <IconButton sx={{
-                    top: '50%',
-                    left: '42%',
-                  }}
-                  aria-label="circle" 
-                  onClick={()=>handleOnOpen(postocoleta.id)}><AddCircleIcon />
+                  top: '50%',
+                  left: '42%',
+                }}
+                  aria-label="circle"
+                  onClick={() => handleOnOpen(postocoleta.id)}><AddCircleIcon />
                 </IconButton>
               </Card>
               <p>{postocoleta.isOpen}</p>
               {postocoleta.isOpen && (
                 <div>
+<<<<<<< HEAD
                   <p>{postocoleta.endereco}</p>
                   <p>{postocoleta.bairro}</p>
                   <p>{postocoleta.cidade}</p>
                   <p>{postocoleta.estado}</p>
                   <p>{postocoleta.destino}</p>
+=======
+                  <Button variant="outlined" onClick={handleOnOpen}>
+                    Open alert dialog
+                  </Button>
+                  <Dialog
+                    open={open}
+                    onClose={handleOnClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        <p>{postocoleta.id}</p>
+                        <p>{postocoleta.destino}</p>
+                        <p>{postocoleta.endereco}</p>
+                        <p>{postocoleta.bairro}</p>
+                        <p>{postocoleta.cidade}</p>
+                        <p>{postocoleta.estado}</p>
+                        <p>{postocoleta.destino}</p>
+                        <button onClick={() => handleOnClose(postocoleta.id)}>Fechar</button>
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleOnClose}>Disagree</Button>
+                      <Button onClick={() => handleOnClose(postocoleta.id)} autoFocus>
+                        Agree
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+>>>>>>> 4a5693b1641e3ee4f4edb4323b0401cdada606e5
                 </div>
               )}
-            
+
               <br />
             </Grid>
           )

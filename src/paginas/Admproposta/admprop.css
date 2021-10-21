@@ -26,3 +26,6 @@ tr:nth-child(even) {
   background-color: #04AA6D;
   color: white;
 }
+#topo{
+  background-image: url(/src/paginas/img/fundopostoavaliacao.png);
+}
