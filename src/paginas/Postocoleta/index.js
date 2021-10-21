@@ -1,14 +1,11 @@
 import firebase from '../../firebaseConnection';
 import React, { useMemo } from 'react';
 import { useEffect, useState } from 'react';
-import { useTable } from 'react-table';
-import { CellWifiOutlined } from '@material-ui/icons';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { CardActionArea, Container } from '@material-ui/core';
-import { Box } from '@material-ui/system';
 import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -23,7 +20,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Stack from '@material-ui/core/Stack';
 import Divider from '@material-ui/core/Divider';
-import Collapse from 'react-bootstrap/Collapse';
+import Fade from '@material-ui/core/Fade';
 
 function Postocoleta() {
 
@@ -79,7 +76,6 @@ function Postocoleta() {
     setPostoscoletas(postos)
   }
 
-<<<<<<< HEAD
   function handleOnOpen(id){
     setOpen(true);
     return handleToogle(id)
@@ -87,15 +83,6 @@ function Postocoleta() {
 
   function handleOnClose(id){
     setOpen(false);
-=======
-  function handleOnOpen(id) {
-    setOpen(true)
-    return handleToogle(id)
-  }
-
-  function handleOnClose(id) {
-    setOpen(false)
->>>>>>> 4a5693b1641e3ee4f4edb4323b0401cdada606e5
     return handleToogle(id)
 
   }
@@ -170,24 +157,14 @@ function Postocoleta() {
               <p>{postocoleta.isOpen}</p>
               {postocoleta.isOpen && (
                 <div>
-<<<<<<< HEAD
-                  <p>{postocoleta.endereco}</p>
-                  <p>{postocoleta.bairro}</p>
-                  <p>{postocoleta.cidade}</p>
-                  <p>{postocoleta.estado}</p>
-                  <p>{postocoleta.destino}</p>
-=======
-                  <Button variant="outlined" onClick={handleOnOpen}>
-                    Open alert dialog
-                  </Button>
                   <Dialog
                     open={open}
-                    onClose={handleOnClose}
+                    onClose={() => handleOnClose(postocoleta.id)}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                   >
                     <DialogTitle id="alert-dialog-title">
-                      {"Use Google's location service?"}
+                      {postocoleta.nome}
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
@@ -198,21 +175,17 @@ function Postocoleta() {
                         <p>{postocoleta.cidade}</p>
                         <p>{postocoleta.estado}</p>
                         <p>{postocoleta.destino}</p>
-                        <button onClick={() => handleOnClose(postocoleta.id)}>Fechar</button>
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={handleOnClose}>Disagree</Button>
-                      <Button onClick={() => handleOnClose(postocoleta.id)} autoFocus>
-                        Agree
+                      <Button variant="contained" disableElevation 
+                      onClick={() => handleOnClose(postocoleta.id)} autoFocus>
+                        Ok
                       </Button>
                     </DialogActions>
                   </Dialog>
->>>>>>> 4a5693b1641e3ee4f4edb4323b0401cdada606e5
                 </div>
               )}
-
-              <br />
             </Grid>
           )
         })}

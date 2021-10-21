@@ -227,65 +227,7 @@ function Admproposta() {
         </Stack>
       </Container>
     </ThemeProvider>
-
-
-
-
-<<<<<<< HEAD
-    return (
-      <div>
-        <h2>Interessados em tornar-se postos de coleta</h2>
-        <Table>
-        <thead className="customers">
-          <tr>
-            <th>Nome</th>
-            <th>Endereço</th>
-            <th>Bairro</th>
-            <th>Mensagem</th>
-          </tr>
-        </thead>
-        <tbody>
-          {propostas.map((proposta) =>{
-            return(
-              <tr>
-                <th scope="row">{proposta.nome}</th>
-                <td>{proposta.endereco}</td>
-                <td>{proposta.bairro}</td>
-                <td>{proposta.mensagem}</td>
-                <button onClick={()=> excluirProposta(proposta.id)}>Excluir proposta</button>
-              </tr>  
-          )})};
-        </tbody>
-      </Table>
-    </div>
-
-    );
-=======
-    //      <div className="container">
-    //        <h1>Relacao de Solicitações para Posto de Coleta</h1><br />
-    //
-    //        <button onClick={ buscaPropostas }>Atualizar</button> <br/>
-    //        
-    //        <ul>
-    //          {propostas.map((proposta) =>{
-    //            return(
-    //              <li key={proposta.id}>
-    //                <span>ID: {proposta.id} </span> <br />
-    //                <span>Nome: {proposta.nome} </span> <br />
-    //                <span>Cep: {proposta.cep} </span> <br />
-    //                <span>Endereço: {proposta.endereco} </span> 
-    //                <hr />
-    //
-    //              </li>
-    //              
-    //            )
-    //          })}
-    //        </ul>
-    //
-    //      </div>
-    //
   );
->>>>>>> 4a5693b1641e3ee4f4edb4323b0401cdada606e5
 }
 
 export default Admproposta;
