@@ -116,30 +116,6 @@ function Admproposta() {
       </Table>
     </div>
 
-
-//      <div className="container">
-//        <h1>Relacao de Solicitações para Posto de Coleta</h1><br />
-//
-//        <button onClick={ buscaPropostas }>Atualizar</button> <br/>
-//        
-//        <ul>
-//          {propostas.map((proposta) =>{
-//            return(
-//              <li key={proposta.id}>
-//                <span>ID: {proposta.id} </span> <br />
-//                <span>Nome: {proposta.nome} </span> <br />
-//                <span>Cep: {proposta.cep} </span> <br />
-//                <span>Endereço: {proposta.endereco} </span> 
-//                <hr />
-//
-//              </li>
-//              
-//            )
-//          })}
-//        </ul>
-//
-//      </div>
-//
     );
 }
 

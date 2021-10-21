@@ -65,6 +65,8 @@ function Postocoleta() {
   };
 
   const [postoscoletas, setPostoscoletas] = useState([]);
+  let mostraend = '';
+  const flagmostra = 2;
 
   const [open, setOpen] = useState(false);
 
@@ -77,13 +79,13 @@ function Postocoleta() {
   }
 
   function handleOnOpen(id){
-    setOpen(true)
-     return handleToogle(id)
+    setOpen(true);
+    return handleToogle(id)
   }
 
   function handleOnClose(id){
-    setOpen(false)
-     return handleToogle(id)
+    setOpen(false);
+    return handleToogle(id)
 
   }
 
@@ -105,14 +107,13 @@ function Postocoleta() {
               destino: item.data().destino,
             })
           })
-
           setPostoscoletas(meusPostos);
         })
     }
 
     loadPostos();
 
-  })
+  },[])
 
   return (
     <Container fixed>
@@ -126,6 +127,10 @@ function Postocoleta() {
         ustifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
+          mostraend = '';
+          if (postocoleta.isOpen === true){
+            mostraend = postocoleta.endereco;
+          }
           return (
             <Grid
               key={postocoleta.id}>
@@ -151,16 +156,14 @@ function Postocoleta() {
                   onClick={()=>handleOnOpen(postocoleta.id)}><AddCircleIcon />
                 </IconButton>
               </Card>
-              {open && (
+              <p>{postocoleta.isOpen}</p>
+              {postocoleta.isOpen && (
                 <div>
-                  <p>{postocoleta.id}</p>
-                  <p>{postocoleta.destino}</p>
                   <p>{postocoleta.endereco}</p>
                   <p>{postocoleta.bairro}</p>
                   <p>{postocoleta.cidade}</p>
                   <p>{postocoleta.estado}</p>
                   <p>{postocoleta.destino}</p>
-                  <button onClick={()=>handleOnClose(postocoleta.id)}>Fechar</button>
                 </div>
               )}
             

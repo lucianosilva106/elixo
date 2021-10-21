@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/co
 import { TextField } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
-//import FormHelperText from '@material-ui/core/FormHelperText';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -13,8 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { InputLabel } from "@material-ui/core";
+import Table from 'react-bootstrap/Table';
 import './admposto.css'
-
 
 const theme = createTheme({
   palette: {
@@ -184,6 +184,10 @@ function Admpostocoleta() {
       })
     }
 
+    function buscaCep(){
+
+    }
+
     return (
       <ThemeProvider theme={theme}>
         <br />
@@ -242,6 +246,7 @@ function Admpostocoleta() {
                   label="CEP"
                   type="text"
                   defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
+                  <Button onClick={buscaCep}>Pesquisar</Button>
   
                 <TextField
                   fullWidth
@@ -307,28 +312,39 @@ function Admpostocoleta() {
             </Box>
           </Grid>
         </Grid>
-
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         <div>
           <h2>Postos Cadastrados</h2>
-          <ul>
-            {postoscoletas.map((postocoleta) =>{
-            return(
-              <li key={postocoleta.id}>
-                <span>ID: {postocoleta.id} </span> <br />
-                <span>Nome: {postocoleta.nome} </span> <br />
-                <span>Cep: {postocoleta.cep} </span> <br />
-                <span>Endereço: {postocoleta.endereco} </span> <br/>
-                <span>Bairro: {postocoleta.bairro} </span> <br/>
-                <span>Destino: {postocoleta.destino} </span> 
-                <button onClick={() => pegaPosto(postocoleta.id)}>Alterar</button>  
-                <button onClick={() => excluirPosto(postocoleta.id)}>Excluir</button>
-                <hr />
-
-              </li>
-              
-              )
-            })}
-          </ul>
+          <Table>
+              <thead className="customers">
+                <tr>
+                  <th>Nome</th>
+                  <th>Cep</th>
+                  <th>Endereço</th>
+                  <th>Bairro</th>
+                  <th>Cidade</th>
+                  <th>Estado</th>
+                  <th>Destino</th>
+                </tr>
+              </thead>
+              <tbody>
+                {postoscoletas.map((postocoleta) =>{
+                  return(
+                    <tr>
+                      <th scope="row">{postocoleta.nome}</th>
+                      <td>{postocoleta.cep}</td>
+                      <td>{postocoleta.endereco}</td>
+                      <td>{postocoleta.bairro}</td>
+                      <td>{postocoleta.cidade}</td>
+                      <td>{postocoleta.estado}</td>
+                      <td>{postocoleta.destino}</td>
+                      <button onClick={() => pegaPosto(postocoleta.id)}>Alterar</button>  
+                      <button onClick={() => excluirPosto(postocoleta.id)}>Excluir</button>
+                    </tr>  
+                )})};
+              </tbody>
+            </Table>
+      
         </div>
       </ThemeProvider >
 

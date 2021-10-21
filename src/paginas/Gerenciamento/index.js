@@ -104,6 +104,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Gerenciamento() {
 
+      async function checkLogin(){
+        await firebase.auth().onAuthStateChanged((user) => {
+          if(user){
+           }else{
+              firebase.auth().signOut();
+              localStorage.clear();
+             window.location.href = '/login';
+           }
+          })
+       }
+
+    checkLogin();
+
     function fazerLogout(){
         firebase.auth().signOut();
         localStorage.clear();
@@ -218,6 +231,7 @@ export default function Gerenciamento() {
                 <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
                 <Button color="success" href="/admnoticia">Notícias</Button>
                 <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
+                <Button color="success" onClick={()=>fazerLogout()}>Logout</Button>
               </Typography>
             </Toolbar>
           </AppBar>
