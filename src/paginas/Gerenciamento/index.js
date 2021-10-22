@@ -18,11 +18,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { green } from '@material-ui/core/colors';
 import DomainIcon from '@material-ui/icons/Domain';
 import MoreIcon from '@material-ui/icons/More';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const theme = createTheme({
   palette: {
@@ -104,38 +107,59 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Gerenciamento() {
 
-      async function checkLogin(){
-        await firebase.auth().onAuthStateChanged((user) => {
-          if(user){
-           }else{
-              firebase.auth().signOut();
-              localStorage.clear();
-             window.location.href = '/login';
-           }
-          })
-       }
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-    checkLogin();
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
 
-    function fazerLogout(){
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  async function checkLogin() {
+    await firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+      } else {
         firebase.auth().signOut();
         localStorage.clear();
-        window.location.href = '/';
-    }
+        window.location.href = '/login';
+      }
+    })
+  }
 
-    
-    const [open, setOpen] = React.useState(false);
-  
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
+  checkLogin();
 
-    return (
-      <ThemeProvider theme={theme}>
+  function fazerLogout() {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location.href = '/';
+  }
+  function abrirHome() {
+    window.location.href = '/';
+  }
+  function abrirPostocoleta() {
+    window.location.href = '/postocoleta';
+  }
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="fixed" color="secondary" open={open} elevation={0}>
@@ -154,7 +178,35 @@ export default function Gerenciamento() {
             </IconButton>
             <Typography variant="h6" noWrap component="div" color="primary">
               Dashboard - Gerenciamento do eLixo
-            </Typography>
+            </Typography>           
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="primary"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={() => abrirHome()}>Home</MenuItem>
+                <MenuItem onClick={() => fazerLogout()}>Logout</MenuItem>
+              </Menu>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -168,10 +220,10 @@ export default function Gerenciamento() {
             {['Postos de Coleta', 'Saiba Mais', 'Solicitações'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
-                  {index % 3 === 0 ? 
-                  <DomainIcon color="secondary" to="/admpostocoleta"/> : 
-                  <MoreIcon color="secondary" href="/admnoticia"/>}
-                  
+                  {index % 3 === 0 ?
+                    <DomainIcon color="secondary" onClick={() => abrirPostocoleta()} /> :
+                    <MoreIcon color="secondary" href="/admnoticia" />}
+
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -179,10 +231,10 @@ export default function Gerenciamento() {
           </List>
           <Divider />
           <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {['Logout'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon color="secondary" /> : <MailIcon color="secondary" />}
+                  {index % 2 === 0 ? <ExitToAppIcon color="secondary" onClick={() => fazerLogout()}/> : <MailIcon color="secondary" />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -219,25 +271,23 @@ export default function Gerenciamento() {
             posuere sollicitudin aliquam ultrices sagittis orci a.
           </Typography>
         </Box>
-        <Button onClick={fazerLogout}>Logout</Button>
       </Box>
-      
-      
-      
-      
-          <AppBar position="static" color="default">
-            <Toolbar>
-              <Typography>
-                <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
-                <Button color="success" href="/admnoticia">Notícias</Button>
-                <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
-                <Button color="success" onClick={()=>fazerLogout()}>Logout</Button>
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        
 
-        </ThemeProvider>
-      
-    );
-  }
+
+
+
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Typography>
+            <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
+            <Button color="success" href="/admnoticia">Notícias</Button>
+            <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+
+    </ThemeProvider>
+
+  );
+}

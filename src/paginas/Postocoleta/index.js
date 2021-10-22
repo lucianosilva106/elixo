@@ -167,14 +167,14 @@ function Postocoleta() {
                       {postocoleta.nome}
                     </DialogTitle>
                     <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        <p>{postocoleta.id}</p>
-                        <p>{postocoleta.destino}</p>
-                        <p>{postocoleta.endereco}</p>
-                        <p>{postocoleta.bairro}</p>
-                        <p>{postocoleta.cidade}</p>
-                        <p>{postocoleta.estado}</p>
-                        <p>{postocoleta.destino}</p>
+                      <DialogContentText id="alert-dialog-description">     
+                      <Typography variant="h6" gutterBottom>Endereço:</Typography>                  
+                      <Typography variant="body1" gutterBottom>{postocoleta.endereco}</Typography>
+                      <Typography variant="body1" gutterBottom>{postocoleta.bairro}</Typography>
+                      <Typography variant="body1" gutterBottom>{postocoleta.cidade}</Typography>
+                      <Typography variant="body1" gutterBottom>{postocoleta.estado}</Typography>
+                      <Typography variant="h6" gutterBottom>Destino Final do Material:</Typography>
+                      <Typography variant="body1" gutterBottom>{postocoleta.destino}</Typography>
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>

@@ -195,7 +195,7 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Lembrar-me"
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, color: 'white' }}
+              <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
                 onClick={fazerLogin}
               >Entrar</Button>
 
