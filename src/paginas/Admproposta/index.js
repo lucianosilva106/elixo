@@ -1,7 +1,6 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
 import { useEffect, useState } from 'react';
-import './admprop.css';
 import * as React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,6 +24,7 @@ import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Typography } from '@material-ui/core';
+import './admprop.css';
 
 const theme = createTheme({
   palette: {
@@ -108,7 +108,7 @@ function Admproposta() {
 
     loadPropostas();
 
-  })
+  }, [])
 
   async function buscaPropostas() {
     await firebase.firestore().collection('propostas')

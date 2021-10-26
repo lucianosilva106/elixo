@@ -67,6 +67,7 @@ function Postocoleta() {
   const flagmostra = 2;
 
   const [open, setOpen] = useState(false);
+  const [direciona] = '';
 
   function handleToogle(id) {
     const postos = postoscoletas.map(item => {
@@ -103,6 +104,9 @@ function Postocoleta() {
               cidade: item.data().cidade,
               estado: item.data().estado,
               destino: item.data().destino,
+              localizacao: item.data().localizacao,
+              latitude: item.data().latitude,
+              longitude: item.data().longitude
             })
           })
           setPostoscoletas(meusPostos);
@@ -112,6 +116,11 @@ function Postocoleta() {
     loadPostos();
 
   },[])
+
+  function handleRedirect(redireciona){
+    window.open(redireciona);
+
+  }
 
   return (
     <Container fixed>
@@ -125,10 +134,7 @@ function Postocoleta() {
         ustifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
-          mostraend = '';
-          if (postocoleta.isOpen === true){
-            mostraend = postocoleta.endereco;
-          }
+          let direciona = postocoleta.localizacao;
           return (
             <Grid
               key={postocoleta.id}>
@@ -175,13 +181,20 @@ function Postocoleta() {
                       <Typography variant="body1" gutterBottom>{postocoleta.estado}</Typography>
                       <Typography variant="h6" gutterBottom>Destino Final do Material:</Typography>
                       <Typography variant="body1" gutterBottom>{postocoleta.destino}</Typography>
+                      <Typography variant="h6" gutterBottom hidden>Localizacao:</Typography>
+                      <Typography variant="body1" gutterBottom hidden>{postocoleta.localizacao}</Typography>
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                       <Button variant="contained" disableElevation 
                       onClick={() => handleOnClose(postocoleta.id)} autoFocus>
-                        Ok
+                        Fechar
                       </Button>
+                      <Button variant="contained" disableElevation 
+                      onClick={() => handleRedirect(postocoleta.localizacao)} autoFocus>
+                        Como chegar
+                      </Button>
+                     
                     </DialogActions>
                   </Dialog>
                 </div>

@@ -1,11 +1,12 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import { TextField } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+//import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -13,7 +14,26 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { InputLabel } from "@material-ui/core";
-import Table from 'react-bootstrap/Table';
+import Stack from '@material-ui/core/Stack'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/core/Alert';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+//import Paper from '@material-ui/core/Paper';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+//import Slide from '@material-ui/core/Slide';
+import Container from '@material-ui/core/Container';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Typography } from '@material-ui/core';
+import Slide from '@material-ui/core/Slide';
 import './admposto.css'
 
 const theme = createTheme({
@@ -25,6 +45,10 @@ const theme = createTheme({
       main: orange[500],
     },
   },
+});
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 
@@ -51,8 +75,35 @@ function Admpostocoleta() {
     const[cidade, setCidade] = useState('');
     const[estado, setEstado] = useState('');
     const[destino, setDestino] = useState('');
+    const[localizacao, setLocalizacao] = useState('');
+    const[latitude, setLatitude] = useState('');
+    const[longitude, setLongitude] = useState('');
     const[postoscoletas, setPostoscoletas] = useState([]);
+    
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+  
+    const [abrir, setAbrir] = React.useState(false);
+    const abrirAlert = () => {
+      setAbrir(true);
+    };
+  
+    
+    const [open, setOpen, aberto] = React.useState(false);
 
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
+  
     useEffect(() => {
       async function loadPostos(){
         await firebase.firestore().collection('postoscoletas')
@@ -67,7 +118,10 @@ function Admpostocoleta() {
               bairro: item.data().bairro,
               cidade: item.data().cidade,
               estado: item.data().estado,
-              destino: item.data().destino
+              destino: item.data().destino,
+              localizacao: item.data().localizacao,
+              latitude: item.data().latitude,
+              longitude: item.data().longitude
             })
           })
 
@@ -77,7 +131,7 @@ function Admpostocoleta() {
 
       loadPostos();
 
-    })
+    }, [])
     
     async function handleAdd(){
       await firebase.firestore().collection('postoscoletas')
@@ -88,10 +142,13 @@ function Admpostocoleta() {
         bairro: bairro,
         cidade: cidade,
         estado: estado,
-        destino: destino
+        destino: destino,
+        localizacao: localizacao,
+        latitude: latitude,
+        longitude: longitude
       })
       .then(()=>{
-        alert('POSTO DE COLETA CADASTRADO COM SUCESSO!');
+        handleClickOpen();
         setNome('');
         setCep('');
         setEndereco('');
@@ -99,6 +156,9 @@ function Admpostocoleta() {
         setCidade('');
         setEstado('');
         setDestino('');
+        setLocalizacao('');
+        setLatitude('');
+        setLongitude('');
         buscaPostos();
       })
       .catch((error)=>{ 
@@ -143,7 +203,10 @@ function Admpostocoleta() {
         bairro: bairro,
         cidade: cidade,
         estado: estado,
-        destino: destino
+        destino: destino,
+        localizacao: localizacao,
+        latitude: latitude,
+        longitude: longitude
       })
       .then(() => {
         alert('DADOS ATUALIZADOS COM SUCESSO!')
@@ -155,6 +218,10 @@ function Admpostocoleta() {
         setCidade('');
         setEstado('');
         setDestino('');
+        setLocalizacao('');
+        setLatitude('');
+        setLongitude('');
+        buscaPostos();
       })
       .catch((error) => {
         alert("Erro ao gravar alteração: " + error)
@@ -172,6 +239,9 @@ function Admpostocoleta() {
         setCidade(doc.data().cidade);
         setEstado(doc.data().estado);
         setDestino(doc.data().destino);
+        setLocalizacao(doc.data().localizacao);
+        setLatitude(doc.data().latitude);
+        setLongitude(doc.data().longitude);
       }) 
     }
 
@@ -179,7 +249,6 @@ function Admpostocoleta() {
       await firebase.firestore().collection('postoscoletas').doc(id)
       .delete()
       .then(() => {
-        alert('Posto de Coleta excluído com sucesso!');
         buscaPostos();
       })
     }
@@ -217,16 +286,6 @@ function Admpostocoleta() {
             >
               <Box component="form" noValidate sx={{ mt: 1 }}>
               <h2>Cadastro de Posto de Coleta</h2>
-
-              <TextField
-                  fullWidth
-                  margin="normal"
-                  required
-                  size="small"
-                  id="outlined-required"
-                  label="Id"
-                  defaultValue="usar Id só para atualizar dados"
-                  value={idPosto} onChange={(e) => setIdPosto(e.target.value)} />
 
                 <TextField
                   fullWidth
@@ -302,6 +361,33 @@ function Admpostocoleta() {
                   placeholder="Destino"
                   multiline value={destino} onChange={(e) => setDestino(e.target.value)} />
   
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-textarea"
+                  label="Localizacao no mapa"
+                  placeholder="Localizacao"
+                  multiline value={localizacao} onChange={(e) => setLocalizacao(e.target.value)} />
+
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-textarea"
+                  label="Latitude no mapa"
+                  placeholder="Latitude"
+                  multiline value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-textarea"
+                  label="Longitude no mapa"
+                  placeholder="Longitude"
+                  multiline value={longitude} onChange={(e) => setLongitude(e.target.value)} />
+
                 <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
                   onClick={handleAdd}>Enviar Formulário</Button><br />
   
@@ -312,43 +398,118 @@ function Admpostocoleta() {
             </Box>
           </Grid>
         </Grid>
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        <div>
-          <h2>Postos Cadastrados</h2>
-          <Table>
-              <thead className="customers">
-                <tr>
-                  <th>Nome</th>
-                  <th>Cep</th>
-                  <th>Endereço</th>
-                  <th>Bairro</th>
-                  <th>Cidade</th>
-                  <th>Estado</th>
-                  <th>Destino</th>
-                </tr>
-              </thead>
-              <tbody>
-                {postoscoletas.map((postocoleta) =>{
-                  return(
-                    <tr>
-                      <th scope="row">{postocoleta.nome}</th>
-                      <td>{postocoleta.cep}</td>
-                      <td>{postocoleta.endereco}</td>
-                      <td>{postocoleta.bairro}</td>
-                      <td>{postocoleta.cidade}</td>
-                      <td>{postocoleta.estado}</td>
-                      <td>{postocoleta.destino}</td>
-                      <button onClick={() => pegaPosto(postocoleta.id)}>Alterar</button>  
-                      <button onClick={() => excluirPosto(postocoleta.id)}>Excluir</button>
-                    </tr>  
-                )})};
-              </tbody>
-            </Table>
-      
-        </div>
-      </ThemeProvider >
 
- 
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Posto de Coleta cadastrado com sucesso!
+          </Alert>
+        </Snackbar>
+        </Stack>
+
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Erro na gravação do Posto de Coleta!
+          </Alert>
+        </Snackbar>
+        </Stack>
+        <br /> <br /> <br /> <br /> <br />
+        <br /> <br /> <br /> <br /> <br /> 
+        <br /> <br /> <br /> <br /> <br /> 
+        <br /> <br /> <br /> <br />
+
+        <ThemeProvider theme={theme}>
+          <Container fixed id="topo"
+            sx={{height: 150, marginTop: 6}}>
+            <Typography variant="h3" gutterBottom component="div">
+              Postos de Coletas cadastrados
+            </Typography>
+          </Container>
+          <Container fixed>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead sx={{ color: 'primary' }}>
+                  <TableRow>
+                    <TableCell align="center">Nome</TableCell>
+                    <TableCell align="center">Endereço</TableCell>
+                    <TableCell align="center">Bairro</TableCell>
+                    <TableCell align="center">Mensagem</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {postoscoletas.map((postocoleta) => {
+                    return (
+                      <TableRow
+                        key={postocoleta.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row">{postocoleta.nome}</TableCell>
+                        <TableCell align="center">{postocoleta.cep}</TableCell>
+                        <TableCell align="center">{postocoleta.endereco}</TableCell>
+                        <TableCell align="center">{postocoleta.bairro}</TableCell>
+                        <TableCell align="center">{postocoleta.cidade}</TableCell>
+                        <TableCell align="center">{postocoleta.estado}</TableCell>
+                        <TableCell align="center">{postocoleta.destino}</TableCell>
+
+                        <Button
+                          variant="outlined" startIcon={<DeleteIcon />}
+                          onClick={() => pegaPosto(postocoleta.id)}
+                          sx={{ margin: 1 }}
+                          color="secondary">Alterar</Button>
+
+                        <Button
+                          variant="outlined" startIcon={<DeleteIcon />}
+                          onClick={handleClickOpen}
+                          sx={{ margin: 1 }}
+                          color="secondary">Remover</Button>
+                      </TableRow>
+                    )
+                  })}
+               </TableBody>
+              </Table>
+            </TableContainer>
+
+            {postoscoletas.map((postocoleta) => {
+              return (
+
+                <div>
+                  <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                  >
+                    <DialogTitle>{"Tem certeza de que deseja excluir a solicitação selecionada?"}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description">
+                      Atenção! A exclusão do posto de coleta será permanente.
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button color="info" onClick={handleClose}>Fechar</Button>
+                      <Button onClick={() => {
+                        excluirPosto(postocoleta.id)
+                      }}
+                        color="error" variant="contained">Excluir</Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+
+              )
+            })}
+
+            <Stack spacing={2} sx={{ width: '100%' }}>
+              <Snackbar open={abrir} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Posto de Coleta removido com sucesso!
+                </Alert>
+              </Snackbar>
+            </Stack>
+          </Container>
+        </ThemeProvider>
+      </ThemeProvider>
     );
 }
   

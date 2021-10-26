@@ -247,8 +247,6 @@ function Home() {
                   placeholder="Mensagem"
                   multiline value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
 
-
-
                 <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
                   onClick={handleAdd}>Enviar Formulário</Button><br />
 
@@ -257,21 +255,21 @@ function Home() {
         </Grid>
       </Grid>
 
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Solicitação de Posto de Coleta enviada com sucesso!
-          </Alert>
-        </Snackbar>
-      </Stack>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Solicitação de Posto de Coleta enviada com sucesso!
+            </Alert>
+          </Snackbar>
+        </Stack>
 
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Erro de preenchimento da solicitação!
-          </Alert>
-        </Snackbar>
-      </Stack>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+          <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              Erro de preenchimento da solicitação!
+            </Alert>
+          </Snackbar>
+        </Stack>
 
     </ThemeProvider >
 
