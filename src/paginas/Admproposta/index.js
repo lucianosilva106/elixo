@@ -208,10 +208,7 @@ function Admproposta() {
                 </DialogContent>
                 <DialogActions>
                   <Button color="info" onClick={handleClose}>Fechar</Button>
-                  <Button onClick={() => {
-                    excluirProposta(proposta.id)
-                  }}
-                    color="error" variant="contained">Excluir</Button>
+                  <Button onClick={() => excluirProposta(proposta.id)} color="error" variant="contained">Excluir</Button>
                 </DialogActions>
               </Dialog>
             </div>

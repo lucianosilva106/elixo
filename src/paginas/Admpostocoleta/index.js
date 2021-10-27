@@ -182,7 +182,10 @@ function Admpostocoleta() {
             bairro: doc.data().bairro,
             cidade: doc.data().cidade,
             estado: doc.data().estado,
-            destino: doc.data().destino
+            destino: doc.data().destino,
+            localizacao: doc.data().localizacao,
+            latitude: doc.data().latitude,
+            longitude: doc.data().longitude
           })
         })
         setPostoscoletas(lista);

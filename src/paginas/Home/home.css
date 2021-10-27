@@ -6,9 +6,9 @@ body{
 }
 
 .logohome{
-    width:400px; /*width of your image*/ 
-    height:250px; /*height of your image*/
-    background-image:url('../img/lixohome.jpg');
+    width:500px; /*width of your image*/ 
+    height:400px; /*height of your image*/
+    background-image:url('../img/lixohomepq.jpg');
     margin:10px; /* If you want no margin */
     padding: 0; /*if your want to padding */
     border: transparent;
@@ -17,7 +17,7 @@ body{
  .resumoprojeto{
     width:1280px; /*width of your image*/ 
     height:720px; /*height of your image*/
-    background-image:url('../img/resumoproj.jpg');
+    background-image:url('../img/resumoproj2pq.jpg');
     margin:10px; /* If you want no margin */
     padding: 0; /*if your want to padding */
     border: transparent;
