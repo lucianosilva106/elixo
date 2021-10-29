@@ -63,11 +63,8 @@ function Postocoleta() {
   };
 
   const [postoscoletas, setPostoscoletas] = useState([]);
-  let mostraend = '';
-  const flagmostra = 2;
 
   const [open, setOpen] = useState(false);
-  const [direciona] = '';
 
   function handleToogle(id) {
     const postos = postoscoletas.map(item => {
@@ -87,7 +84,6 @@ function Postocoleta() {
     return handleToogle(id)
 
   }
-
 
   useEffect(() => {
     async function loadPostos() {
@@ -134,7 +130,6 @@ function Postocoleta() {
         ustifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
-          let direciona = postocoleta.localizacao;
           return (
             <Grid
               key={postocoleta.id}>

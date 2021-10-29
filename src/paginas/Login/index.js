@@ -41,7 +41,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="/">
-        eLixo
+        Re-user
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -61,35 +61,29 @@ export default function SignInSide() {
     async function checkLogin() {
       await firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          //            alert('checkando login')
           setUser(true);
           setUserLogged({
             uid: user.uid,
             email: user.email
           });
+          window.location.href = "/gerenciamento";
         } else {
-          //            alert('sem login')
           setUser(false);
           setUserLogged({});
-
         }
       })
-
     }
 
     checkLogin();
-
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
-    //      alert(email + ' - ' + senha)
   };
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -113,7 +107,6 @@ export default function SignInSide() {
 
 
   async function fazerLogin() {
-    //      alert('fazer login')
     await firebase.auth().signInWithEmailAndPassword(email, senha)
       .then((value) => {
         setUser(true);
@@ -161,11 +154,6 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Faça seu Login
             </Typography>
-            {user && (
-              <div>
-                <span>{userLogged.uid} - {userLogged.email}</span>
-              </div>
-            )}
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -206,13 +194,6 @@ export default function SignInSide() {
                   </Alert>
                 </Snackbar>
               </Stack>
-
-
-              {user && (                      // renderizacao condicional se usuario estiver logado
-                <div>
-                  <Redirect to="/gerenciamento" />
-                </div>
-              )}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

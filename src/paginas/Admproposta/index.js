@@ -25,6 +25,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Typography } from '@material-ui/core';
 import './admprop.css';
+import Postocoleta from '../Postocoleta';
 
 const theme = createTheme({
   palette: {
@@ -52,15 +53,7 @@ function Admproposta() {
     setAbrir(true);
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [open, setOpen, excluiu] = React.useState(false);
 
   async function checkLogin() {
     await firebase.auth().onAuthStateChanged((user) => {
@@ -75,15 +68,25 @@ function Admproposta() {
 
   checkLogin();
 
-
-  const [idProposta, setIdProposta] = useState('');
-  const [nome, setNome] = useState('');
-  const [cep, setCep] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [tipolixo, setTipolixo] = useState('');
-  const [mensagem, setMensagem] = useState('');
   const [propostas, setPropostas] = useState([]);
+  
+  function handleToogle(id) {
+    const lista = propostas.map(item => {
+      if (item.id === id) item.isOpen = !item.isOpen
+      return item
+    })
+    setPropostas(lista)
+  }
+
+  const handleClick = (id) => {
+    setOpen(true);
+    return handleToogle(id)
+  };
+
+  const handleClose = (id) => {
+    setOpen(false);
+    return handleToogle(id)
+  };
 
   useEffect(() => {
     async function loadPropostas() {
@@ -97,6 +100,8 @@ function Admproposta() {
               cep: item.data().cep,
               endereco: item.data().endereco,
               bairro: item.data().bairro,
+              cidade: item.data().cidade,
+              estado: item.data().estado,
               tipolixo: item.data().tipolixo,
               mensagem: item.data().mensagem
             })
@@ -110,38 +115,11 @@ function Admproposta() {
 
   }, [])
 
-  async function buscaPropostas() {
-    await firebase.firestore().collection('propostas')
-      .get()
-      .then((snapshot) => {
-        let lista = [];
-
-        snapshot.forEach((doc) => {
-          lista.push({
-            id: doc.id,
-            nome: doc.data().nome,
-            cep: doc.data().cep,
-            endereco: doc.data().endereco,
-            bairro: doc.data().bairro,
-            tipolixo: doc.data().tipolixo,
-            mensagem: doc.data().mensagem
-          })
-        })
-        setPropostas(lista);
-
-      })
-      .catch(() => {
-
-      })
-  }
-
   async function excluirProposta(id) {
     await firebase.firestore().collection('propostas').doc(id)
       .delete()
       .then(() => {
-        abrirAlert();
-        //  alert('Proposta excluida com sucesso!');
-        buscaPropostas();
+        alert('Solicitação excluída com sucesso!')
       })
 
   }
@@ -161,67 +139,35 @@ function Admproposta() {
             <TableHead sx={{ color: 'primary' }}>
               <TableRow>
                 <TableCell align="center">Nome</TableCell>
+                <TableCell align="center">Cep</TableCell>
                 <TableCell align="center">Endereço</TableCell>
                 <TableCell align="center">Bairro</TableCell>
+                <TableCell align="center">Cidade</TableCell>
+                <TableCell align="center">Estado</TableCell>
                 <TableCell align="center">Mensagem</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {propostas.map((proposta) => {
                 return (
-                  <TableRow
-                    key={proposta.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
+                  <TableRow key={proposta.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                     <TableCell component="th" scope="row">{proposta.nome}</TableCell>
+                    <TableCell align="center">{proposta.cep}</TableCell>
                     <TableCell align="center">{proposta.endereco}</TableCell>
                     <TableCell align="center">{proposta.bairro}</TableCell>
+                    <TableCell align="center">{proposta.cidade}</TableCell>
+                    <TableCell align="center">{proposta.estado}</TableCell>
                     <TableCell align="center">{proposta.mensagem}</TableCell>
-                    <Button
-                      variant="outlined" startIcon={<DeleteIcon />}
-                      onClick={handleClickOpen}
+                    <Button variant="outlined" startIcon={<DeleteIcon />} 
+                      onClick={() => excluirProposta(proposta.id)}
                       sx={{ margin: 1 }}
                       color="secondary">Remover</Button>
                   </TableRow>
-                )
+              )
               })}
             </TableBody>
           </Table>
         </TableContainer>
-
-        {propostas.map((proposta) => {
-          return (
-
-            <div>
-              <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-              >
-                <DialogTitle>{"Tem certeza de que deseja excluir a solicitação selecionada?"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-slide-description">
-                    Atenção! A exclusão da solicitação será permanente.
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button color="info" onClick={handleClose}>Fechar</Button>
-                  <Button onClick={() => excluirProposta(proposta.id)} color="error" variant="contained">Excluir</Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-
-          )
-        })}
-        <Stack spacing={2} sx={{ width: '100%' }}>
-          <Snackbar open={abrir} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-              Solicitação removida com sucesso!
-            </Alert>
-          </Snackbar>
-        </Stack>
       </Container>
     </ThemeProvider>
   );

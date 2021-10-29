@@ -1,4 +1,6 @@
 import * as React from 'react';
+import firebase from '../../firebaseConnection';
+import 'firebase/auth';
 import './header.css';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -25,6 +27,17 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
   export default function Header() {
     
+    async function checkLogin(){
+      await firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          window.location.href = '/gerenciamento';
+
+          }else{
+            window.location.href = '/login';
+        }
+      })
+    }
+
     return (
 
       <header>
@@ -49,8 +62,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
                   <Button color="secondary" href="/">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
-                  <Button color="secondary" href="/noticia">Saiba Mais</Button>
-                  <Button color="secondary" href="/login" variant="outlined" endIcon={<AccountCircleIcon />}>Login</Button>
+                  <Button color="secondary" href="/noticia">Saiba Mais </Button>
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Login</Button>
                 </Typography>
 
               </Toolbar>

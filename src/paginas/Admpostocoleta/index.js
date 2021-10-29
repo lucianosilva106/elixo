@@ -392,7 +392,7 @@ function Admpostocoleta() {
                   multiline value={longitude} onChange={(e) => setLongitude(e.target.value)} />
 
                 <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAdd}>Enviar Formulário</Button><br />
+                  onClick={handleAdd}>Incluir Cadastro</Button><br />
   
                 <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
                   onClick={editarPosto}>Atualizar Cadastro</Button><br />
@@ -435,9 +435,12 @@ function Admpostocoleta() {
                 <TableHead sx={{ color: 'primary' }}>
                   <TableRow>
                     <TableCell align="center">Nome</TableCell>
+                    <TableCell align="center">Cep</TableCell>
                     <TableCell align="center">Endereço</TableCell>
                     <TableCell align="center">Bairro</TableCell>
-                    <TableCell align="center">Mensagem</TableCell>
+                    <TableCell align="center">Cidade</TableCell>
+                    <TableCell align="center">Estado</TableCell>
+                    <TableCell align="center">Destino</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -463,7 +466,7 @@ function Admpostocoleta() {
 
                         <Button
                           variant="outlined" startIcon={<DeleteIcon />}
-                          onClick={handleClickOpen}
+                          onClick={() => excluirPosto(postocoleta.id)}
                           sx={{ margin: 1 }}
                           color="secondary">Remover</Button>
                       </TableRow>
@@ -473,43 +476,6 @@ function Admpostocoleta() {
               </Table>
             </TableContainer>
 
-            {postoscoletas.map((postocoleta) => {
-              return (
-
-                <div>
-                  <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                  >
-                    <DialogTitle>{"Tem certeza de que deseja excluir a solicitação selecionada?"}</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-slide-description">
-                      Atenção! A exclusão do posto de coleta será permanente.
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button color="info" onClick={handleClose}>Fechar</Button>
-                      <Button onClick={() => {
-                        excluirPosto(postocoleta.id)
-                      }}
-                        color="error" variant="contained">Excluir</Button>
-                    </DialogActions>
-                  </Dialog>
-                </div>
-
-              )
-            })}
-
-            <Stack spacing={2} sx={{ width: '100%' }}>
-              <Snackbar open={abrir} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                  Posto de Coleta removido com sucesso!
-                </Alert>
-              </Snackbar>
-            </Stack>
           </Container>
         </ThemeProvider>
       </ThemeProvider>

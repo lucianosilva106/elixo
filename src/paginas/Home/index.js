@@ -101,14 +101,15 @@ function Home() {
 
       <div align="left">
         <h2>
-          <p> <font color="Green"> Você tem lixo eletrônico em casa? </font></p>
+          <p> <font color="Green"> Você tem descarte eletrônico em casa? </font></p>
         </h2>
         <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
           Saiba mais</Button>
       </div>
+
       <div align="right">
         <h2>
-          <p> <font color="Green"> Sabe quanto vale seu lixo eletrônico? </font> </p>
+          <p> <font color="Green"> Sabe quanto vale seu descarte eletrônico? </font> </p>
         </h2>
         <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
           Saiba mais</Button>

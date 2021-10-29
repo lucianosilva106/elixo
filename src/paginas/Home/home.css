@@ -6,12 +6,16 @@ body{
 }
 
 .logohome{
-    width:500px; /*width of your image*/ 
-    height:400px; /*height of your image*/
-    background-image:url('../img/lixohomepq.jpg');
+    width:230px; /*width of your image*/ 
+    height:180px; /*height of your image*/
+    background-image:url('../img/Reuser_logo1.ico');
     margin:10px; /* If you want no margin */
     padding: 0; /*if your want to padding */
     border: transparent;
+ }
+
+ img, h2{
+     display:inline-block;
  }
 
  .resumoprojeto{
