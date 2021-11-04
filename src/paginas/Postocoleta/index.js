@@ -120,9 +120,10 @@ function Postocoleta() {
 
   return (
     <Container fixed>
-
-      <h1>Postos de Coleta</h1><br />
-
+      <div align="center">
+        <h1>Postos de Coleta</h1>
+      </div>
+      <br />
       <Stack direction={{ xs: 'column', sm: 'row' }}
         divider={<Divider orientation="vertical" flexItem />}
         spacing={{ sm: 2, md: 2 }}

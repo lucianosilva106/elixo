@@ -91,6 +91,9 @@ function Home() {
       })
   }
 
+  function handleAvaliar(){
+    window.location.href = '/avaliacao'
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -113,6 +116,12 @@ function Home() {
         </h2>
         <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
           Saiba mais</Button>
+      </div>
+      <div align="center">
+        <h3>
+        <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+                  onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
+        </h3>
       </div>
       <div align="center">
         <h3>

@@ -288,6 +288,7 @@ function Admpostocoleta() {
               }}
             >
               <Box component="form" noValidate sx={{ mt: 1 }}>
+              
               <h2>Cadastro de Posto de Coleta</h2>
 
                 <TextField
@@ -425,7 +426,7 @@ function Admpostocoleta() {
         <ThemeProvider theme={theme}>
           <Container fixed id="topo"
             sx={{height: 150, marginTop: 6}}>
-            <Typography variant="h3" gutterBottom component="div">
+            <Typography variant="h3" gutterBottom component="div" align="center">
               Postos de Coletas cadastrados
             </Typography>
           </Container>

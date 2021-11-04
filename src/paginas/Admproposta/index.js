@@ -128,7 +128,7 @@ function Admproposta() {
     <ThemeProvider theme={theme}>
       <Container fixed id="topo"
       sx={{height: 150, marginTop: 6}}>
-        <Typography variant="h3" gutterBottom component="div">
+        <Typography variant="h3" gutterBottom component="div" align="center">
           Interessados em tornar-se postos de coleta
 
         </Typography>

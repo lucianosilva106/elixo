@@ -266,6 +266,7 @@ export default function Gerenciamento() {
             <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
             <Button color="success" href="/admnoticia">Notícias</Button>
             <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
+            <Button color="success" href="/admavaliacao">Avaliações dos visitantes</Button>
           </Typography>
         </Toolbar>
       </AppBar>

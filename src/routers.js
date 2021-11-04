@@ -14,6 +14,8 @@ import Noticia from './paginas/Noticia';
 import Quemsomos from './paginas/Quemsomos';
 import Admproposta from './paginas/Admproposta';
 import Cadastre from './paginas/Cadastre';
+import Avaliacao from './paginas/Avaliacao';
+import AdmAvaliacao from './paginas/Admavaliacao';
 import ScrollToTop from './paginas/ScrollToTop';
 
 const Routes = () => {
@@ -35,6 +37,8 @@ const Routes = () => {
                 <Route exact path="/quemsomos" component={Quemsomos} />
                 <Route exact path="/admproposta" component={Admproposta} />
                 <Route exact path="/cadastre" component={Cadastre} />
+                <Route exact path="/avaliacao" component={Avaliacao} />
+                <Route exact path="/admavaliacao" component={AdmAvaliacao} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>
