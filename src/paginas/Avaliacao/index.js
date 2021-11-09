@@ -14,8 +14,11 @@ function Avaliacao() {
   const [resposta3, setResposta3] = useState(0);
   const [resposta4, setResposta4] = useState(0);
 
+  const [avaliacao, setAvaliacao] = useState('');
+  const [datamensagem, setDatamensagem] = useState('');
   const [sugestao, setSugestao] = useState('');
   const [email, setEmail] = useState('');
+
   useEffect(() => {
     function loadAvaliacao(id){
       firebase.firestore().collection('avaliacoes').doc(id)
@@ -79,8 +82,11 @@ function Avaliacao() {
     })
     .then(() => {
       alert('RESPOSTA INCREMENTADA COM SUCESSO!')
-      SeuAval = 5;
       localStorage.setItem('aval',SeuAval);
+      alert(sugestao)
+      if (sugestao) {
+        addSugestao()
+      }
       setResposta1(0);
       setResposta2(0);
       setResposta3(0);
@@ -93,6 +99,32 @@ function Avaliacao() {
     })
     .catch((error) => {
       alert("Erro ao gravar alteração: " + error)
+    })
+  }
+
+  async function addSugestao(){
+    var dataAtual = '';
+    var data = new Date();
+    var dia = String(data.getDate()).padStart(2, '0');
+    var mes = String(data.getMonth() + 1).padStart(2, '0');
+    var ano = data.getFullYear();
+    dataAtual = dia + '/' + mes + '/' + ano;
+    await firebase.firestore().collection('mensagens')
+    .add({
+      avaliacao: SeuAval,
+      datamensagem: dataAtual,
+      email: email,
+      mensagem: sugestao
+    })
+    .then(() => {
+      alert('Mensagem registrada com sucesso!');
+      setAvaliacao('');
+      setDatamensagem('');
+      setEmail('');
+      setSugestao('');
+    })
+    .catch((error) => {
+      console.log('ERRO: ' + error);
     })
   }
 
@@ -123,6 +155,7 @@ function Avaliacao() {
             setFirstStar(false);
           } else {
             setFirstStar(true);
+            SeuAval = 1;
           }
           
           setSecondStar(false);
@@ -137,6 +170,7 @@ function Avaliacao() {
             setSecondStar(false);
           } else {
             setSecondStar(true);
+            SeuAval = 2;
           }
           setFirstStar(true);
           setThirdStar(false);
@@ -150,6 +184,7 @@ function Avaliacao() {
             setThirdStar(false);
           } else {
             setThirdStar(true);
+            SeuAval = 3;
           }
           setFirstStar(true);
           setSecondStar(true);
@@ -163,6 +198,7 @@ function Avaliacao() {
             setFourtStar(false);
           } else {
             setFourtStar(true);
+            SeuAval = 4;
           }
           setFirstStar(true);
           setSecondStar(true);
