@@ -93,6 +93,7 @@ function Postocoleta() {
           doc.forEach((item) => {
             meusPostos.push({
               id: item.id,
+              ativo: item.data().ativo,
               nome: item.data().nome,
               cep: item.data().cep,
               endereco: item.data().endereco,
@@ -131,6 +132,7 @@ function Postocoleta() {
         ustifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
+          if (postocoleta.ativo) {
           return (
             <Grid
               key={postocoleta.id}>
@@ -197,6 +199,7 @@ function Postocoleta() {
               )}
             </Grid>
           )
+          }
         })}
       </Stack>
     </Container>

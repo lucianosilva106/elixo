@@ -49,6 +49,15 @@ function Home() {
 
   const [open, setOpen, aberto] = React.useState(false);
 
+  const [clicksm1, setClicksm1] = React.useState(false);
+
+  const handleClicksm1 = () => {
+    setClicksm1(true);
+  };
+
+  const closeClicksm1 = () => {
+    setClicksm1(false);
+  };
 
   const handleClick = () => {
     setOpen(true);
@@ -106,8 +115,19 @@ function Home() {
         <h2>
           <p> <font color="Green"> Você tem descarte eletrônico em casa? </font></p>
         </h2>
-        <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+        <Button onClick={handleClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
           Saiba mais</Button>
+        { clicksm1 && (
+          <div>
+            <p> <font color="Green">Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</font></p>
+            <p> <font color="Green">A pesquisa de Resíduos eletrônicos no Brasil – 2021, promovida pela Green Eletron, gestora sem fins lucrativos de logística reversa de eletroeletrônicos e pilhas, </font></p>
+            <p> <font color="Green">em parceria com a Radar Pesquisa, sobre o cenário do lixo eletrônico no país, aponta que 87% dos brasileiros possui alguma noção sobre lixo eletrônico, porém 33% acredita </font> </p>
+            <p> <font color="Green">que existe uma relação entre esse lixo e elementos do meio digital, como spam, e-mails, fotos ou arquivos. Para outros 42% dos entrevistados o lixo eletrônico consiste em </font></p>
+            <p> <font color="Green">aparelhos eletrônicos e eletrodomésticos sem funcionamento e 3% acreditam que são todos os equipamentos que já foram descartados, inclusive os que foram parar em locais inadequados. </font></p>
+            <Button onClick={closeClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+              Fechar</Button>
+          </div>
+        )}
       </div>
 
       <div align="right">
@@ -280,6 +300,11 @@ function Home() {
             </Alert>
           </Snackbar>
         </Stack>
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+        <div align="center">
+          <hr />
+          <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>
+        </div>
 
     </ThemeProvider >
 

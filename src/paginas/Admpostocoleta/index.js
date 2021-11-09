@@ -6,7 +6,6 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/co
 import { TextField } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
-//import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -23,13 +22,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-//import Paper from '@material-ui/core/Paper';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-//import Slide from '@material-ui/core/Slide';
 import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
@@ -68,6 +65,7 @@ function Admpostocoleta() {
     checkLogin();
 
     const[idPosto, setIdPosto] = useState('');
+    const[ativo, setAtivo] = useState('');
     const[nome, setNome] = useState('');
     const[cep, setCep] = useState('');
     const[endereco, setEndereco] = useState('');
@@ -112,6 +110,7 @@ function Admpostocoleta() {
           doc.forEach((item) => {
             meusPostos.push({
               id: item.id,
+              ativo: item.data().ativo,
               nome: item.data().nome,
               cep: item.data().cep,
               endereco: item.data().endereco,
@@ -136,6 +135,7 @@ function Admpostocoleta() {
     async function handleAdd(){
       await firebase.firestore().collection('postoscoletas')
       .add({
+        ativo: ativo,
         nome: nome,
         cep: cep,
         endereco: endereco,
@@ -149,6 +149,7 @@ function Admpostocoleta() {
       })
       .then(()=>{
         handleClickOpen();
+        setAtivo('');
         setNome('');
         setCep('');
         setEndereco('');
@@ -176,6 +177,7 @@ function Admpostocoleta() {
         snapshot.forEach((doc) => {
           lista.push({
             id: doc.id,
+            ativo: doc.data().ativo,
             nome: doc.data().nome,
             cep: doc.data().cep,
             endereco: doc.data().endereco,
@@ -200,6 +202,7 @@ function Admpostocoleta() {
       await firebase.firestore().collection('postoscoletas')
       .doc(idPosto)
       .update({
+        ativo: ativo,
         nome: nome,
         cep: cep,
         endereco:endereco,
@@ -214,6 +217,7 @@ function Admpostocoleta() {
       .then(() => {
         alert('DADOS ATUALIZADOS COM SUCESSO!')
         setIdPosto('');
+        setAtivo('');
         setNome('');
         setCep('');
         setEndereco('');
@@ -235,6 +239,7 @@ function Admpostocoleta() {
       firebase.firestore().collection('postoscoletas').doc(id)
       .onSnapshot((doc) => {
         setIdPosto(id);
+        setAtivo(doc.data().ativo);
         setNome(doc.data().nome);
         setCep(doc.data().cep);
         setEndereco(doc.data().endereco);
@@ -258,6 +263,17 @@ function Admpostocoleta() {
 
     function buscaCep(){
 
+    }
+
+    let tabsituacao = '';
+
+    function setaSituacao(situacao){
+      if (situacao){
+        tabsituacao = 'ATIVO'
+      } else {
+        tabsituacao = 'INATIVO'
+      }
+      return tabsituacao
     }
 
     return (
@@ -392,6 +408,23 @@ function Admpostocoleta() {
                   placeholder="Longitude"
                   multiline value={longitude} onChange={(e) => setLongitude(e.target.value)} />
 
+                <InputLabel id="demo-simple-select-helper-label">Situacao</InputLabel>
+                <Select
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={ativo}
+                  label="Situacao"
+                  onChange={(e) => setAtivo(e.target.value)}
+                >
+                  <MenuItem value="">
+                  </MenuItem>
+                  <MenuItem value={true}>Ativado</MenuItem>
+                  <MenuItem value={false}>Desativado</MenuItem>
+                </Select>
+
                 <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
                   onClick={handleAdd}>Incluir Cadastro</Button><br />
   
@@ -421,7 +454,7 @@ function Admpostocoleta() {
         <br /> <br /> <br /> <br /> <br />
         <br /> <br /> <br /> <br /> <br /> 
         <br /> <br /> <br /> <br /> <br /> 
-        <br /> <br /> <br /> <br />
+        <br /> <br /> <br /> <br /> <br /> <br />
 
         <ThemeProvider theme={theme}>
           <Container fixed id="topo"
@@ -442,6 +475,7 @@ function Admpostocoleta() {
                     <TableCell align="center">Cidade</TableCell>
                     <TableCell align="center">Estado</TableCell>
                     <TableCell align="center">Destino</TableCell>
+                    <TableCell align="center">Situacao</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -458,7 +492,7 @@ function Admpostocoleta() {
                         <TableCell align="center">{postocoleta.cidade}</TableCell>
                         <TableCell align="center">{postocoleta.estado}</TableCell>
                         <TableCell align="center">{postocoleta.destino}</TableCell>
-
+                        <TableCell align="center">{setaSituacao(postocoleta.ativo)}</TableCell>
                         <Button
                           variant="outlined" startIcon={<DeleteIcon />}
                           onClick={() => pegaPosto(postocoleta.id)}
