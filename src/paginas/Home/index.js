@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/co
 import firebase from "../../firebaseConnection";
 import { useEffect, useState } from 'react';
 import { Fade, TextField, Typography } from "@material-ui/core";
-import { orange, green } from '@material-ui/core/colors';
+import { orange, green, grey } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
@@ -28,6 +28,9 @@ const theme = createTheme({
     },
     secondary: {
       main: orange[500],
+    },
+    textos: {
+      main: grey[800],
     },
   },
 });
@@ -133,15 +136,23 @@ function Home() {
     window.location.href = '/avaliacao'
   }
 
+
   return (
     <ThemeProvider theme={theme}>
-      <Container fluid>
+      <Grid container component="main" sx={{ alignItems: 'center', height: '450px', }}>
+        <CssBaseline />
+        <Grid id="homebackground1"
+          item
+          sx={{
+            alignItems: 'flex-end',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
         <Box sx={{
           marginLeft: '8%',
-          marginTop: '15%',
           maxWidth: '30%',
         }}>
-          <Typography variant="h1" sx={{color: 'primary.main'}}>{`Você tem materiais
+          <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
         eletrônicos em casa?`}</Typography>
           <Button onClick={handleClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
             Saiba mais</Button>
@@ -158,38 +169,47 @@ function Home() {
             </div>
           )}
         </Box>
+      </Grid>
 
-        <Box 
-        sx={{
-          marginTop: '18%',
-          maxWidth: '25%',
-          alignItems: 'right',
-          textAlign: 'right',
-          marginLeft: '67%',
-        }}>
-          <Typography variant="h1" sx={{ color: 'primary.main', }}>{`Sabe quanto vale
+      <Grid container component="main" sx={{ bgcolor: '#fafafa', alignItems: 'center', height: '450px', }}>
+        <CssBaseline />
+        <Grid id="homebackground2"
+          item
+          sx={{
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        <Box
+          sx={{
+            maxWidth: '25%',
+            textAlign: 'right',
+            marginLeft: '67%',
+          }}>
+          <Typography variant="h1" sx={{ color: 'textos.main', }}>{`Sabe quanto vale
       seu lixo eletrônico?`}</Typography>
           <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
             Saiba mais</Button>
         </Box>
+      </Grid>
 
-        <div align="center">
-          <h3>
-            <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-              onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
-          </h3>
-        </div>
-        <div align="center">
-          <h3>
-            <p> Entenda abaixo como nosso projeto funciona.</p>
-          </h3>
 
-        </div>
+      <div align="center">
+        <h3>
+          <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+            onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
+        </h3>
+      </div>
+      <div align="center">
+        <h3>
+          <p> Entenda abaixo como nosso projeto funciona.</p>
+        </h3>
 
-        <div>
-          <img className="resumoprojeto"></img>
-        </div>
-      </Container>
+      </div>
+
+      <div>
+        <img className="resumoprojeto"></img>
+      </div>
+
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />

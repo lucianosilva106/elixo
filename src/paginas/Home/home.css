@@ -30,3 +30,13 @@ body{
      background-image: url("/src/paginas/img/sejapostocoleta.png");
      background-size: auto;
  }
+ #homebackground1{
+    background-image: url("/src/paginas/img/homebackgorund1.png");
+    background-size: 25%;
+    background-position: right;
+}
+#homebackground2{
+    background-image: url("/src/paginas/img/homebackground2.png");
+    background-size: 80%;
+    background-position: center;
+}
