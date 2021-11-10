@@ -19,6 +19,8 @@ import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Container } from "react-bootstrap";
+import Fab from '@material-ui/core/Fab';
+import StarIcon from '@material-ui/icons/Star';
 
 
 const theme = createTheme({
@@ -357,7 +359,14 @@ function Home() {
           </Alert>
         </Snackbar>
       </Stack>
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+
+      <Box sx={{ '& > :not(style)': { m: 1 }, justifyContent: 'right', alignContent: 'right', marginTop: '5%', }}>
+      <Fab size="small" color="primary" aria-label="add">
+        <StarIcon />
+        </Fab>
+        </Box>
+
+   <br /> <br /> <br /> <br />
       <div align="center">
         <hr />
         <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>
