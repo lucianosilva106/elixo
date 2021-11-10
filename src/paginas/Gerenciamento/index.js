@@ -172,6 +172,7 @@ export default function Gerenciamento() {
               sx={{
                 marginRight: '36px',
                 ...(open && { display: 'none' }),
+                justifyContent: 'flex-end',
               }}
             >
               <MenuIcon />

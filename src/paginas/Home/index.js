@@ -4,7 +4,7 @@ import './home.css'
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import firebase from "../../firebaseConnection";
 import { useEffect, useState } from 'react';
-import { Fade, TextField } from "@material-ui/core";
+import { Fade, TextField, Typography } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -18,6 +18,7 @@ import { InputLabel } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
+import { Container } from "react-bootstrap";
 
 
 const theme = createTheme({
@@ -30,6 +31,34 @@ const theme = createTheme({
     },
   },
 });
+
+theme.typography.h1 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2rem',
+  },
+};
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+};
+theme.typography.p = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2rem',
+  },
+};
 
 function Home() {
 
@@ -100,59 +129,67 @@ function Home() {
       })
   }
 
-  function handleAvaliar(){
+  function handleAvaliar() {
     window.location.href = '/avaliacao'
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <br />
-      <div>
-        <img className="logohome"></img>
-      </div>
+      <Container fluid>
+        <Box sx={{
+          marginLeft: '8%',
+          marginTop: '15%',
+          maxWidth: '30%',
+        }}>
+          <Typography variant="h1" sx={{color: 'primary.main'}}>{`Você tem materiais
+        eletrônicos em casa?`}</Typography>
+          <Button onClick={handleClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+            Saiba mais</Button>
 
-      <div align="left">
-        <h2>
-          <p> <font color="Green"> Você tem descarte eletrônico em casa? </font></p>
-        </h2>
-        <Button onClick={handleClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
-          Saiba mais</Button>
-        { clicksm1 && (
-          <div>
-            <p> <font color="Green">Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</font></p>
-            <p> <font color="Green">A pesquisa de Resíduos eletrônicos no Brasil – 2021, promovida pela Green Eletron, gestora sem fins lucrativos de logística reversa de eletroeletrônicos e pilhas, </font></p>
-            <p> <font color="Green">em parceria com a Radar Pesquisa, sobre o cenário do lixo eletrônico no país, aponta que 87% dos brasileiros possui alguma noção sobre lixo eletrônico, porém 33% acredita </font> </p>
-            <p> <font color="Green">que existe uma relação entre esse lixo e elementos do meio digital, como spam, e-mails, fotos ou arquivos. Para outros 42% dos entrevistados o lixo eletrônico consiste em </font></p>
-            <p> <font color="Green">aparelhos eletrônicos e eletrodomésticos sem funcionamento e 3% acreditam que são todos os equipamentos que já foram descartados, inclusive os que foram parar em locais inadequados. </font></p>
-            <Button onClick={closeClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
-              Fechar</Button>
-          </div>
-        )}
-      </div>
+          {clicksm1 && (
+            <div>
+              <p> <font color="Green">Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</font></p>
+              <p> <font color="Green">A pesquisa de Resíduos eletrônicos no Brasil – 2021, promovida pela Green Eletron, gestora sem fins lucrativos de logística reversa de eletroeletrônicos e pilhas, </font></p>
+              <p> <font color="Green">em parceria com a Radar Pesquisa, sobre o cenário do lixo eletrônico no país, aponta que 87% dos brasileiros possui alguma noção sobre lixo eletrônico, porém 33% acredita </font> </p>
+              <p> <font color="Green">que existe uma relação entre esse lixo e elementos do meio digital, como spam, e-mails, fotos ou arquivos. Para outros 42% dos entrevistados o lixo eletrônico consiste em </font></p>
+              <p> <font color="Green">aparelhos eletrônicos e eletrodomésticos sem funcionamento e 3% acreditam que são todos os equipamentos que já foram descartados, inclusive os que foram parar em locais inadequados. </font></p>
+              <Button onClick={closeClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+                Fechar</Button>
+            </div>
+          )}
+        </Box>
 
-      <div align="right">
-        <h2>
-          <p> <font color="Green"> Sabe quanto vale seu descarte eletrônico? </font> </p>
-        </h2>
-        <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
-          Saiba mais</Button>
-      </div>
-      <div align="center">
-        <h3>
-        <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
-        </h3>
-      </div>
-      <div align="center">
-        <h3>
-          <p> Entenda abaixo como nosso projeto funciona.</p>
-        </h3>
+        <Box 
+        sx={{
+          marginTop: '18%',
+          maxWidth: '25%',
+          alignItems: 'right',
+          textAlign: 'right',
+          marginLeft: '67%',
+        }}>
+          <Typography variant="h1" sx={{ color: 'primary.main', }}>{`Sabe quanto vale
+      seu lixo eletrônico?`}</Typography>
+          <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+            Saiba mais</Button>
+        </Box>
 
-      </div>
+        <div align="center">
+          <h3>
+            <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+              onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
+          </h3>
+        </div>
+        <div align="center">
+          <h3>
+            <p> Entenda abaixo como nosso projeto funciona.</p>
+          </h3>
 
-      <div>
-        <img className="resumoprojeto"></img>
-      </div>
+        </div>
+
+        <div>
+          <img className="resumoprojeto"></img>
+        </div>
+      </Container>
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -177,134 +214,134 @@ function Home() {
               alignItems: 'center',
             }}
           >
-            <Box component="form" noValidate sx={{ mt: 1 }}>            
-                <h2>Seja um Parceiro</h2>
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  required
-                  size="small"
-                  id="outlined-required"
-                  label="Empresa"
-                  defaultValue="Empresa"
-                  value={nome} onChange={(e) => setNome(e.target.value)} />
+            <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Typography variant="h2">Seja um Parceiro</Typography>
+              <TextField
+                fullWidth
+                margin="normal"
+                required
+                size="small"
+                id="outlined-required"
+                label="Empresa"
+                defaultValue="Empresa"
+                value={nome} onChange={(e) => setNome(e.target.value)} />
 
-                <TextField
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="CEP"
-                  type="text"
-                  defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
+              <TextField
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-required"
+                label="CEP"
+                type="text"
+                defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
 
-                <TextField
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Endereço"
-                  type="text"
-                  defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
+              <TextField
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-required"
+                label="Endereço"
+                type="text"
+                defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
 
-                <TextField
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Bairro"
-                  type="text"
-                  defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
+              <TextField
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-required"
+                label="Bairro"
+                type="text"
+                defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
 
-                <TextField
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Cidade"
-                  type="text"
-                  defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
+              <TextField
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-required"
+                label="Cidade"
+                type="text"
+                defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
 
-                <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
-                <Select
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  value={estado}
-                  label="Estado"
-                  onChange={(e) => setEstado(e.target.value.toString())}
-                >
-                  <MenuItem value="">
-                  </MenuItem>
-                  <MenuItem value={'SP'}>São Paulo</MenuItem>
-                  <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
-                  <MenuItem value={'MG'}>Minas Gerais</MenuItem>
-                </Select>
+              <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
+              <Select
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={estado}
+                label="Estado"
+                onChange={(e) => setEstado(e.target.value.toString())}
+              >
+                <MenuItem value="">
+                </MenuItem>
+                <MenuItem value={'SP'}>São Paulo</MenuItem>
+                <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
+                <MenuItem value={'MG'}>Minas Gerais</MenuItem>
+              </Select>
 
-                <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
-                <Select
-                  required
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  value={tipolixo}
-                  label="Categoria"
-                  onChange={(e) => setTipolixo(e.target.value.toString())}
-                >
-                  <MenuItem value="">
-                  </MenuItem>
-                  <MenuItem value={10}>Pequeno</MenuItem>
-                  <MenuItem value={20}>Médio</MenuItem>
-                  <MenuItem value={30}>Grande</MenuItem>
-                </Select>
-                <FormHelperText>Tamanho do material recebido</FormHelperText>
+              <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
+              <Select
+                required
+                fullWidth
+                margin="normal"
+                size="small"
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={tipolixo}
+                label="Categoria"
+                onChange={(e) => setTipolixo(e.target.value.toString())}
+              >
+                <MenuItem value="">
+                </MenuItem>
+                <MenuItem value={10}>Pequeno</MenuItem>
+                <MenuItem value={20}>Médio</MenuItem>
+                <MenuItem value={30}>Grande</MenuItem>
+              </Select>
+              <FormHelperText>Tamanho do material recebido</FormHelperText>
 
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-textarea"
-                  label="Deixe a sua mensagem"
-                  placeholder="Mensagem"
-                  multiline value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
+              <TextField
+                fullWidth
+                margin="normal"
+                size="small"
+                id="outlined-textarea"
+                label="Deixe a sua mensagem"
+                placeholder="Mensagem"
+                multiline value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
 
-                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAdd}>Enviar Formulário</Button><br />
+              <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+                onClick={handleAdd}>Enviar Formulário</Button><br />
 
             </Box>
           </Box>
         </Grid>
       </Grid>
 
-        <Stack spacing={2} sx={{ width: '100%' }}>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-              Solicitação de Posto de Coleta enviada com sucesso!
-            </Alert>
-          </Snackbar>
-        </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Solicitação de Posto de Coleta enviada com sucesso!
+          </Alert>
+        </Snackbar>
+      </Stack>
 
-        <Stack spacing={2} sx={{ width: '100%' }}>
-          <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-              Erro de preenchimento da solicitação!
-            </Alert>
-          </Snackbar>
-        </Stack>
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        <div align="center">
-          <hr />
-          <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>
-        </div>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Erro de preenchimento da solicitação!
+          </Alert>
+        </Snackbar>
+      </Stack>
+      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+      <div align="center">
+        <hr />
+        <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>
+      </div>
 
     </ThemeProvider >
 
