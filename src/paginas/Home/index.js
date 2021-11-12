@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import './home.css'
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import firebase from "../../firebaseConnection";
@@ -21,6 +22,14 @@ import MuiAlert from '@material-ui/core/Alert';
 import { Container } from "react-bootstrap";
 import Fab from '@material-ui/core/Fab';
 import StarIcon from '@material-ui/icons/Star';
+import Avaliacao from "../Avaliacao";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Slide from '@material-ui/core/Slide';
+import AvaliacaoInc from "../Avaliacao";
 
 
 const theme = createTheme({
@@ -65,6 +74,12 @@ theme.typography.p = {
   },
 };
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+  
+
 function Home() {
 
   const [nome, setNome] = useState('');
@@ -85,6 +100,8 @@ function Home() {
 
   const [clicksm1, setClicksm1] = React.useState(false);
 
+  const [abrir, setAvaliar] = React.useState(false);
+
   const handleClicksm1 = () => {
     setClicksm1(true);
   };
@@ -97,13 +114,20 @@ function Home() {
     setOpen(true);
   };
 
+  const abrirAvaliacao = () => {
+    setAvaliar(true);
+  };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
     setOpen(false);
+    setAvaliar(false);
   };
+
+  
 
   async function handleAdd() {
     await firebase.firestore().collection('propostas')
@@ -137,6 +161,7 @@ function Home() {
   function handleAvaliar() {
     window.location.href = '/avaliacao'
   }
+
 
 
   return (
@@ -361,10 +386,32 @@ function Home() {
       </Stack>
 
       <Box sx={{ '& > :not(style)': { m: 1 }, justifyContent: 'right', alignContent: 'right', marginTop: '5%', }}>
-      <Fab size="small" color="primary" aria-label="add">
+      <Fab 
+      onClick={abrirAvaliacao}
+      size="small" color="primary" aria-label="add">
         <StarIcon />
         </Fab>
         </Box>
+
+        <Dialog
+        sx={{justifyContent: 'center', alignItems: 'center',}}
+        open={abrir}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Sua opinião é muito importante para nós!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+          Quanto a iniciativa do site, achou interessante?
+          </DialogContentText>
+          <Avaliacao/>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="outlined" disableElevation onClick={Avaliacao=>AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5')}>Enviar</Button>
+        </DialogActions>
+      </Dialog>
 
    <br /> <br /> <br /> <br />
       <div align="center">

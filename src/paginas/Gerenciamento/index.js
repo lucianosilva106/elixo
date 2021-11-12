@@ -178,7 +178,7 @@ export default function Gerenciamento() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div" color="primary">
-              Dashboard - Gerenciamento do eLixo
+              Dashboard - Gerenciamento do Re-User
             </Typography>           
               <IconButton
                 size="large"
