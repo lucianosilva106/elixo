@@ -26,6 +26,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Stack } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
@@ -35,8 +39,48 @@ const theme = createTheme({
     secondary: {
       main: green[500],
     },
+    botao:{
+      
+    }
   },
 });
+
+theme.typography.h1 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2rem',
+  },
+};
+theme.typography.h6 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.4rem',
+  },
+};
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+};
+theme.typography.p = {
+  fontSize: '0.8rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1rem',
+  },
+};
 
 const drawerWidth = 240;
 
@@ -104,6 +148,91 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 )
+
+const card1 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
+        Posto de Coleta
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Cadastrar
+      </Typography>
+      <Typography variant="p">
+        Cadastre, edite ou desative postos de coleta de acordo com a necessidade.
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/admpostocoleta" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
+const card2 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
+        Informações
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Postagens
+      </Typography>
+      <Typography variant="p">
+        Poste informações relevantes ao descarte de materiais eletrônicos e seus impactos.
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/admnoticia" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
+const card3 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
+        Solicitações de Postos
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Solicitar
+      </Typography>
+      <Typography variant="p">
+        Solicitações para avaliação de estabelecimentos que desejam se tornar futuros Postos de Coleta.
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/admproposta" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
+const card4 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
+        Avaliações do Site
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Avaliar
+      </Typography>
+      <Typography variant="p">
+        Feedbacks de usabilidade e interesse dos visitantes do website.
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/admavaliacao" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
 
 export default function Gerenciamento() {
 
@@ -179,35 +308,35 @@ export default function Gerenciamento() {
             </IconButton>
             <Typography variant="h6" noWrap component="div" color="primary">
               Dashboard - Gerenciamento do Re-User
-            </Typography>           
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="primary"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={() => abrirHome()}>Home</MenuItem>
-                <MenuItem onClick={() => fazerLogout()}>Logout</MenuItem>
-              </Menu>
+            </Typography>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="primary"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={() => abrirHome()}>Home</MenuItem>
+              <MenuItem onClick={() => fazerLogout()}>Logout</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -235,7 +364,7 @@ export default function Gerenciamento() {
             {['Logout'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <ExitToAppIcon color="secondary" onClick={() => fazerLogout()}/> : <MailIcon color="secondary" />}
+                  {index % 2 === 0 ? <ExitToAppIcon color="secondary" onClick={() => fazerLogout()} /> : <MailIcon color="secondary" />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -244,6 +373,33 @@ export default function Gerenciamento() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+            <Box sx={{ minWidth: 275, }}>
+              <Card variant="outlined"
+              sx={{
+              maxWidth: '100%',
+              }}>{card1}</Card>
+            </Box>
+            <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined"
+              sx={{
+              maxWidth: '100%',
+              }}>{card2}</Card>
+            </Box>
+            <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined"
+              sx={{
+              maxWidth: '100%',
+              }}>{card3}</Card>
+            </Box>
+            <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined"
+              sx={{
+              maxWidth: '100%',
+              }}>{card4}</Card>
+            </Box>
+          </Stack>
+
           <Typography paragraph>
             Essa rota de gerenciamento permite aos administradores da plataforma ter acesso  às
             solicitações de adesão a um posto de coleta. Uma vez analisadas essas propostas, um
@@ -252,25 +408,13 @@ export default function Gerenciamento() {
             reciclados possam ser retirados.
           </Typography>
           <Typography paragraph>
-            Também acessamos os postos de coletas para manutenções cadastrais, como  atualização 
+            Também acessamos os postos de coletas para manutenções cadastrais, como  atualização
             de dados, inclusão e exclusão, além de vincular sua posição  geográfica  no  intuito
             de facilitar aos usuários o acesso mais rápido e fácil de chegar até o  endereço  do
             posto de coleta desejado.
           </Typography>
         </Box>
       </Box>
-
-
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography>
-            <Button color="success" href="/admpostocoleta">Postos de Coleta</Button>
-            <Button color="success" href="/admnoticia">Notícias</Button>
-            <Button color="success" href="/admproposta">Solicitações para Posto de Coleta</Button>
-            <Button color="success" href="/admavaliacao">Avaliações dos visitantes</Button>
-          </Typography>
-        </Toolbar>
-      </AppBar>
 
 
     </ThemeProvider>

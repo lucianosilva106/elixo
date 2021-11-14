@@ -129,7 +129,7 @@ function Postocoleta() {
         divider={<Divider orientation="vertical" flexItem />}
         spacing={{ sm: 2, md: 2 }}
         alignItems="center"
-        ustifyContent="center">
+        justifyContent="center">
 
         {postoscoletas.map((postocoleta) => {
           if (postocoleta.ativo) {
