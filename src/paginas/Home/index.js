@@ -30,6 +30,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
 import AvaliacaoInc from "../Avaliacao";
+import Tooltip from '@material-ui/core/Tooltip'
 
 
 const theme = createTheme({
@@ -385,13 +386,15 @@ function Home() {
         </Snackbar>
       </Stack>
 
-      <Box sx={{ '& > :not(style)': { m: 1 }, justifyContent: 'right', alignContent: 'right', marginTop: '5%', }}>
-      <Fab 
+      
+        <Tooltip title="Avalie-nos">
+      <Fab sx={{ position: 'absolute',}}
       onClick={abrirAvaliacao}
       size="small" color="primary" aria-label="add">
         <StarIcon />
         </Fab>
-        </Box>
+        </Tooltip>
+        
 
         <Dialog
         sx={{justifyContent: 'center', alignItems: 'center',}}

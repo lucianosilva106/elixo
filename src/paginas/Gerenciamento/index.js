@@ -30,6 +30,13 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { Stack } from '@material-ui/core';
+import Header from '../../components/Header';
+
+<React.Fragment>
+  <Header></Header>
+  
+  window.location.pathname !== "/gerenciamento";
+</React.Fragment>
 
 const theme = createTheme({
   palette: {
@@ -373,7 +380,8 @@ export default function Gerenciamento() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}
+          sx={{justifyContent: 'center'}}>
             <Box sx={{ minWidth: 275, }}>
               <Card variant="outlined"
               sx={{
@@ -399,6 +407,7 @@ export default function Gerenciamento() {
               }}>{card4}</Card>
             </Box>
           </Stack>
+          <br />
 
           <Typography paragraph>
             Essa rota de gerenciamento permite aos administradores da plataforma ter acesso  às
