@@ -31,6 +31,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
 import AvaliacaoInc from "../Avaliacao";
 import Tooltip from '@material-ui/core/Tooltip'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const theme = createTheme({
@@ -66,20 +69,18 @@ theme.typography.h2 = {
   },
 };
 theme.typography.p = {
-  fontSize: '1.2rem',
+  fontSize: '0.8rem',
   '@media (min-width:600px)': {
-    fontSize: '1.5rem',
+    fontSize: '0.9rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '2rem',
+    fontSize: '1rem',
   },
 };
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-
 
 function Home() {
 
@@ -163,22 +164,73 @@ function Home() {
     window.location.href = '/avaliacao'
   }
 
-
+  const card1 = (
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+      <CardContent>
+        <Typography variant="h2" component="div" sx={{color: 'primary.main'}}>
+          + 53 milhões
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="p">
+        de toneladas de eletrônicos descartados
+        </Typography>
+      </CardContent>
+      </ThemeProvider>
+    </React.Fragment>
+  );
+  const card2 = (
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+      <CardContent>
+        <Typography variant="h2" component="div" sx={{color: 'primary.main'}}>
+          7 milhões
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="p">
+        de toneladas de lixo eletrônico até 2030
+        </Typography>
+      </CardContent>
+      </ThemeProvider>
+    </React.Fragment>
+  );
+  const card3 = (
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+      <CardContent>
+        <Typography variant="h2" component="div" sx={{color: 'primary.main'}}>
+          17,4%
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="p">
+        foram coletados e reciclados
+        </Typography>
+      </CardContent>
+      </ThemeProvider>
+    </React.Fragment>
+  );
+  const card4 = (
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+      <CardContent>
+        <Typography variant="h2" component="div" sx={{color: 'primary.main'}}>
+          2 milhões
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="p">
+        de toneladas de eletrônicos descartados no Brasil
+        </Typography>
+      </CardContent>
+      </ThemeProvider>
+    </React.Fragment>
+  );
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ alignItems: 'center', height: '450px', }}>
-        <CssBaseline />
-        <Grid id="homebackground1"
-          item
-          sx={{
-            alignItems: 'flex-end',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
+      <Container fixed>
+      <Grid container component="main" align="center" 
+      sx={{ alignItems: 'center', height: '400px', justifyContent: 'center' }}>
+        <Stack direction={{  sm: 'row' }} 
+        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">        
         <Box sx={{
-          marginLeft: '8%',
-          maxWidth: '30%',
+          maxWidth: '35%',
+          marginLeft: '5%'
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
         eletrônicos em casa?`}</Typography>
@@ -197,29 +249,67 @@ function Home() {
             </div>
           )}
         </Box>
+
+        <Box id="homebackground1"
+          sx={{
+            backgroundRepeat: 'no-repeat',
+            minWidth: 300,
+            minHeight: 300,
+          }}/>
+        </Stack>
       </Grid>
 
-      <Grid container component="main" sx={{ bgcolor: '#fafafa', alignItems: 'center', height: '450px', }}>
-        <CssBaseline />
-        <Grid id="homebackground2"
+      <Grid container align="center" justifyItems="center" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
+      <Stack direction={{  sm: 'row' }} 
+        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">  
+        <Box id="homebackground2"
           item
           sx={{
+            minWidth: 350,
+            minHeight: 350,
             backgroundRepeat: 'no-repeat',
           }}
         />
-        <Box
-          sx={{
-            maxWidth: '25%',
-            textAlign: 'right',
-            marginLeft: '67%',
-          }}>
+              
+        <Box sx={{
+          maxWidth: '30%',
+        }}>
           <Typography variant="h1" sx={{ color: 'textos.main', }}>{`Sabe quanto vale
       seu lixo eletrônico?`}</Typography>
           <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
             Saiba mais</Button>
         </Box>
+        </Stack>
       </Grid>
+      </Container>
 
+      <Grid container component="main" align="center" 
+      sx={{ alignItems: 'center', height: '420px', justifyContent: 'center' }}>
+
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}
+          sx={{justifyContent: 'center'}}>
+            <Box sx={{ minWidth: "20%" }}>
+              <Card variant="outlined2"
+              sx={{
+              }}>{card1}</Card>
+            </Box>
+            <Box sx={{ minWidth: "20%" }}>
+              <Card variant="outlined2"
+              sx={{
+              }}>{card2}</Card>
+            </Box>
+            <Box sx={{ minWidth: "20%" }}>
+              <Card variant="outlined2"
+              sx={{
+              }}>{card3}</Card>
+            </Box>
+            <Box sx={{ minWidth: "20%" }}>
+              <Card variant="outlined2"
+              sx={{
+              }}>{card4}</Card>
+            </Box>
+          </Stack>
+          </Grid>
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />

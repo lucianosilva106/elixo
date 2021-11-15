@@ -32,11 +32,11 @@ body{
  }
  #homebackground1{
     background-image: url("/src/paginas/img/homebackgorund1.png");
-    background-size: 25%;
-    background-position: right;
+    background-size: 100%;
+    background-position: center;
 }
 #homebackground2{
     background-image: url("/src/paginas/img/homebackground2.png");
-    background-size: 80%;
+    background-size: 100%;
     background-position: center;
 }

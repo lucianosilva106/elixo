@@ -287,7 +287,7 @@ function Postocoleta() {
                         </DialogContentText>
                       </DialogContent>
                       <DialogActions>
-                        <Button variant="outlined" disableElevation
+                        <Button variant="outlined" disableElevation size="small"
                           onClick={() => handleRedirect(postocoleta.localizacao)} autoFocus>
                           Como chegar
                         </Button>
