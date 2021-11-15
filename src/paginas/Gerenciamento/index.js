@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { styled, useTheme, createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { styled, createTheme, ThemeProvider } from '@material-ui/core/styles';
 import MuiDrawer from '@material-ui/core/Drawer';
 import MuiAppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
@@ -30,13 +30,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { Stack } from '@material-ui/core';
-import Header from '../../components/Header';
 
-<React.Fragment>
-  <Header></Header>
-  
-  window.location.pathname !== "/gerenciamento";
-</React.Fragment>
 
 const theme = createTheme({
   palette: {
