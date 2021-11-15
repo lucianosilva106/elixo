@@ -21,6 +21,69 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Stack from '@material-ui/core/Stack';
 import Divider from '@material-ui/core/Divider';
 import Fade from '@material-ui/core/Fade';
+import { Box } from '@material-ui/system';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import { orange, green, grey } from '@material-ui/core/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
+    textos: {
+      main: grey[800],
+    },
+  },
+});
+
+theme.typography.h1 = {
+  fontSize: '1.7rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.5rem',
+  },
+};
+theme.typography.h5 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.4rem',
+  },
+};
+theme.typography.h6 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem',
+  },
+};
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+};
+theme.typography.p = {
+  fontSize: '0.8rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1rem',
+  },
+};
 
 function Postocoleta() {
 
@@ -74,12 +137,12 @@ function Postocoleta() {
     setPostoscoletas(postos)
   }
 
-  function handleOnOpen(id){
+  function handleOnOpen(id) {
     setOpen(true);
     return handleToogle(id)
   }
 
-  function handleOnClose(id){
+  function handleOnClose(id) {
     setOpen(false);
     return handleToogle(id)
 
@@ -112,97 +175,134 @@ function Postocoleta() {
 
     loadPostos();
 
-  },[])
+  }, [])
 
-  function handleRedirect(redireciona){
+  function handleRedirect(redireciona) {
     window.open(redireciona);
 
   }
 
   return (
-    <Container fixed>
-      <div align="center">
-        <h1>Postos de Coleta</h1>
-      </div>
-      <br />
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          bgcolor: '#fafafa',
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h1"
+            align="center"
+            gutterBottom
+            sx={{color:'primary.main'}}
+          >
+            Postos de Coleta
+          </Typography>
+          <Typography variant="h2" align="center" color="text.secondary" paragraph>
+            Confira os principais Postos de Coleta dos materiais eletrônicos na sua região.
+          </Typography>
+        </Container>
+      </Box>
+
+    <Container fixed
+    sx={{marginTop: '2%'}}>
+      
       <Stack direction={{ xs: 'column', sm: 'row' }}
         divider={<Divider orientation="vertical" flexItem />}
         spacing={{ sm: 2, md: 2 }}
         alignItems="center"
-        justifyContent="center">
+        justifyContent="center"
+        sx={{
+          alignItems: 'center',
+          alignSelf: 'center',
+          justifySelf: 'center'
+        }}>
 
         {postoscoletas.map((postocoleta) => {
           if (postocoleta.ativo) {
-          return (
-            <Grid
-              key={postocoleta.id}>
+            return (
+              <Grid sx={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'center',
+                justifySelf: 'center'
+              }}
+                key={postocoleta.id}>
 
-              <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa' }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image="https://cdn.pixabay.com/photo/2021/01/30/14/23/man-5963976_960_720.jpg"
-                    alt="posto de coleta"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom component="div"> {postocoleta.nome} </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center' }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image="https://cdn.pixabay.com/photo/2021/01/30/14/23/man-5963976_960_720.jpg"
+                      alt="posto de coleta"
+                    />
+                    <CardContent sx={{
+                      justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
+                      justifySelf: 'center'
+                    }}>
+                      <Typography gutterBottom component="div"> {postocoleta.nome} </Typography>
+                    </CardContent>
+                  </CardActionArea>
 
-                <IconButton sx={{
-                  top: '50%',
-                  left: '42%',
-                }}
-                  aria-label="circle"
-                  onClick={() => handleOnOpen(postocoleta.id)}><AddCircleIcon />
-                </IconButton>
-              </Card>
-              <p>{postocoleta.isOpen}</p>
-              {postocoleta.isOpen && (
-                <div>
-                  <Dialog
-                    open={open}
-                    onClose={() => handleOnClose(postocoleta.id)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">
-                      {postocoleta.nome}
-                    </DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">     
-                      <Typography variant="h6" gutterBottom>Endereço:</Typography>                  
-                      <Typography variant="body1" gutterBottom>{postocoleta.endereco}</Typography>
-                      <Typography variant="body1" gutterBottom>{postocoleta.bairro}</Typography>
-                      <Typography variant="body1" gutterBottom>{postocoleta.cidade}</Typography>
-                      <Typography variant="body1" gutterBottom>{postocoleta.estado}</Typography>
-                      <Typography variant="h6" gutterBottom>Destino Final do Material:</Typography>
-                      <Typography variant="body1" gutterBottom>{postocoleta.destino}</Typography>
-                      <Typography variant="h6" gutterBottom hidden>Localizacao:</Typography>
-                      <Typography variant="body1" gutterBottom hidden>{postocoleta.localizacao}</Typography>
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button variant="contained" disableElevation 
-                      onClick={() => handleOnClose(postocoleta.id)} autoFocus>
-                        Fechar
-                      </Button>
-                      <Button variant="contained" disableElevation 
-                      onClick={() => handleRedirect(postocoleta.localizacao)} autoFocus>
-                        Como chegar
-                      </Button>
-                     
-                    </DialogActions>
-                  </Dialog>
-                </div>
-              )}
-            </Grid>
-          )
+                  <IconButton sx={{
+                    top: '50%',
+                    left: '42%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifySelf: 'center'
+                  }}
+                    aria-label="circle"
+                    onClick={() => handleOnOpen(postocoleta.id)}><AddCircleIcon 
+                    sx={{ alignSelf: 'center', justifyContent: 'center', color: 'primary.main' }} />
+                  </IconButton>
+                </Card>
+                <p>{postocoleta.isOpen}</p>
+                {postocoleta.isOpen && (
+                  <div>
+                    <Dialog
+                      open={open}
+                      onClose={() => handleOnClose(postocoleta.id)}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle variant="h5" sx={{color:'primary.main'}} id="alert-dialog-title">
+                        {postocoleta.nome}
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          <Typography variant="h6" gutterBottom>Endereço:</Typography>
+                          <Typography variant="p" gutterBottom>{postocoleta.endereco} - </Typography>
+                          <Typography variant="p" gutterBottom>{postocoleta.bairro} - </Typography>
+                          <Typography variant="p" gutterBottom>{postocoleta.cidade}/</Typography>
+                          <Typography variant="p" gutterBottom>{postocoleta.estado}</Typography>
+                          <Typography variant="h6" gutterBottom>Destino Final do Material:</Typography>
+                          <Typography variant="p" gutterBottom>{postocoleta.destino}</Typography>
+                          <Typography variant="h6" gutterBottom hidden>Localizacao:</Typography>
+                          <Typography variant="p" gutterBottom hidden>{postocoleta.localizacao}</Typography>
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button variant="outlined" disableElevation
+                          onClick={() => handleRedirect(postocoleta.localizacao)} autoFocus>
+                          Como chegar
+                        </Button>
+
+                      </DialogActions>
+                    </Dialog>
+                  </div>
+                )}
+              </Grid>
+            )
           }
         })}
       </Stack>
     </Container>
+    </ThemeProvider>
   )
 
 }

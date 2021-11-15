@@ -79,7 +79,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-  
+
 
 function Home() {
 
@@ -128,7 +128,7 @@ function Home() {
     setAvaliar(false);
   };
 
-  
+
 
   async function handleAdd() {
     await firebase.firestore().collection('propostas')
@@ -219,24 +219,6 @@ function Home() {
             Saiba mais</Button>
         </Box>
       </Grid>
-
-
-      <div align="center">
-        <h3>
-          <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-            onClick={handleAvaliar}>Avalie-nos clicando aqui...</Button><br />
-        </h3>
-      </div>
-      <div align="center">
-        <h3>
-          <p> Entenda abaixo como nosso projeto funciona.</p>
-        </h3>
-
-      </div>
-
-      <div>
-        <img className="resumoprojeto"></img>
-      </div>
 
 
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -386,18 +368,21 @@ function Home() {
         </Snackbar>
       </Stack>
 
-      
+      <Box sx={{ display: 'grid', width: '100%', justifyContent: 'flex-end', 
+      alignSelf: 'flex-end', alignItems: 'flex-end'}}>
         <Tooltip title="Avalie-nos">
-      <Fab sx={{ position: 'absolute',}}
-      onClick={abrirAvaliacao}
-      size="small" color="primary" aria-label="add">
-        <StarIcon />
-        </Fab>
+          <Fab sx={{ zIndex: 1500, justifyContent: 'center', 
+          alignSelf: 'flex-end', alignItems: 'center',}}
+            onClick={abrirAvaliacao}
+            size="small" color="primary" aria-label="add">
+            <StarIcon />
+          </Fab>
         </Tooltip>
-        
+      </Box>
 
-        <Dialog
-        sx={{justifyContent: 'center', alignItems: 'center',}}
+
+      <Dialog
+        sx={{ justifyContent: 'center', alignItems: 'center', }}
         open={abrir}
         TransitionComponent={Transition}
         keepMounted
@@ -407,16 +392,16 @@ function Home() {
         <DialogTitle>{"Sua opinião é muito importante para nós!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-          Quanto a iniciativa do site, achou interessante?
+            Quanto a iniciativa do site, achou interessante?
           </DialogContentText>
-          <Avaliacao/>
+          <Avaliacao />
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" disableElevation onClick={Avaliacao=>AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5')}>Enviar</Button>
+          <Button variant="outlined" disableElevation onClick={Avaliacao => AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5')}>Enviar</Button>
         </DialogActions>
       </Dialog>
 
-   <br /> <br /> <br /> <br />
+      <br /> <br /> <br /> <br />
       <div align="center">
         <hr />
         <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>

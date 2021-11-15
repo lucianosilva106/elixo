@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { CssBaseline } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ export default function Header() {
 
     <header>
       <ThemeProvider theme={theme}>
+      <CssBaseline />
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="fixed" color="primary" elevation={0}>
             <Toolbar>
@@ -69,5 +71,6 @@ export default function Header() {
 
       </ThemeProvider>
     </header>
+    
   )
 }
