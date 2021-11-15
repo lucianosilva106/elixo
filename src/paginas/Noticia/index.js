@@ -18,13 +18,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { green } from '@material-ui/core/colors';
+import { green, orange, grey } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Typography } from '@material-ui/core';
 
+import { useQuery } from "graphql-hooks";
+import { Image } from 'react-datocms';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import { Box } from '@material-ui/system';
+import { Grid } from '@material-ui/core';
+
+{/*
 const theme = createTheme({
   palette: {
     primary: {
@@ -154,4 +165,155 @@ function Noticia() {
   );
 }
 
+export default Noticia;*/}
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
+    textos: {
+      main: grey[800],
+    },
+  },
+});
+
+theme.typography.h1 = {
+  fontSize: '1.7rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.5rem',
+  },
+};
+theme.typography.h5 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.4rem',
+  },
+};
+theme.typography.h6 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem',
+  },
+};
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+};
+theme.typography.p = {
+  fontSize: '0.8rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1rem',
+  },
+};
+
+const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
+  allArtigos(first: $limit) {
+    titulo
+    descricao
+    tumbnail {
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+}`;
+
+function Noticia() {
+
+  const { loading, error, data } = useQuery(HOMEPAGE_QUERY, {
+    variables: {
+      limit: 10
+    }
+  });
+  if (loading) return (
+    <ThemeProvider theme={theme}>
+    <Box sx={{ display: 'flex', 
+    alignSelf: 'center', 
+    top: '50%', 
+    left: '50%', 
+    position: 'fixed' }}>
+  <CircularProgress color="primary" />
+  </Box>
+  </ThemeProvider>);
+  if (error) return "Erro de conexão";
+
+    return (
+      <ThemeProvider theme={theme}>
+      <><Box
+        sx={{
+          bgcolor: '#fafafa',
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h1"
+          align="center"
+          gutterBottom
+          sx={{ color: 'primary.main' }}
+        >
+          Informações
+        </Typography>
+        <Typography variant="h2" align="center" color="text.secondary" paragraph>
+          Confira as principais informações, curiosidades e dicas sobre o descartes de materiais eletrônicos.
+        </Typography>
+      </Box><Container fixed>
+
+          {data.allArtigos.map(artigo => (
+            <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ sm: 2, md: 2 }}>
+            <Grid>
+              <Card sx={{ maxWidth: 250, minWidth: 50, justifyContent: 'center', alignItems: 'center' }}>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={artigo.tumbnail} />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {artigo.titulo}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" fullWidth variant="contained">Saiba mais</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            </Stack>
+          ))}
+        </Container></>
+        </ThemeProvider>
+    );
+}
+  
 export default Noticia;

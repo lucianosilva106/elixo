@@ -302,21 +302,19 @@ export default function Gerenciamento() {
               sx={{
                 marginRight: '36px',
                 ...(open && { display: 'none' }),
-                justifyContent: 'flex-end',
               }}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div" color="primary">
-              Dashboard - Gerenciamento do Re-User
+            <Typography variant="h6" component="div" color="primary">
+              Dashboard - Re-User
             </Typography>
             <IconButton
               size="large"
               aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
               onClick={handleMenu}
               color="primary"
+              sx={{justifyContent: 'space-evenly'}}
             >
               <AccountCircle />
             </IconButton>
