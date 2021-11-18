@@ -29,12 +29,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
-import AvaliacaoInc from "../Avaliacao";
+import {AvaliacaoInc} from "../Avaliacao";
 import Tooltip from '@material-ui/core/Tooltip'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
 
 const theme = createTheme({
   palette: {
@@ -110,6 +109,10 @@ function Home() {
 
   const closeClicksm1 = () => {
     setClicksm1(false);
+  };
+
+  const closeClicksm2 = () => {
+    window.location.href='./quemsomos';
   };
 
   const handleClick = () => {
@@ -229,7 +232,7 @@ function Home() {
         <Stack direction={{  sm: 'row' }} 
         spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">        
         <Box sx={{
-          maxWidth: '35%',
+          maxWidth: '45%',
           marginLeft: '5%'
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
@@ -258,7 +261,6 @@ function Home() {
           }}/>
         </Stack>
       </Grid>
-
       <Grid container align="center" justifyItems="center" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
       <Stack direction={{  sm: 'row' }} 
         spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">  
@@ -276,7 +278,7 @@ function Home() {
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main', }}>{`Sabe quanto vale
       seu lixo eletrônico?`}</Typography>
-          <Button type="submit" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2 }}>
             Saiba mais</Button>
         </Box>
         </Stack>
@@ -486,9 +488,6 @@ function Home() {
           </DialogContentText>
           <Avaliacao />
         </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" disableElevation onClick={Avaliacao => AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5')}>Enviar</Button>
-        </DialogActions>
       </Dialog>
 
       <br /> <br /> <br /> <br />

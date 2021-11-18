@@ -24,7 +24,6 @@ import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Typography } from '@material-ui/core';
-
 import { useQuery } from "graphql-hooks";
 import { Image } from 'react-datocms';
 import CircularProgress from '@material-ui/core/CircularProgress';

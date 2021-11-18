@@ -8,6 +8,10 @@ import Box from '@material-ui/core/Box';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import { Fade, TextField, Typography } from "@material-ui/core";
 import { orange, green, grey } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
+import Stack from '@material-ui/core/Stack'
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/core/Alert';
 
 const theme = createTheme({
   palette: {
@@ -62,12 +66,23 @@ theme.typography.p = {
   },
 };
 
-
 function Avaliacao() {
 
+  const [open, setOpen, aberto] = React.useState(false);
 
-  const [value, setValue] = React.useState(2);
-  const [hover, setHover] = React.useState(-1);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const [value, setValue] = useState(2);
+  const [hover, setHover] = useState(-1);
 
   const [pergunta1, setPergunta1] = useState('');
   const [resposta1, setResposta1] = useState(0);
@@ -95,11 +110,6 @@ function Avaliacao() {
     localStorage.getItem('aval', SeuAval);
   }, [])
 
-  const [firstStar, setFirstStar] = useState(false);
-  const [secondStar, setSecondStar] = useState(false);
-  const [thirdStar, setThirdStar] = useState(false);
-  const [fourtStar, setFourtStar] = useState(false);
-
   const [clickedStar, setShowError] = useState(false);
   const showError = (index) => {
     setShowError(index);
@@ -111,18 +121,18 @@ function Avaliacao() {
   let qresp4 = resposta4;
   let SeuAval = 0;
 
-  function AvaliacaoInc(id) {
+  function AvaliacaoInc(id, aval) {
 
-    if (fourtStar) {
+    if (aval == 4) {
       qresp4 += 1;
     } else {
-      if (thirdStar) {
+      if (aval == 3) {
         qresp3 += 1;
       } else {
-        if (secondStar) {
+        if (aval == 2) {
           qresp2 += 1;
         } else {
-          if (firstStar) {
+          if (aval == 1) {
             qresp1 += 1;
           }
         }
@@ -142,9 +152,8 @@ function Avaliacao() {
         resposta4: qresp4
       })
       .then(() => {
-        alert('RESPOSTA INCREMENTADA COM SUCESSO!')
+        handleClick();
         localStorage.setItem('aval', SeuAval);
-        alert(sugestao)
         if (sugestao) {
           addSugestao()
         }
@@ -152,14 +161,10 @@ function Avaliacao() {
         setResposta2(0);
         setResposta3(0);
         setResposta4(0);
-        setFirstStar(false);
-        setSecondStar(false);
-        setThirdStar(false);
-        setFourtStar(false);
         atuAvaliacao('0rF3cVgRBbFFQY5LSWD5');
       })
       .catch((error) => {
-        alert("Erro ao gravar alteração: " + error)
+        handleClose();
       })
   }
 
@@ -209,7 +214,8 @@ function Avaliacao() {
         value={value}
         precision={1}
         onChange={(event, newValue) => {
-          setValue(newValue);
+          setValue(newValue); 
+          SeuAval = value; 
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
@@ -219,64 +225,6 @@ function Avaliacao() {
       {value !== null && (
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
       )}
-      <Star
-        selected={firstStar}
-        StarClicked={() => {
-          if (firstStar) {
-            setFirstStar(false);
-          } else {
-            setFirstStar(true);
-            SeuAval = 1;
-          }
-
-          setSecondStar(false);
-          setThirdStar(false);
-          setFourtStar(false);
-        }}
-      />
-      <Star
-        selected={secondStar}
-        StarClicked={() => {
-          if (secondStar) {
-            setSecondStar(false);
-          } else {
-            setSecondStar(true);
-            SeuAval = 2;
-          }
-          setFirstStar(true);
-          setThirdStar(false);
-          setFourtStar(false);
-        }}
-      />
-      <Star
-        selected={thirdStar}
-        StarClicked={() => {
-          if (thirdStar) {
-            setThirdStar(false);
-          } else {
-            setThirdStar(true);
-            SeuAval = 3;
-          }
-          setFirstStar(true);
-          setSecondStar(true);
-          setFourtStar(false);
-        }}
-      />
-      <Star
-        selected={fourtStar}
-        StarClicked={() => {
-          if (fourtStar) {
-            setFourtStar(false);
-          } else {
-            setFourtStar(true);
-            SeuAval = 4;
-          }
-          setFirstStar(true);
-          setSecondStar(true);
-          setThirdStar(true);
-        }}
-      />
-      {clickedStar ? <div>this star already clicked</div> : null}
 
       <h4>
         <p> Deixe seu comentário que entraremos em contato com você.</p>
@@ -291,7 +239,7 @@ function Avaliacao() {
         id="outlined-required"
         label="E-mail"
         value={email} onChange={(e) => setEmail(e.target.value)} />
-         <TextField
+      <TextField
         fullWidth
         margin="normal"
         required
@@ -301,8 +249,15 @@ function Avaliacao() {
         label="Deixe a sua opinião"
         multiline
         value={sugestao} onChange={(e) => setSugestao(e.target.value)} />
-      <button onClick={() => AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5')}>Enviar</button>
+     <Button variant="outlined" disableElevation onClick={() => AvaliacaoInc('0rF3cVgRBbFFQY5LSWD5', value)}>Enviar</Button>
       {/*<p>Avaliações: {resposta1} Ruim  /  {resposta2} Razoável  /  {resposta3} Bom  /  {resposta4} Otimo  /  Seu Voto foi {SeuAval}</p>*/}
+     <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Obrigado pela sua Avaliação!
+          </Alert>
+        </Snackbar>
+      </Stack>
 
     </div>
   );

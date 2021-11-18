@@ -414,6 +414,12 @@ export default function Gerenciamento() {
             de facilitar aos usuários o acesso mais rápido e fácil de chegar até o  endereço  do
             posto de coleta desejado.
           </Typography>
+          <Typography paragraph>
+            Clicando Em Avaliações do site, acessamos um gráfico de satisfação de nosso  projeto 
+            e também uma lista de mensagens idenficadas que nos são enviadas nos permite  sentir
+            mais de perto as sugestãoes e criticas dos usuários mais interessados no tema.
+          </Typography>
+
         </Box>
       </Box>
 

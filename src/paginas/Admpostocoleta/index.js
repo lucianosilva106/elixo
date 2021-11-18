@@ -89,9 +89,14 @@ function Admpostocoleta() {
   
     
     const [open, setOpen, aberto] = React.useState(false);
+    const [excluir, setExcluir] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleClick = () => {
       setOpen(true);
+    };
+
+    const handleExcluir = () => {
+      setExcluir(true);
     };
 
     const handleClose = (event, reason) => {
@@ -148,7 +153,7 @@ function Admpostocoleta() {
         longitude: longitude
       })
       .then(()=>{
-        handleClickOpen();
+        handleClick();
         setAtivo('');
         setNome('');
         setCep('');
@@ -257,6 +262,7 @@ function Admpostocoleta() {
       await firebase.firestore().collection('postoscoletas').doc(id)
       .delete()
       .then(() => {
+        handleExcluir();
         buscaPostos();
       })
     }
@@ -451,6 +457,7 @@ function Admpostocoleta() {
           </Alert>
         </Snackbar>
         </Stack>
+
         <br /> <br /> <br /> <br /> <br />
         <br /> <br /> <br /> <br /> <br /> 
         <br /> <br /> <br /> <br /> <br /> 
@@ -508,6 +515,13 @@ function Admpostocoleta() {
                     )
                   })}
                </TableBody>
+               <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={excluir} autoHideDuration={6000} onClose={handleExcluir}>
+                  <Alert onClose={handleExcluir} severity="error" sx={{ width: '100%' }}>
+                    Posto de Coleta removido com sucesso!
+                  </Alert>
+                </Snackbar>
+               </Stack>
               </Table>
             </TableContainer>
 

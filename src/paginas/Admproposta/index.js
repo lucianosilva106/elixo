@@ -119,9 +119,8 @@ function Admproposta() {
     await firebase.firestore().collection('propostas').doc(id)
       .delete()
       .then(() => {
-        alert('Solicitação excluída com sucesso!')
+        handleClick();
       })
-
   }
 
   return (
@@ -166,6 +165,15 @@ function Admproposta() {
               )
               })}
             </TableBody>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Proposta excluída com sucesso!
+                </Alert>
+              </Snackbar>
+            </Stack>
+
+
           </Table>
         </TableContainer>
       </Container>
