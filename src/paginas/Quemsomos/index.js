@@ -4,7 +4,10 @@ import { Box } from '@material-ui/system';
 import './somos.css';
 import { orange, green, grey } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import Stack from '@material-ui/core/Stack'
+import Stack from '@material-ui/core/Stack';
+import { styled } from '@material-ui/core/styles';
+import MuiGrid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 
 const theme = createTheme({
@@ -51,6 +54,16 @@ theme.typography.p = {
 
 <a href="https://storyset.com/marketing">Marketing illustrations by Storyset</a>
 
+const Grid2 = styled(MuiGrid)(({ theme }) => ({
+  width: '80%',
+  ...theme.typography.p,
+  align: 'center',
+  justifyContent: 'space-evenly',
+  '& [role="separator"]': {
+    margin: theme.spacing(0, 2,),
+  },
+}));
+
 function Quemsomos() {
 
   return (
@@ -74,19 +87,40 @@ function Quemsomos() {
         gutterBottom
         sx={{ color: 'primary.main' }}
       >
-        Juntos Somos Mais!
+        Juntos Somos Mais
       </Typography>
-        <Typography variant="h4" align="center" color="text.secondary" paragraph>
-           <p>
+        <Typography variant="p" align="center" color="text.secondary" paragraph>
               Esta plataforma traz uma solução Web inovadora e escalonável, com foco no segmento de mercado 
-              específico de descarte de eletrônicos. </p>
-           <p>
+              específico de descarte de eletrônicos.
               Com base nos levantamentos e pesquisas realizadas no decorrer do projeto, 
               foi identificado o problema cultural no qual as pessoas muitas vezes não sabem o que é 
               e como descartar corretamente o lixo eletrônico. Visando facilitar esse processo, 
               a solução web tem como cerne inicial a orientação dessas pessoas, 
-              além de direcioná-las à locais apropriados para o descarte consciente. </p>
+              além de direcioná-las à locais apropriados para o descarte consciente.
         </Typography>
+
+<Box align="center" justifyContent="center">
+        <Grid2 container sx={{marginLeft: '10%'}} justifyContent="center">
+      <Grid2 item xs >
+      <Typography variant="p" align="center" color="text.secondary" paragraph>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
+   Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+   Sed malesuada lobortis pretium.
+        </Typography>
+      </Grid2>
+      <Divider orientation="vertical" flexItem>
+        VERTICAL
+      </Divider>
+      <Grid2 item xs>
+      <Typography variant="p" align="center" color="text.secondary" paragraph>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
+   Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+   Sed malesuada lobortis pretium.
+        </Typography>
+      </Grid2>
+    </Grid2>
+    </Box>
+
         </Box>
  
         <Grid container component="main" 
@@ -99,7 +133,7 @@ function Quemsomos() {
           marginLeft: '5%'
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main' }}>Missão, Visão e Valores</Typography>
-          <Typography variant="p" sx={{ color: 'textos.main' }}>A solução tem como objetivo promover uma mudança cultural dos indivíduos sobre a importância 
+          <Typography variant="p" sx={{ color: 'text.secondary' }}>A solução tem como objetivo promover uma mudança cultural dos indivíduos sobre a importância 
             do descarte sustentável do lixo eletrônico.</Typography>
         </Box>
 
@@ -127,7 +161,7 @@ function Quemsomos() {
           maxWidth: '30%',
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main', marginRight: '5%', }}>Descarte correto</Typography>
-          <Typography variant="p" sx={{ color: 'textos.main', marginRight: '5%', }}>Voltado para quem não tem acesso às informações de como deve ser o descarte de peças eletrônicas obsoletas, 
+          <Typography variant="p" sx={{ color: 'text.secondary', marginRight: '5%', }}>Voltado para quem não tem acesso às informações de como deve ser o descarte de peças eletrônicas obsoletas, 
           manutenções ou em desuso.</Typography>
         </Box>
         </Stack>

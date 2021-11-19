@@ -20,6 +20,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
+import InfoIcon from '@material-ui/icons/Info';
+import HomeIcon from '@material-ui/icons/Home';
+import FlagIcon from '@material-ui/icons/Flag';
+import MoreIcon from '@material-ui/icons/More';
+import ListItemButton from '@material-ui/core/ListItemButton';
+
 
 const theme = createTheme({
   palette: {
@@ -31,9 +37,6 @@ const theme = createTheme({
     },
   },
 });
-
-
-
 
 export default function Header() {
 
@@ -48,10 +51,23 @@ export default function Header() {
     })
   }
 
+  const HomeClick = () => {
+    window.location.href = './';
+  };
+  const QuemClick = () => {
+    window.location.href = './quemsomos';
+  };
+  const PostoClick = () => {
+    window.location.href = './postocoleta';
+  };
+  const NoticiaClick = () => {
+    window.location.href = './noticia';
+  };
+
   const [state, setState] = React.useState({
     left: false,
   });
-  
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -60,10 +76,10 @@ export default function Header() {
     ) {
       return;
     }
-  
+
     setState({ ...state, [anchor]: open });
   };
-  
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -72,11 +88,30 @@ export default function Header() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Quem Somos', 'Postos de Coleta', 'Saiba Mais'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItemButton onClick={() => HomeClick()}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItemButton>
+        <ListItemButton onClick={() => QuemClick()}>
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary="Quem Somos" />
+        </ListItemButton>
+        <ListItemButton onClick={() => PostoClick()}>
+          <ListItemIcon>
+            <FlagIcon />
+          </ListItemIcon>
+          <ListItemText primary="Postos de Coleta" />
+        </ListItemButton>
+        <ListItemButton onClick={() => NoticiaClick()}>
+          <ListItemIcon>
+            <MoreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Saiba Mais" />
+        </ListItemButton>
       </List>
       <Divider />
       <List>
@@ -94,54 +129,54 @@ export default function Header() {
 
   return (
 
-    <header>
+<header>
       <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {['left'].map((anchor) => (
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="fixed" color="primary" elevation={0}>
-            <Toolbar>
-              <IconButton
-              id="menuresp"
-                size="large"
-                edge="start"
-                color="secondary"
-                aria-label="home"
-                sx={{ mr: 2 }}
-                onClick={toggleDrawer(anchor, true)}
-              >
-                <MenuIcon>
-                </MenuIcon>
+        <CssBaseline />
+        {['left'].map((anchor) => (
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="fixed" color="primary" elevation={0}>
+              <Toolbar>
+                <IconButton
+                  id="menuresp"
+                  size="large"
+                  edge="start"
+                  color="secondary"
+                  aria-label="home"
+                  sx={{ mr: 2 }}
+                  onClick={toggleDrawer(anchor, true)}
+                >
+                  <MenuIcon>
+                  </MenuIcon>
 
-              </IconButton><Typography className="geral">
-                <Button color="secondary" href="/">Home</Button>
-                <Button color="secondary" href="/quemsomos">Quem Somos</Button>
-                <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
-                <Button color="secondary" href="/noticia">Saiba Mais </Button>
-                <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Login</Button>
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        </Box>))}
+                </IconButton><Typography className="geral">
+                  <Button color="secondary" href="/">Home</Button>
+                  <Button color="secondary" href="/quemsomos">Quem Somos</Button>
+                  <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
+                  <Button color="secondary" href="/noticia">Saiba Mais </Button>
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Login</Button>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </Box>))}
 
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}></Button>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
- 
+        {['left'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}></Button>
+            <SwipeableDrawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              {list(anchor)}
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
 
       </ThemeProvider>
 
     </header>
     
+
   )
 }

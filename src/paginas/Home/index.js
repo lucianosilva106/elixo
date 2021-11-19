@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import './home.css'
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import firebase from "../../firebaseConnection";
-import { useEffect, useState } from 'react';
-import { Fade, TextField, Typography } from "@material-ui/core";
+import { useState } from 'react';
+import { TextField, Typography } from "@material-ui/core";
 import { orange, green, grey } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -20,19 +18,8 @@ import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import { Container } from "react-bootstrap";
-import Fab from '@material-ui/core/Fab';
-import StarIcon from '@material-ui/icons/Star';
-import Avaliacao from "../Avaliacao";
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
-import {AvaliacaoInc} from "../Avaliacao";
-import Tooltip from '@material-ui/core/Tooltip'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 const theme = createTheme({
@@ -103,8 +90,6 @@ function Home() {
 
   const [clicksm1, setClicksm1] = React.useState(false);
 
-  const [abrir, setAvaliar] = React.useState(false);
-
   const handleClicksm1 = () => {
     setClicksm1(true);
   };
@@ -121,9 +106,6 @@ function Home() {
     setOpen(true);
   };
 
-  const abrirAvaliacao = () => {
-    setAvaliar(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -131,7 +113,6 @@ function Home() {
     }
 
     setOpen(false);
-    setAvaliar(false);
   };
 
 
@@ -163,10 +144,6 @@ function Home() {
         handleClick();
         console.log('ERRO: ' + error);
       })
-  }
-
-  function handleAvaliar() {
-    window.location.href = '/avaliacao'
   }
 
   const card1 = (
@@ -462,42 +439,6 @@ function Home() {
           </Alert>
         </Snackbar>
       </Stack>
-
-      <Box sx={{ display: 'grid', width: '100%', justifyContent: 'flex-end', 
-      alignSelf: 'flex-end', alignItems: 'flex-end'}}>
-        <Tooltip title="Avalie-nos">
-          <Fab sx={{ zIndex: 1500, justifyContent: 'center', 
-          alignSelf: 'flex-end', alignItems: 'center',}}
-            onClick={abrirAvaliacao}
-            size="small" color="primary" aria-label="add">
-            <StarIcon />
-          </Fab>
-        </Tooltip>
-      </Box>
-
-
-      <Dialog
-        sx={{ justifyContent: 'center', alignItems: 'center', }}
-        open={abrir}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Sua opinião é muito importante para nós!"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Quanto a iniciativa do site, achou interessante?
-          </DialogContentText>
-          <Avaliacao />
-        </DialogContent>
-      </Dialog>
-
-      <br /> <br /> <br /> <br />
-      <div align="center">
-        <hr />
-        <h4>(c) 2021 Re-User - Todos os direitos reservados</h4>
-      </div>
 
     </ThemeProvider >
 

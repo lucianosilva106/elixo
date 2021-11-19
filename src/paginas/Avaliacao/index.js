@@ -5,8 +5,8 @@ import { FaStar } from "react-icons/fa";
 import Rating from '@material-ui/core/Rating';
 import StarIcon from '@material-ui/icons/Star';
 import Box from '@material-ui/core/Box';
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
-import { Fade, TextField, Typography } from "@material-ui/core";
+import { createTheme } from '@material-ui/core/styles';
+import { TextField } from "@material-ui/core";
 import { orange, green, grey } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Stack from '@material-ui/core/Stack'
@@ -167,6 +167,7 @@ function Avaliacao() {
         handleClose();
       })
   }
+
 
   async function addSugestao() {
     var dataAtual = '';
