@@ -102,6 +102,7 @@ export default function Header() {
           <AppBar position="fixed" color="primary" elevation={0}>
             <Toolbar>
               <IconButton
+              id="menuresp"
                 size="large"
                 edge="start"
                 color="secondary"
@@ -112,7 +113,7 @@ export default function Header() {
                 <MenuIcon>
                 </MenuIcon>
 
-              </IconButton><Typography>
+              </IconButton><Typography className="geral">
                 <Button color="secondary" href="/">Home</Button>
                 <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                 <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>

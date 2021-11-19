@@ -31,7 +31,7 @@ body{
      background-size: auto;
  }
  #homebackground1{
-    background-image: url("/src/paginas/img/homebackgorund1.png");
+    background-image: url("/src/paginas/img/homebackgorund1.svg");
     background-size: 100%;
     background-position: center;
 }
@@ -39,4 +39,15 @@ body{
     background-image: url("/src/paginas/img/homebackground2.png");
     background-size: 100%;
     background-position: center;
+}
+@media only screen and (max-width: 600px) {
+    #homebackground1{
+        background-size: 70%;
+    }
+    #homebackground2{
+        background-size: 70%;
+    }
+    #imgcontato{
+        background-size: 20%;
+    }
 }

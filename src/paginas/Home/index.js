@@ -77,6 +77,8 @@ theme.typography.p = {
   },
 };
 
+<a href="https://storyset.com/marketing">Marketing illustrations by Storyset</a>
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -230,9 +232,9 @@ function Home() {
       <Grid container component="main" align="center" 
       sx={{ alignItems: 'center', height: '400px', justifyContent: 'center' }}>
         <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">        
+        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">        
         <Box sx={{
-          maxWidth: '45%',
+          maxWidth: '38%',
           marginLeft: '5%'
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
@@ -263,7 +265,7 @@ function Home() {
       </Grid>
       <Grid container align="center" justifyItems="center" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
       <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center">  
+        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">  
         <Box id="homebackground2"
           item
           sx={{
@@ -276,9 +278,10 @@ function Home() {
         <Box sx={{
           maxWidth: '30%',
         }}>
-          <Typography variant="h1" sx={{ color: 'textos.main', }}>{`Sabe quanto vale
+          <Typography variant="h1" sx={{ color: 'textos.main', 
+          marginRight: '5%',}}>{`Sabe quanto vale
       seu lixo eletrônico?`}</Typography>
-          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2, marginRight: '5%', }}>
             Saiba mais</Button>
         </Box>
         </Stack>

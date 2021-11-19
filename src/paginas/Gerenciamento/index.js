@@ -290,7 +290,7 @@ export default function Gerenciamento() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-evenly'}}>
         <CssBaseline />
         <AppBar position="fixed" color="secondary" open={open} elevation={0}>
           <Toolbar>

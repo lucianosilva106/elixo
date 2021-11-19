@@ -183,7 +183,6 @@ function Avaliacao() {
         mensagem: sugestao
       })
       .then(() => {
-        alert('Mensagem registrada com sucesso!');
         setAvaliacao('');
         setDatamensagem('');
         setEmail('');

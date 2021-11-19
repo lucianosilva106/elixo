@@ -1,0 +1,26 @@
+#imagemain{
+    background-image: url("/src/paginas/img/solidarity-animada.svg");
+    background-size: auto;
+    background-position: center;
+}
+#image1{
+    background-image: url("/src/paginas/img/missao-animada.svg");
+    background-size: auto;
+    background-position: center;
+}
+#image2{
+    background-image: url("/src/paginas/img/phone-animada.svg");
+    background-size: auto;
+    background-position: center;
+}
+@media only screen and (max-width: 600px) {
+    #image2{
+        background-size: 60%;
+    }
+    #image1{
+        background-size: 70%;
+    }
+    #imagemain{
+        background-size: 60%;
+    }
+  }
