@@ -231,17 +231,16 @@ const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
     titulo
     descricao
     tumbnail {
-      responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
-        srcSet
-        webpSrcSet
-        sizes
-        src
-        width
-        height
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 200, auto: format }) {
         aspectRatio
-        alt
-        title
-        base64
+          width
+          sizes
+          srcSet
+          src
+          webpSrcSet
+          alt
+          title
+          base64
       }
     }
   }
@@ -289,16 +288,14 @@ function Noticia() {
         </Typography>
       </Box><Container fixed>
 
-          {data.allArtigos.map(artigo => (
-            <Stack direction={{ xs: 'column', sm: 'row' }}
+      <Stack justifyContent="center" align="center" direction={{ xs: 'column', sm: 'row', marginTop: '3%' }}
             spacing={{ sm: 2, md: 2 }}>
+
+          {data.allArtigos.map(artigo => (
             <Grid>
               <Card sx={{ maxWidth: 250, minWidth: 50, justifyContent: 'center', alignItems: 'center' }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={artigo.tumbnail} />
-                <CardContent>
+              <Image data={artigo.tumbnail.responsiveImage}/>
+                <CardContent>             
                   <Typography gutterBottom variant="h6" component="div">
                     {artigo.titulo}
                   </Typography>
@@ -308,8 +305,7 @@ function Noticia() {
                 </CardActions>
               </Card>
             </Grid>
-            </Stack>
-          ))}
+          ))}</Stack>
         </Container></>
         </ThemeProvider>
     );

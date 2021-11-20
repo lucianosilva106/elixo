@@ -8,7 +8,7 @@ import Stack from '@material-ui/core/Stack';
 import { styled } from '@material-ui/core/styles';
 import MuiGrid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-
+import Chip from '@material-ui/core/Chip';
 
 const theme = createTheme({
   palette: {
@@ -25,7 +25,7 @@ const theme = createTheme({
 });
 
 theme.typography.h1 = {
-  fontSize: '1.2rem',
+  fontSize: '1.5rem',
   '@media (min-width:600px)': {
     fontSize: '1.5rem',
   },
@@ -40,6 +40,15 @@ theme.typography.h2 = {
   },
   [theme.breakpoints.up('md')]: {
     fontSize: '1.6rem',
+  },
+};
+theme.typography.h5 = {
+  fontSize: '1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.2rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.3rem',
   },
 };
 theme.typography.p = {
@@ -89,36 +98,28 @@ function Quemsomos() {
       >
         Juntos Somos Mais
       </Typography>
-        <Typography variant="p" align="center" color="text.secondary" paragraph>
-              Esta plataforma traz uma solução Web inovadora e escalonável, com foco no segmento de mercado 
-              específico de descarte de eletrônicos.
-              Com base nos levantamentos e pesquisas realizadas no decorrer do projeto, 
-              foi identificado o problema cultural no qual as pessoas muitas vezes não sabem o que é 
-              e como descartar corretamente o lixo eletrônico. Visando facilitar esse processo, 
-              a solução web tem como cerne inicial a orientação dessas pessoas, 
-              além de direcioná-las à locais apropriados para o descarte consciente.
-        </Typography>
 
-<Box align="center" justifyContent="center">
+<Box align="center" justifyContent="center" sx={{marginTop: '5%'}}>
         <Grid2 container sx={{marginLeft: '10%'}} justifyContent="center">
       <Grid2 item xs >
       <Typography variant="p" align="center" color="text.secondary" paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
-   Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-   Sed malesuada lobortis pretium.
+      Uma solução inovadora e escalonável, com foco no segmento de mercado
+      específico de descarte de eletrônicos.
         </Typography>
       </Grid2>
       <Divider orientation="vertical" flexItem>
-        VERTICAL
+      <Typography variant="h5" align="center" color="text.secondary">Inovação</Typography>
       </Divider>
       <Grid2 item xs>
       <Typography variant="p" align="center" color="text.secondary" paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo.
-   Nulla ut facilisis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-   Sed malesuada lobortis pretium.
+      Visando facilitar, a solução tem como objetivo principal 
+      a orientação, além do direcionamento à locais apropriados para o descarte consciente.
         </Typography>
       </Grid2>
     </Grid2>
+    <Divider align="center" color="text.secondary">
+    <Typography variant="h5" align="center" color="text.secondary">Teste</Typography>
+      </Divider>
     </Box>
 
         </Box>
@@ -136,7 +137,6 @@ function Quemsomos() {
           <Typography variant="p" sx={{ color: 'text.secondary' }}>A solução tem como objetivo promover uma mudança cultural dos indivíduos sobre a importância 
             do descarte sustentável do lixo eletrônico.</Typography>
         </Box>
-
         <Box id="image1"
           sx={{
             backgroundRepeat: 'no-repeat',
@@ -151,12 +151,11 @@ function Quemsomos() {
         <Box id="image2"
           item
           sx={{
-            minWidth: 350,
-            minHeight: 350,
+            minWidth: 300,
+            minHeight: 300,
             backgroundRepeat: 'no-repeat',
           }}
-        />
-              
+        />           
         <Box sx={{
           maxWidth: '30%',
         }}>
@@ -166,7 +165,6 @@ function Quemsomos() {
         </Box>
         </Stack>
       </Grid>
-        
 
       </ThemeProvider>
   
