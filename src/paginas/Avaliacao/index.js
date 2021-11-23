@@ -1,6 +1,6 @@
 import firebase from "../../firebaseConnection";
 import { useEffect, useState } from 'react';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { FaStar } from "react-icons/fa";
 import Rating from '@material-ui/core/Rating';
 import StarIcon from '@material-ui/icons/Star';

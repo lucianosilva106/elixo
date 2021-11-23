@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './login.css'
 import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,12 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, green } from '@material-ui/core/colors';
 import firebase from 'firebase';
-import { Redirect } from 'react-router';
-import Alert from '@material-ui/core/Alert';
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const theme = createTheme({
@@ -48,7 +44,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 
 export default function SignInSide() {
 

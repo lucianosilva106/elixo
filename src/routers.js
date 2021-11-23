@@ -1,21 +1,16 @@
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from './components/Header';
 import Home from './paginas/Home';
-import Reciclavel from './paginas/Reciclavel';
-import Nossoapp from './paginas/Nossoapp';
-import Contato from './paginas/Contato';
 import Erro from './paginas/Erro';
 import Login from './paginas/Login';
 import Gerenciamento from './paginas/Gerenciamento'
 import Admpostocoleta from './paginas/Admpostocoleta';
-import Admnoticia from './paginas/Admnoticia';
 import Postocoleta from './paginas/Postocoleta';
 import Noticia from './paginas/Noticia';
 import Quemsomos from './paginas/Quemsomos';
 import Admproposta from './paginas/Admproposta';
-import Cadastre from './paginas/Cadastre';
-import Avaliacao from './paginas/Avaliacao';
 import AdmAvaliacao from './paginas/Admavaliacao';
+import Info from './paginas/Noticia/Info';
 import ScrollToTop from './paginas/ScrollToTop';
 
 const Routes = () => {
@@ -25,19 +20,15 @@ const Routes = () => {
         <ScrollToTop/>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/reciclavel" component={Reciclavel} />
-                <Route exact path="/nossoapp" component={Nossoapp} />
-                <Route exact path="/contato" component={Contato} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/gerenciamento" component={Gerenciamento} />
                 <Route exact path="/postocoleta" component={Postocoleta} />
                 <Route exact path="/noticia" component={Noticia} />
                 <Route exact path="/admpostocoleta" component={Admpostocoleta} />
-                <Route exact path="/admnoticia" component={Admnoticia} />
                 <Route exact path="/quemsomos" component={Quemsomos} />
                 <Route exact path="/admproposta" component={Admproposta} />
-                <Route exact path="/cadastre" component={Cadastre} />
                 <Route exact path="/admavaliacao" component={AdmAvaliacao} />
+                <Route exact path="/info/:id" component={Info} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>

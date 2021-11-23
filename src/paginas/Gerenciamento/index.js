@@ -186,7 +186,7 @@ const card2 = (
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admnoticia" size="small" variant="contained" 
+      <Button href="https://dashboard.datocms.com/project/56599" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>

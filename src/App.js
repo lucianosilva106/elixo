@@ -13,7 +13,6 @@ import Avaliacao from "../src/paginas/Avaliacao";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
 import { Typography } from '@material-ui/core';
@@ -27,6 +26,7 @@ import {ptBR} from '@material-ui/core/locale'
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
   allArtigos(first: $limit) {
+    id
     titulo
     tumbnail {
       responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {

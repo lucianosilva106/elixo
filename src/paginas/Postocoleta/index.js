@@ -1,5 +1,5 @@
 import firebase from '../../firebaseConnection';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,7 +9,6 @@ import { CardActionArea, Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { styled } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -20,9 +19,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Stack from '@material-ui/core/Stack';
 import Divider from '@material-ui/core/Divider';
-import Fade from '@material-ui/core/Fade';
 import { Box } from '@material-ui/system';
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, green, grey } from '@material-ui/core/colors';
 
 const theme = createTheme({
@@ -87,14 +85,6 @@ theme.typography.p = {
 
 function Postocoleta() {
 
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
 
   const BootstrapDialogTitle = (props) => {
     const { children, onClose, ...other } = props;

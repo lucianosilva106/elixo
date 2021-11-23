@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider, responsiveFontSizes  } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider  } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { Box } from '@material-ui/system';
 import './somos.css';
@@ -8,7 +8,6 @@ import Stack from '@material-ui/core/Stack';
 import { styled } from '@material-ui/core/styles';
 import MuiGrid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
 
 const theme = createTheme({
   palette: {
@@ -118,8 +117,25 @@ function Quemsomos() {
       </Grid2>
     </Grid2>
     <Divider align="center" color="text.secondary">
-    <Typography variant="h5" align="center" color="text.secondary">Teste</Typography>
+    <Typography variant="h5" align="center" color="text.secondary">Cultura</Typography>
       </Divider>
+      <Grid2 container sx={{marginLeft: '10%'}} justifyContent="center">
+      <Grid2 item xs >
+      <Typography variant="p" align="center" color="text.secondary" paragraph>
+      Uma solução inovadora e escalonável, com foco no segmento de mercado
+      específico de descarte de eletrônicos.
+        </Typography>
+      </Grid2>
+      <Divider orientation="vertical" flexItem>
+      <Typography variant="h5" align="center" color="text.secondary">Transformação</Typography>
+      </Divider>
+      <Grid2 item xs>
+      <Typography variant="p" align="center" color="text.secondary" paragraph>
+      Visando facilitar, a solução tem como objetivo principal 
+      a orientação, além do direcionamento à locais apropriados para o descarte consciente.
+        </Typography>
+      </Grid2>
+    </Grid2>
     </Box>
 
         </Box>
@@ -128,7 +144,7 @@ function Quemsomos() {
       sx={{ alignItems: 'center', height: '400px', justifyContent: 'center', 
       bgcolor: '#fafafa', }}>
         <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">        
+        spacing={{ xs: 1, sm: 2, md: 6 }} alignItems="center" justifyContent="space-evenly">        
         <Box sx={{
           maxWidth: '38%',
           marginLeft: '5%'
@@ -147,7 +163,7 @@ function Quemsomos() {
       </Grid>
       <Grid container justifyItems="center" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
       <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">  
+        spacing={{ xs: 1, sm: 2, md: 6 }} alignItems="center" justifyContent="space-evenly">  
         <Box id="image2"
           item
           sx={{

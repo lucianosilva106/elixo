@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import firebase from "../../firebaseConnection";
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,7 +13,6 @@ import Container from '@material-ui/core/Container';
 import MuiAlert from '@material-ui/core/Alert';
 import { green } from '@material-ui/core/colors';
 import Slide from '@material-ui/core/Slide';
-import { Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import './admaval.css';
 

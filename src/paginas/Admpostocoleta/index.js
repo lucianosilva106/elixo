@@ -2,7 +2,7 @@ import firebase from '../../firebaseConnection';
 import 'firebase/auth';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { TextField } from "@material-ui/core";
 import { orange, green } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,11 +22,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
@@ -42,10 +37,6 @@ const theme = createTheme({
       main: orange[500],
     },
   },
-});
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 
@@ -80,13 +71,7 @@ function Admpostocoleta() {
     
     const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
-  
-    const [abrir, setAbrir] = React.useState(false);
-    const abrirAlert = () => {
-      setAbrir(true);
-    };
-  
+    });  
     
     const [open, setOpen, aberto] = React.useState(false);
     const [excluir, setExcluir] = React.useState(false);
