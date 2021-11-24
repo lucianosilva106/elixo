@@ -276,8 +276,7 @@ function Home() {
           maxWidth: '35%',
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main', 
-          }}>{`Sabe quanto vale
-      seu lixo eletrônico?`}</Typography>
+          }}>{`Conheça mais sobre o Lixo Eletrônico`}</Typography>
           <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2, }}>
             Saiba mais</Button>
         </Box>

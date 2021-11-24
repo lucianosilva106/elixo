@@ -126,6 +126,7 @@ function Noticia() {
           pb: 6,
         }}
       >
+        <Container maxWidth="sm">
         <Typography
           component="h1"
           variant="h1"
@@ -138,7 +139,9 @@ function Noticia() {
         <Typography variant="h2" align="center" color="text.secondary" paragraph>
           Confira as principais informações, curiosidades e dicas sobre o descartes de materiais eletrônicos.
         </Typography>
-      </Box><Container fixed>
+        </Container>
+      </Box>
+      <Container fixed>
 
       <Stack justifyContent="center" align="center" direction={{ xs: 'column', sm: 'row', marginTop: '3%' }}
             spacing={{ sm: 2, md: 2, xs: 2 }}>
@@ -146,7 +149,7 @@ function Noticia() {
           {data.allArtigos.map(artigo => (
             <Grid
             key={artigo.id}>
-              <Card sx={{ maxWidth: 250, minWidth: 50, justifyContent: 'center', alignItems: 'center' }}>
+              <Card sx={{ maxWidth: 250, minWidth: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fafafa' }}>
               <Image data={artigo.tumbnail.responsiveImage}/>
                 <CardContent>             
                   <Typography gutterBottom variant="h6" component="div">
