@@ -21,6 +21,11 @@ import { Container } from "react-bootstrap";
 import Slide from '@material-ui/core/Slide';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const theme = createTheme({
   palette: {
@@ -52,6 +57,15 @@ theme.typography.h2 = {
   },
   [theme.breakpoints.up('md')]: {
     fontSize: '1.6rem',
+  },
+};
+theme.typography.h6 = {
+  fontSize: '1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.1rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem',
   },
 };
 theme.typography.p = {
@@ -89,6 +103,10 @@ function Home() {
   const [open, setOpen, aberto] = React.useState(false);
 
   const [clicksm1, setClicksm1] = React.useState(false);
+  
+  const [scroll, setScroll] = React.useState('paper');
+
+  const [saibamais, setSaiba] = React.useState(false);
 
   const handleClicksm1 = () => {
     setClicksm1(true);
@@ -106,6 +124,10 @@ function Home() {
     setOpen(true);
   };
 
+  const handleClickOpen = (scrollType) => () => {
+    setSaiba(true);
+    setScroll(scrollType);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -113,6 +135,7 @@ function Home() {
     }
 
     setOpen(false);
+    setSaiba(false);
   };
 
 
@@ -203,33 +226,30 @@ function Home() {
     </React.Fragment>
   );
 
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
   return (
     <ThemeProvider theme={theme}>
       <Container fixed>
       <Grid container component="main" align="center" 
       sx={{ alignItems: 'center', height: '400px', justifyContent: 'center' }}>
         <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">        
+        spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="space-evenly">        
         <Box sx={{
           maxWidth: '38%',
-          marginLeft: '5%'
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
         eletrônicos em casa?`}</Typography>
-          <Button onClick={handleClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button onClick={handleClickOpen('paper')} variant="outlined" sx={{ mt: 3, mb: 2 }}>
             Saiba mais</Button>
-
-          {clicksm1 && (
-            <div>
-              <p> <font color="Green">Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</font></p>
-              <p> <font color="Green">A pesquisa de Resíduos eletrônicos no Brasil – 2021, promovida pela Green Eletron, gestora sem fins lucrativos de logística reversa de eletroeletrônicos e pilhas, </font></p>
-              <p> <font color="Green">em parceria com a Radar Pesquisa, sobre o cenário do lixo eletrônico no país, aponta que 87% dos brasileiros possui alguma noção sobre lixo eletrônico, porém 33% acredita </font> </p>
-              <p> <font color="Green">que existe uma relação entre esse lixo e elementos do meio digital, como spam, e-mails, fotos ou arquivos. Para outros 42% dos entrevistados o lixo eletrônico consiste em </font></p>
-              <p> <font color="Green">aparelhos eletrônicos e eletrodomésticos sem funcionamento e 3% acreditam que são todos os equipamentos que já foram descartados, inclusive os que foram parar em locais inadequados. </font></p>
-              <Button onClick={closeClicksm1} variant="outlined" sx={{ mt: 3, mb: 2 }}>
-                Fechar</Button>
-            </div>
-          )}
         </Box>
 
         <Box id="homebackground1"
@@ -240,9 +260,9 @@ function Home() {
           }}/>
         </Stack>
       </Grid>
-      <Grid container align="center" justifyItems="center" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
+      <Grid container align="center" justifyItems="space-evenly" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '350px', justifyContent: 'center' }}>
       <Stack direction={{  sm: 'row' }} 
-        spacing={{ xs: 1, sm: 2, md: 30 }} alignItems="center" justifyContent="space-evenly">  
+        spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="space-evenly">  
         <Box id="homebackground2"
           item
           sx={{
@@ -253,12 +273,12 @@ function Home() {
         />
               
         <Box sx={{
-          maxWidth: '30%',
+          maxWidth: '35%',
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main', 
-          marginRight: '5%',}}>{`Sabe quanto vale
+          }}>{`Sabe quanto vale
       seu lixo eletrônico?`}</Typography>
-          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2, marginRight: '5%', }}>
+          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2, }}>
             Saiba mais</Button>
         </Box>
         </Stack>
@@ -266,7 +286,7 @@ function Home() {
       </Container>
 
       <Grid container component="main" align="center" 
-      sx={{ alignItems: 'center', height: '420px', justifyContent: 'center' }}>
+      sx={{ alignItems: 'center', height: '420px', justifyContent: 'space-evenly' }}>
 
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}
           sx={{justifyContent: 'center'}}>
@@ -439,6 +459,34 @@ function Home() {
           </Alert>
         </Snackbar>
       </Stack>
+
+      <div>
+      <Dialog
+        open={saibamais}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title"><Typography variant="h6" align="center" color="text.secondary" paragraph>
+            Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</Typography></DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            <Typography variant="p" align="center" color="text.secondary" paragraph>A pesquisa de Resíduos eletrônicos no Brasil – 2021, promovida pela Green Eletron, gestora sem fins lucrativos de logística reversa de eletroeletrônicos e pilhas,
+em parceria com a Radar Pesquisa, sobre o cenário do lixo eletrônico no país, aponta que 87% dos brasileiros possui alguma noção sobre lixo eletrônico, porém 33% acredita
+que existe uma relação entre esse lixo e elementos do meio digital, como spam, e-mails, fotos ou arquivos. Para outros 42% dos entrevistados o lixo eletrônico consiste em
+aparelhos eletrônicos e eletrodomésticos sem funcionamento e 3% acreditam que são todos os equipamentos que já foram descartados, inclusive os que foram parar em locais inadequados.</Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Ok</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
 
     </ThemeProvider >
 
