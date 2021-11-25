@@ -467,8 +467,8 @@ function Home() {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title"><Typography variant="h6" align="center" color="text.secondary" paragraph>
-            Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substancias nocivas a sua saúde?</Typography></DialogTitle>
+        <DialogTitle id="scroll-dialog-title"><Typography variant="h6" align="center" color="text.secondary">
+            Você sabia que os equipamentos eletrônicos além de poluir o meio ambiente, tem substâncias nocivas a sua saúde?</Typography></DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
           <DialogContentText
             id="scroll-dialog-description"

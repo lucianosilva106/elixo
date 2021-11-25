@@ -52,16 +52,16 @@ export default function Header() {
   }
 
   const HomeClick = () => {
-    window.location.href = './';
+    window.location.href = '/';
   };
   const QuemClick = () => {
-    window.location.href = './quemsomos';
+    window.location.href = '/quemsomos';
   };
   const PostoClick = () => {
-    window.location.href = './postocoleta';
+    window.location.href = '/postocoleta';
   };
   const NoticiaClick = () => {
-    window.location.href = './noticia';
+    window.location.href = '/noticia';
   };
 
   const [state, setState] = React.useState({
