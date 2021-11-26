@@ -129,7 +129,7 @@ export default function Header() {
 
   return (
 
-<header>
+    <header>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {['left'].map((anchor) => (
@@ -148,7 +148,9 @@ export default function Header() {
                   <MenuIcon>
                   </MenuIcon>
 
-                </IconButton><Typography className="geral">
+                </IconButton>
+                <Box></Box>
+                <Typography className="geral">
                   <Button color="secondary" href="/">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
@@ -158,6 +160,8 @@ export default function Header() {
               </Toolbar>
             </AppBar>
           </Box>))}
+
+         
 
         {['left'].map((anchor) => (
           <React.Fragment key={anchor}>
@@ -176,7 +180,7 @@ export default function Header() {
       </ThemeProvider>
 
     </header>
-    
+
 
   )
 }

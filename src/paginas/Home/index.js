@@ -239,16 +239,16 @@ function Home() {
   return (
     <ThemeProvider theme={theme}>
       <Container fixed>
-      <Grid container component="main" align="center" 
+      <Grid id="grid-bg1" container component="main" align="center" 
       sx={{ alignItems: 'center', height: '400px', justifyContent: 'center' }}>
         <Stack direction={{  sm: 'row' }} 
         spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="space-evenly">        
         <Box sx={{
           maxWidth: '38%',
         }}>
-          <Typography variant="h1" sx={{ color: 'textos.main' }}>{`Você tem materiais
+          <Typography variant="h1" sx={{ color: 'textos.main'}}>{`Você tem materiais
         eletrônicos em casa?`}</Typography>
-          <Button onClick={handleClickOpen('paper')} variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button onClick={handleClickOpen('paper')} variant="outlined" sx={{ mt: 3, mb: 2, color: 'secondary.main', borderColor:'secondary.main' }}>
             Saiba mais</Button>
         </Box>
 
@@ -260,7 +260,7 @@ function Home() {
           }}/>
         </Stack>
       </Grid>
-      <Grid container align="center" justifyItems="space-evenly" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '350px', justifyContent: 'center' }}>
+      <Grid id="grid-bg2" container align="center" justifyItems="space-evenly" component="main" sx={{ bgcolor: '#DEFFE5', alignItems: 'center', height: '400px', justifyContent: 'center' }}>
       <Stack direction={{  sm: 'row' }} 
         spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="space-evenly">  
         <Box id="homebackground2"
@@ -277,15 +277,15 @@ function Home() {
         }}>
           <Typography variant="h1" sx={{ color: 'textos.main', 
           }}>{`Conheça mais sobre o Lixo Eletrônico`}</Typography>
-          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2, }}>
+          <Button onClick={closeClicksm2} variant="outlined" sx={{ mt: 3, mb: 2,}}>
             Saiba mais</Button>
         </Box>
         </Stack>
       </Grid>
       </Container>
 
-      <Grid container component="main" align="center" 
-      sx={{ alignItems: 'center', height: '420px', justifyContent: 'space-evenly' }}>
+      <Grid id="grid-perc" container component="main" align="center" 
+      sx={{ alignItems: 'center', height: '400px', justifyContent: 'space-evenly' }}>
 
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}
           sx={{justifyContent: 'center'}}>
@@ -314,7 +314,7 @@ function Home() {
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid id="imgcontato"
+        <Grid id="imagemcontato"
           item
           xs={false}
           sm={4}
@@ -440,8 +440,8 @@ function Home() {
 
             </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Grid>       
+      </Grid>     
 
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

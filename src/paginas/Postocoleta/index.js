@@ -264,7 +264,7 @@ function Postocoleta() {
                         {postocoleta.nome}
                       </DialogTitle>
                       <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        <DialogContentText id="alert-dialog-description">                        
                           <Typography variant="h6" gutterBottom>Endereço:</Typography>
                           <Typography variant="p" gutterBottom>{postocoleta.endereco} - </Typography>
                           <Typography variant="p" gutterBottom>{postocoleta.bairro} - </Typography>

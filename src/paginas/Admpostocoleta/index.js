@@ -243,14 +243,6 @@ function Admpostocoleta() {
       }) 
     }
 
-    async function excluirPosto(id){
-      await firebase.firestore().collection('postoscoletas').doc(id)
-      .delete()
-      .then(() => {
-        handleExcluir();
-        buscaPostos();
-      })
-    }
 
     function buscaCep(){
 
@@ -489,13 +481,7 @@ function Admpostocoleta() {
                           variant="outlined" startIcon={<DeleteIcon />}
                           onClick={() => pegaPosto(postocoleta.id)}
                           sx={{ margin: 1 }}
-                          color="secondary">Alterar</Button>
-
-                        <Button
-                          variant="outlined" startIcon={<DeleteIcon />}
-                          onClick={() => excluirPosto(postocoleta.id)}
-                          sx={{ margin: 1 }}
-                          color="secondary">Remover</Button>
+                          color="secondary">Alterar</Button>                       
                       </TableRow>
                     )
                   })}

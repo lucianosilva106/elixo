@@ -19,6 +19,8 @@ import firebase from 'firebase';
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const theme = createTheme({
@@ -100,6 +102,16 @@ export default function SignInSide() {
     setOpen(false);
   };
 
+  const [duas, setDuas] = React.useState(false);
+  const handleToggle = () => {
+    setDuas(!open);
+  };
+
+  const DuasFunction = () => {
+    handleToggle();
+    fazerLogin();
+  }
+
 
   async function fazerLogin() {
     await firebase.auth().signInWithEmailAndPassword(email, senha)
@@ -179,7 +191,7 @@ export default function SignInSide() {
                 label="Lembrar-me"
               />
               <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
-                onClick={fazerLogin}
+                onClick={DuasFunction}
               >Entrar</Button>
 
               <Stack spacing={2} sx={{ width: '100%' }}>
@@ -194,6 +206,14 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={duas}
+        onClick={DuasFunction}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </ThemeProvider>
   );
 }

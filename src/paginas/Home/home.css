@@ -26,28 +26,42 @@ body{
     padding: 0; /*if your want to padding */
     border: transparent;
  }
- #imgcontato{
-     background-image: url("/src/paginas/img/sejapostocoleta.png");
+ #imagemcontato{
+     background-image: url("/src/paginas/img/recycling-animada.svg");
      background-size: auto;
+     background-position: center;
  }
  #homebackground1{
-    background-image: url("/src/paginas/img/homebackgorund1.svg");
+    background-image: url("/src/paginas/img/videotape-animada.svg");
     background-size: 100%;
     background-position: center;
 }
 #homebackground2{
-    background-image: url("/src/paginas/img/homebackground2.png");
-    background-size: 100%;
+    background-image: url("/src/paginas/img/processing-thoughts-animada.svg");
+    background-size: auto;
     background-position: center;
 }
 @media only screen and (max-width: 600px) {
     #homebackground1{
         background-size: 70%;
+        min-width: 200px;
+        min-height: 200px;
     }
     #homebackground2{
         background-size: 70%;
+        min-width: 200px;
+        min-height: 200px;
     }
-    #imgcontato{
+    #imagemcontato{
         background-size: 20%;
+    }
+    #grid-bg2{
+        height: auto;
+    }
+    #grid-bg1{
+        height: auto;
+    }
+    #grid-perc{
+        height: auto;
     }
 }

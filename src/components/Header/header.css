@@ -12,6 +12,7 @@ header{
     color:green;
     cursor: pointer;
 }
+
 @media only screen and (max-width: 600px) {
     
     .geral{
@@ -25,6 +26,7 @@ header{
         visibility: hidden;
     }
   }
+
 
 
   
