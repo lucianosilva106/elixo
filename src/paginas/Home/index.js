@@ -39,6 +39,7 @@ const theme = createTheme({
       main: grey[800],
     },
   },
+  fontFamily: 'Raleway',
 });
 
 theme.typography.h1 = {

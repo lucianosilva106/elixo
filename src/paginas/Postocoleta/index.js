@@ -201,7 +201,6 @@ function Postocoleta() {
     sx={{marginTop: '2%'}}>
       
       <Stack direction={{ xs: 'column', sm: 'row' }}
-        divider={<Divider orientation="vertical" flexItem />}
         spacing={{ sm: 2, md: 2 }}
         alignItems="center"
         justifyContent="center"
@@ -222,7 +221,8 @@ function Postocoleta() {
               }}
                 key={postocoleta.id}>
 
-                <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center' }}>
+                <Card sx={{ maxWidth: 250, minWidth: 50, 
+                  backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', boxShadow: 5 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
