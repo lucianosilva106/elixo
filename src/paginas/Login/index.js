@@ -54,26 +54,6 @@ export default function SignInSide() {
   const [user, setUser] = useState(false);
   const [userLogged, setUserLogged] = useState({});
 
-  useEffect(() => {
-    async function checkLogin() {
-      await firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          setUser(true);
-          setUserLogged({
-            uid: user.uid,
-            email: user.email
-          });
-          window.location.href = "/gerenciamento";
-        } else {
-          setUser(false);
-          setUserLogged({});
-        }
-      })
-    }
-
-    checkLogin();
-  }, []);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -112,15 +92,33 @@ export default function SignInSide() {
     fazerLogin();
   }
 
+  const cadastrarCliente = () => {
+    window.location.href = "/cadastro";
+  }
+
+  let meutipo = '';
 
   async function fazerLogin() {
     await firebase.auth().signInWithEmailAndPassword(email, senha)
-      .then((value) => {
+      .then(async (value) => {
         setUser(true);
         setUserLogged({
           uid: user.uid,
           email: user.email
         });
+        await firebase.firestore().collection('usuarios')
+        .doc(value.user.uid)
+        .get()
+        .then((snapshot) => {
+          meutipo = snapshot.data().tipo;
+        })
+        alert(meutipo)
+        if (meutipo === 'Administrador') {
+          window.location.href = "/gerenciamento"
+        }
+        if (meutipo === 'Usuario') {
+          window.location.href = "/gerenciamentousuario"
+        }
       })
       .catch((error) => {
         handleClick();
@@ -193,6 +191,9 @@ export default function SignInSide() {
               <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
                 onClick={DuasFunction}
               >Entrar</Button>
+              <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
+                onClick={cadastrarCliente}
+              >Cadastre-se</Button>
 
               <Stack spacing={2} sx={{ width: '100%' }}>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

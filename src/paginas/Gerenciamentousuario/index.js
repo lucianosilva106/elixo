@@ -19,7 +19,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import { green } from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 import DomainIcon from '@material-ui/icons/Domain';
 import MoreIcon from '@material-ui/icons/More';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -38,7 +38,7 @@ const theme = createTheme({
       main: '#fff',
     },
     secondary: {
-      main: green[500],
+      main: blueGrey[500],
     },
     botao:{
       
@@ -155,38 +155,39 @@ const card1 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Posto de Coleta
+        Loja
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Cadastrar
+        Todos os produtos
       </Typography>
       <Typography variant="p">
-        Cadastre, edite ou desative postos de coleta de acordo com a necessidade.
+        Visualizar os produtos, adiciona-os ao carrinho e fecha sua compra
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admpostocoleta" size="small" variant="contained" 
+      <Button href="/produto" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
   </React.Fragment>
 );
+
 const card2 = (
   <React.Fragment>
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Informações
+        Meu cadastro
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Postagens
+        Cliente/Usuário
       </Typography>
       <Typography variant="p">
-        Poste informações relevantes ao descarte de materiais eletrônicos e seus impactos.
+        Dados cadastrais dos clientes/usuários do sistema
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="https://dashboard.datocms.com/project/56599" size="small" variant="contained" 
+      <Button href="/meucadastro" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -197,17 +198,17 @@ const card3 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Solicitações de Postos
+        Meus Produtos
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Solicitar
+        Quero vender
       </Typography>
       <Typography variant="p">
-        Solicitações para avaliação de estabelecimentos que desejam se tornar futuros Postos de Coleta.
+        Visualizar os produtos oferecidos para venda.
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admproposta" size="small" variant="contained" 
+      <Button href="/admprodutousuario" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -218,13 +219,13 @@ const card4 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Avaliações do Site
+        Minhas transações
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Avaliar
+        Transações realizadas
       </Typography>
       <Typography variant="p">
-        Feedbacks de usabilidade e interesse dos visitantes do website.
+        Visualizar as compras e vendas efetuadas
       </Typography>
     </CardContent>
     <CardActions>
@@ -235,72 +236,30 @@ const card4 = (
   </React.Fragment>
 );
 const card5 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Produtos
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Gerenciamento dos produtos de compra e venda
-      </Typography>
-      <Typography variant="p">
-        Todos os produtos oferecidos e disponiveis para compra
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admproduto" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
-const card6 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Aprovações de venda
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Aprovar produto
-      </Typography>
-      <Typography variant="p">
-        Avaliação e aprovação dos produtos oferecidos para venda 
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admaprovacao" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
-const card7 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Clientes
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Cadastro de clientes/usuários
-      </Typography>
-      <Typography variant="p">
-        Gerenciar os clientes/usuários cadastrados no sistema
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admusuario" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+      <CardContent>
+        <Typography variant="h6" component="div">
+          Carrinho de Compras
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Seu carrinho de compras
+        </Typography>
+        <Typography variant="p">
+          Visualizar os produtos, adiciona-os ao carrinho e fecha sua compra
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button href="/carrinho" size="small" variant="contained" 
+        disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+      </CardActions>
+      </ThemeProvider>
+    </React.Fragment>
+  );
+  
 
 
-
-export default function Gerenciamento() {
+export default function Gerenciamentousuario() {
 
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -372,7 +331,7 @@ export default function Gerenciamento() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" color="primary">
-              Dashboard - Re-User
+              Dashboard Cliente/Usuário - Re-User
             </Typography>
             <IconButton
               size="large"
@@ -411,7 +370,7 @@ export default function Gerenciamento() {
           </DrawerHeader>
           <Divider />
           <List>
-            {['Postos de Coleta', 'Saiba Mais', 'Solicitações'].map((text, index) => (
+            {['Meu Cadastro', 'Meus Produtos', 'Minhas Transações'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
                   {index % 3 === 0 ?
@@ -465,9 +424,6 @@ export default function Gerenciamento() {
               bgcolor: '#fafafa'
               }}>{card4}</Card>
             </Box>
-            </Stack>
-            <br />
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{justifyContent: 'center'}}>
             <Box sx={{ minWidth: 275 }}>
               <Card variant="outlined"
               sx={{
@@ -475,21 +431,8 @@ export default function Gerenciamento() {
               bgcolor: '#fafafa'
               }}>{card5}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card6}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card7}</Card>
-            </Box>
           </Stack>
+
           <br />
 
           <Typography paragraph>

@@ -155,17 +155,17 @@ const card1 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Posto de Coleta
+        Produtos 
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Cadastrar
+        A loja
       </Typography>
       <Typography variant="p">
-        Cadastre, edite ou desative postos de coleta de acordo com a necessidade.
+        Visualize todos os produtos que estão à venda
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admpostocoleta" size="small" variant="contained" 
+      <Button href="/produto" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -176,17 +176,17 @@ const card2 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Informações
+        Meus Produtos
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Postagens
+        Quer Vender?
       </Typography>
       <Typography variant="p">
-        Poste informações relevantes ao descarte de materiais eletrônicos e seus impactos.
+        Visualize os seus produtos que estão à venda no aplicativo
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="https://dashboard.datocms.com/project/56599" size="small" variant="contained" 
+      <Button href="/admprodutousuario" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -197,17 +197,17 @@ const card3 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Solicitações de Postos
+        Minhas Transações
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Solicitar
+        Compra e Venda efetuadas
       </Typography>
       <Typography variant="p">
-        Solicitações para avaliação de estabelecimentos que desejam se tornar futuros Postos de Coleta.
+        Visualizações das suas compras e vendas efetuadas
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admproposta" size="small" variant="contained" 
+      <Button href="/transacao" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -218,87 +218,22 @@ const card4 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Avaliações do Site
+        Carrinho de compras
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Avaliar
+        Feche sua compra
       </Typography>
       <Typography variant="p">
-        Feedbacks de usabilidade e interesse dos visitantes do website.
+        Confirme suas escolhas e complete sua transação
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admavaliacao" size="small" variant="contained" 
+      <Button href="/meucarrinho" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
   </React.Fragment>
 );
-const card5 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Produtos
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Gerenciamento dos produtos de compra e venda
-      </Typography>
-      <Typography variant="p">
-        Todos os produtos oferecidos e disponiveis para compra
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admproduto" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
-const card6 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Aprovações de venda
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Aprovar produto
-      </Typography>
-      <Typography variant="p">
-        Avaliação e aprovação dos produtos oferecidos para venda 
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admaprovacao" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
-const card7 = (
-  <React.Fragment>
-    <ThemeProvider theme={theme}>
-    <CardContent>
-      <Typography variant="h6" component="div">
-        Clientes
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Cadastro de clientes/usuários
-      </Typography>
-      <Typography variant="p">
-        Gerenciar os clientes/usuários cadastrados no sistema
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button href="/admusuario" size="small" variant="contained" 
-      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
-    </CardActions>
-    </ThemeProvider>
-  </React.Fragment>
-);
-
-
 
 export default function Gerenciamento() {
 
@@ -342,7 +277,6 @@ export default function Gerenciamento() {
     window.location.href = '/postocoleta';
   }
 
-
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -372,7 +306,7 @@ export default function Gerenciamento() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" color="primary">
-              Dashboard - Re-User
+              Dashboard App Mobile - Re-User
             </Typography>
             <IconButton
               size="large"
@@ -465,52 +399,12 @@ export default function Gerenciamento() {
               bgcolor: '#fafafa'
               }}>{card4}</Card>
             </Box>
-            </Stack>
-            <br />
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{justifyContent: 'center'}}>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card5}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card6}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card7}</Card>
-            </Box>
           </Stack>
           <br />
 
           <Typography paragraph>
-            Essa rota de gerenciamento permite aos administradores da plataforma ter acesso  às
-            solicitações de adesão a um posto de coleta. Uma vez analisadas essas propostas, um
-            contato será realizado com cada local para analisar a viabilidade de sua adesão  em
-            atender as requisitos mínimos de coleta e armazenagem correta até que  os  produtos
-            reciclados possam ser retirados.
+            Essa rota de mostra o que estará diponivel no aplicativo mobile
           </Typography>
-          <Typography paragraph>
-            Também acessamos os postos de coletas para manutenções cadastrais, como  atualização
-            de dados, inclusão e exclusão, além de vincular sua posição  geográfica  no  intuito
-            de facilitar aos usuários o acesso mais rápido e fácil de chegar até o  endereço  do
-            posto de coleta desejado.
-          </Typography>
-          <Typography paragraph>
-            Clicando Em Avaliações do site, acessamos um gráfico de satisfação de nosso  projeto 
-            e também uma lista de mensagens idenficadas que nos são enviadas nos permite  sentir
-            mais de perto as sugestãoes e criticas dos usuários mais interessados no tema.
-          </Typography>
-
         </Box>
       </Box>
 
