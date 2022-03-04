@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { InputLabel } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
@@ -25,7 +24,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
-import Slide from '@material-ui/core/Slide';
 
 const theme = createTheme({
   palette: {
@@ -56,8 +54,7 @@ function Carrinhocompra() {
     const [codseguranca, setCodseguranca] = useState('');
 
     const [datavenda, setDatavenda] = useState('');
-    const [valortotal, setValortotal] = useState('');
-
+ 
     async function checkLogin(){
       await firebase.auth().onAuthStateChanged(async (user) => {
         if(user){
@@ -84,19 +81,12 @@ function Carrinhocompra() {
 
     checkLogin();
 
-    if (localStorage.length == null){
-      alert('carrinho vazio')
-      window.location.href = '/produto'
-
-    }
-
     const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });  
     
-    const [open, setOpen, aberto] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const [excluir, setExcluir] = React.useState(false);
-    const [fechar, setFechar] = React.useState(false);
 
     const handleClick = () => {
       setOpen(true);
@@ -114,6 +104,16 @@ function Carrinhocompra() {
       setOpen(false);
     };
 
+
+    if (localStorage.length == 0){
+       return (
+        <div>
+          <h2>Carrinho de compras vazio...</h2>
+          <button onClick={() => window.location.href = '/produto'}>Ir para a Loja</button>
+        </div>     
+       )
+    }
+
     var dataAtual = '';
     var data = new Date();
     var dia = String(data.getDate()).padStart(2, '0');
@@ -122,8 +122,7 @@ function Carrinhocompra() {
     dataAtual = dia + '/' + mes + '/' + ano;
     
     function fechaCompra(){
-        setDatavenda(dataAtual)
-        setFechar(true);
+        gravarCompra();
     }
 
     var carrinho = JSON.parse(localStorage.getItem('produtocarrinho'));
@@ -132,7 +131,7 @@ function Carrinhocompra() {
     var i=0;
 
     async function gravarCompra() {
-      alert('vai gravar');
+//      alert('vai gravar:' + datavenda + ' - ' +formapagamento + ' - '+idcliente + ' ' + total);
       await firebase.firestore().collection('vendas')
       .add({
         datavenda: datavenda,
@@ -143,7 +142,9 @@ function Carrinhocompra() {
       .then((value) => {
        idvenda = value.id;
        alert('gravou ok:' + idvenda);
-       carrinho.map(async (det) => {
+      // ler o array e gravar o detalhe
+
+      carrinho.map(async (det) => {
         await firebase.firestore().collection('vendaprodutos')
           .add({
             idvenda: idvenda,
@@ -176,6 +177,8 @@ function Carrinhocompra() {
 
     async function deletaProduto(){
       alert('vou apagar')
+//    excluir posicao e recarregar carrinho      
+      carrinho = JSON.parse(localStorage.getItem('produtocarrinho'));
 
     }
 
@@ -235,10 +238,7 @@ function Carrinhocompra() {
               <button onClick={fechaCompra}>fechar Compra</button>
             </div>
           </Container>
-
-            { fechar && (
-
-            <Grid mx={2} my={2} container spacing={4} columns={12}>
+          <Grid mx={2} my={2} container spacing={4} columns={12}>
               <Grid item xs={8} sm={6} md={5} component={Paper} elevation={0} square>
               <Box component="form" noValidate sx={{ mt: 1 }}>
                 <h3>Fechamento de Transação - Dados do cliente</h3>
@@ -374,15 +374,9 @@ function Carrinhocompra() {
                   type="text"
                   defaultValue="Codigo de seguranca" value={codseguranca} onChange={(e) => setCodseguranca(e.target.value)} />
 
-                <br />
-                <div align="center">
-                  <button onClick={gravarCompra}>Finaliza a Transação</button>
-                </div>
               </Box>
               </Grid>
             </Grid>
-            )
-            }
         </ThemeProvider>
     );
 }

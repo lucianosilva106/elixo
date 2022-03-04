@@ -1,5 +1,6 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
+//import firebase from 'firebase';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -42,12 +43,17 @@ const theme = createTheme({
 
 function Admprodutousuario() {
 
-    var userlog = '';
+    var storage = firebase.storage();
+    const [image, setImage] = useState('');
+    const [imageAsUrl, setImageAsUrl] = useState('');
+
+    const[idusuario, setIdUsuario] = useState('');
+    var userlog = "";
 
     async function checkLogin(){
-      await firebase.auth().onAuthStateChanged((user) => {
-          userlog = user
+      await firebase.auth().onAuthStateChanged(async (user) => {
         if(user){
+            userlog = user.uid;
           }else{
             firebase.auth().signOut();
             localStorage.clear();
@@ -64,7 +70,7 @@ function Admprodutousuario() {
     const[pathimagem, setPathimagem] = useState('');
     const[info, setInfo] = useState('');
     const[percentual, setPercentual] = useState('');
-    const[idusuario, setIdUsuario] = useState('');
+
     const[produtos, setProdutos] = useState([]);
     
     const Alert = React.forwardRef(function Alert(props, ref) {
@@ -96,15 +102,14 @@ function Admprodutousuario() {
         .onSnapshot((doc) => {
           let meusProdutos = [];
           doc.forEach((item) => {
-            if (item.usuario == userlog){
+            if (item.data().idusuario == userlog){
               meusProdutos.push({
                 id: item.id,
                 descricao: item.data().descricao,
                 preco: item.data().preco,
                 pathimagem: item.data().pathimagem,
                 info: item.data().info,
-                percentual: item.percentual,
-                idusuario: item.idusuario
+                percentual: item.data().percentual
               })
             }
           })
@@ -116,15 +121,16 @@ function Admprodutousuario() {
       loadProdutos();
 
     }, [])
-    
+
     async function handleAdd(){
       await firebase.firestore().collection('produtos')
       .add({
         descricao: descricao,
         info: info,
         preco: preco,
-        pathimagem: pathimagem,
-        percentual: percentual
+        pathimagem: imageAsUrl,
+        percentual: percentual,
+        idusuario: userlog
       })
       .then(()=>{
         handleClick();
@@ -132,6 +138,7 @@ function Admprodutousuario() {
         setInfo('');
         setPreco('');
         setPathimagem('');
+        setImageAsUrl('');
         setPercentual('');
         buscaProdutos();
       })
@@ -172,7 +179,7 @@ function Admprodutousuario() {
         descricao: descricao,
         info: info,
         preco: preco,
-        pathimagem: pathimagem,
+        pathimagem: imageAsUrl,
         percentual: percentual
       })
       .then(() => {
@@ -181,8 +188,8 @@ function Admprodutousuario() {
         setDescricao('');
         setInfo('');
         setPreco('');
-        setPathimagem('');
         setPercentual('');
+        setImageAsUrl('');
         buscaProdutos();
       })
       .catch((error) => {
@@ -202,6 +209,26 @@ function Admprodutousuario() {
         setPercentual(doc.data().percentual);
       }) 
     }
+
+    const upload = (e) => {
+      e.preventDefault();
+
+      const uploadcom = storage.ref(`/imagens/${image.name}`).put(image)
+
+      if (image == null) return;
+
+      uploadcom.on("state_changed" , function(){
+
+          uploadcom.snapshot.ref.getDownloadURL().then( function (newurl) {
+              setImageAsUrl(newurl)
+              console.log("url:" + newurl)
+          })
+
+      }, function(error){
+          console.log("Erro ao salvar arquivo!")
+      })
+    } 
+
 
     return (
       <ThemeProvider theme={theme}>
@@ -263,16 +290,20 @@ function Admprodutousuario() {
                   type="number"
                   defaultValue="Preco" 
                   value={preco} onChange={(e) => setPreco(e.target.value)} />
-  
+
+                <text>Imagem: </text>
+                <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                <button onClick={upload}>Upload file</button>
+
                 <TextField
                   fullWidth
                   margin="normal"
                   size="small"
                   id="outlined-required"
-                  label="Local da imagem"
                   type="text"
-                  defaultValue="Local" value={pathimagem} onChange={(e) => setPathimagem(e.target.value)} />
+                  defaultValue="Local da Imagem" value={imageAsUrl}/>
 
+                
                 <TextField
                   fullWidth
                   margin="normal"

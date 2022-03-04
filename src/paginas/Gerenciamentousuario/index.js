@@ -229,7 +229,7 @@ const card4 = (
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/admavaliacao" size="small" variant="contained" 
+      <Button href="/minhatransacao" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
@@ -250,7 +250,7 @@ const card5 = (
         </Typography>
       </CardContent>
       <CardActions>
-        <Button href="/carrinho" size="small" variant="contained" 
+        <Button href="/carrinhocompra" size="small" variant="contained" 
         disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
       </CardActions>
       </ThemeProvider>

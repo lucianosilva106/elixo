@@ -5,7 +5,6 @@ import Erro from './paginas/Erro';
 import Login from './paginas/Login';
 import Gerenciamento from './paginas/Gerenciamento';
 import Gerenciamentousuario from './paginas/Gerenciamentousuario';
-import Gerenciamentoapp from './paginas/Gerenciamentoapp';
 import Admpostocoleta from './paginas/Admpostocoleta';
 import Postocoleta from './paginas/Postocoleta';
 import Produto from './paginas/Produto'
@@ -19,7 +18,9 @@ import Info from './paginas/Noticia/Info';
 import ScrollToTop from './paginas/ScrollToTop';
 import Meucadastro from './paginas/Meucadastro';
 import Admprodutousuario from './paginas/Admprodutousuario';
-import Carrinhocompra from './paginas/Carrinho';
+import Carrinhocompra from './paginas/Carrinhocompra';
+import Minhatransacao from './paginas/Minhatransacao';
+import Produtoupload from './paginas/Produtoupload';
 
 const Routes = () => {
     return(
@@ -34,7 +35,6 @@ const Routes = () => {
                 <Route exact path="/admprodutousuario" component={Admprodutousuario} />
                 <Route exact path="/gerenciamento" component={Gerenciamento} />
                 <Route exact path="/gerenciamentousuario" component={Gerenciamentousuario} />
-                <Route exact path="/gerenciamentoapp" component={Gerenciamentoapp} />
                 <Route exact path="/postocoleta" component={Postocoleta} />
                 <Route exact path="/noticia" component={Noticia} />
                 <Route exact path="/admpostocoleta" component={Admpostocoleta} />
@@ -43,7 +43,9 @@ const Routes = () => {
                 <Route exact path="/admproposta" component={Admproposta} />
                 <Route exact path="/admproduto" component={Admproduto} />
                 <Route exact path="/admavaliacao" component={AdmAvaliacao} />
-                <Route exact path="/carrinho" component={Carrinhocompra} />
+                <Route exact path="/carrinhocompra" component={Carrinhocompra} />
+                <Route exact path="/minhatransacao" component={Minhatransacao} />
+                <Route exact path="/produtoupload" component={Produtoupload} />
                 <Route exact path="/info/:id" component={Info} />
                 <Route path="*" component={Erro} />
             </Switch>

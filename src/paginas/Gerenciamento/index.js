@@ -317,8 +317,10 @@ export default function Gerenciamento() {
     setAnchorEl(null);
   };
 
+  var meutipo = "";
+
   async function checkLogin() {
-    await firebase.auth().onAuthStateChanged((user) => {
+    await firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
       } else {
         firebase.auth().signOut();
@@ -335,13 +337,14 @@ export default function Gerenciamento() {
     localStorage.clear();
     window.location.href = '/';
   }
+
   function abrirHome() {
     window.location.href = '/';
   }
+
   function abrirPostocoleta() {
     window.location.href = '/postocoleta';
   }
-
 
   const [open, setOpen] = React.useState(false);
 
@@ -401,6 +404,7 @@ export default function Gerenciamento() {
               <MenuItem onClick={() => abrirHome()}>Home</MenuItem>
               <MenuItem onClick={() => fazerLogout()}>Logout</MenuItem>
             </Menu>
+            <text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

@@ -111,8 +111,8 @@ export default function SignInSide() {
         .get()
         .then((snapshot) => {
           meutipo = snapshot.data().tipo;
+          localStorage.setItem('nomelogado', snapshot.data().nome)
         })
-        alert(meutipo)
         if (meutipo === 'Administrador') {
           window.location.href = "/gerenciamento"
         }
