@@ -14,7 +14,6 @@ function Produtoupload() {
     
 
     const upload = () => {
-        setImageAsUrl(image.name)
 
         const uploadcom = storage.ref(`/imagens/${image.name}`).put(image)
 
@@ -23,7 +22,7 @@ function Produtoupload() {
         uploadcom.on("state_changed" , function(){
 
             uploadcom.snapshot.ref.getDownloadURL().then( function (newurl) {
-                alert(newurl)
+                setImageAsUrl(newurl)
                 console.log("url:" + newurl)
             })
 

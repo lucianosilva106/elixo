@@ -3,6 +3,7 @@ import 'firebase/auth';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 import Table from '@material-ui/core/Table';
+import reactTable from 'react-table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -47,7 +48,7 @@ function Minhatransacao() {
     setAbrir(true);
   };
 
-  const [open, setOpen, excluiu] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [idcliente, setIdcliente] = useState('');
   var userlog = "";
 
@@ -67,6 +68,7 @@ function Minhatransacao() {
  
 
   const [vendas, setVendas] = useState([]);
+  const [vendaprodutos, setVendaprodutos] = useState([]);
   
   function handleToogle(id) {
     const lista = vendas.map(item => {
@@ -92,8 +94,7 @@ function Minhatransacao() {
         .onSnapshot((doc) => {
           let minhasVendas = [];
           doc.forEach((item) => {
-//            alert(item.data().idcliente + ' - '+ userlog)
-            if (item.data().idcliente == userlog){
+            if (item.data().idusuario == userlog){
                 minhasVendas.push({
                     id: item.id,
                     datavenda: item.data().datavenda,
@@ -110,13 +111,37 @@ function Minhatransacao() {
 
   }, [])
 
-  var vendadetalhe = "";
-  var mostradetalhe = false;
+  const [idclick, setIdClick] = useState('');
+
+  async function loadDetalhes(idVenda) {
+    await firebase.firestore().collection('vendaprodutos')
+      .onSnapshot((doc) => {
+        let minhasVendaprodutos = [];
+        doc.forEach((item) => {
+          if (item.data().idvenda == idVenda){
+              minhasVendaprodutos.push({
+                  id: item.id,
+                  idproduto: item.data().idproduto,
+                  descprod: item.data().descprod,
+                  info: item.data().info,
+                  valor: item.data().valor
+              })
+          }
+        })
+
+        setVendaprodutos(minhasVendaprodutos);
+      })
+  }
 
   function visualizaVenda(id){
+    if (open == false)
+    {
       handleClick();
-      vendadetalhe = id;
-
+      setIdClick(id);
+      loadDetalhes(id)
+    }
+    else
+      setOpen(false)
   }
 
   return (
@@ -147,15 +172,32 @@ function Minhatransacao() {
                       onClick={() => visualizaVenda(venda.id)}
                       sx={{ margin: 1 }}
                       color="secondary">Detalhes</Button>
-
-                    {open && 
-                        <div>teste</div>
+                    {open && venda.id == idclick && 
+                       <TableHead sx={{ color: 'primary' }}>
+                         <TableRow>
+                           <TableCell align="center">Produto</TableCell>
+                           <TableCell align="center">Informações</TableCell>
+                           <TableCell align="center">Valor do Produto</TableCell>
+                         </TableRow>
+                       </TableHead>
                     }
-
+                    {open && venda.id == idclick &&
+                      vendaprodutos.map((vendaproduto) => {
+                        return (
+                          <TableRow key={vendaproduto.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell component="th" scope="row">{vendaproduto.descprod}</TableCell>
+                            <TableCell align="center">{vendaproduto.info}</TableCell>
+                            <TableCell align="center">{vendaproduto.valor}</TableCell>
+                          </TableRow>
+                        )
+                      })
+                      
+                    }
                   </TableRow>
-              )
-              })}
-          </TableBody>
+                 )
+               })
+              }
+            </TableBody>
           </Table>
         </TableContainer>
       </Container>

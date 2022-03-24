@@ -54,10 +54,13 @@ function Carrinhocompra() {
     const [codseguranca, setCodseguranca] = useState('');
 
     const [datavenda, setDatavenda] = useState('');
+
+    var userlog = "";
  
     async function checkLogin(){
       await firebase.auth().onAuthStateChanged(async (user) => {
         if(user){
+          userlog = user.uid;
           await firebase.firestore().collection('usuarios')
           .doc(user.uid)
           .get()
@@ -137,7 +140,8 @@ function Carrinhocompra() {
         datavenda: datavenda,
         formapagamento: formapagamento,
         idcliente: idcliente,
-        valortotal: total
+        valortotal: total,
+        idusuario: userlog
       })
       .then((value) => {
        idvenda = value.id;

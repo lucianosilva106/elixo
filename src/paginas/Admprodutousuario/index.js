@@ -45,6 +45,7 @@ function Admprodutousuario() {
 
     var storage = firebase.storage();
     const [image, setImage] = useState('');
+    const [endImg] = useState('../img/drink1.jpg');
     const [imageAsUrl, setImageAsUrl] = useState('');
 
     const[idusuario, setIdUsuario] = useState('');
@@ -232,119 +233,11 @@ function Admprodutousuario() {
 
     return (
       <ThemeProvider theme={theme}>
-        <br />
   
-        <Grid container component="main" sx={{ height: '100vh' }}>
-          <CssBaseline />
-          <Grid id="imgdrink"
-            xs={false}
-            sm={4}
-            item
-            md={7}
-            sx={{
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-            }}
-        
-          />
-          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
-            <Box
-              sx={{
-                my: 8,
-                mx: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Box component="form" noValidate sx={{ mt: 1 }}>
-              
-              <h2>Meus Produtos cadastrados para Venda</h2>
-
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  required
-                  size="small"
-                  id="descricao-form"
-                  label="Descricao"
-                  defaultValue="Descricao"
-                  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-  
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Info"
-                  type="text"
-                  defaultValue="CEP" 
-                  value={info} onChange={(e) => setInfo(e.target.value)} />
-  
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Preco"
-                  type="number"
-                  defaultValue="Preco" 
-                  value={preco} onChange={(e) => setPreco(e.target.value)} />
-
-                <text>Imagem: </text>
-                <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
-                <button onClick={upload}>Upload file</button>
-
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  type="text"
-                  defaultValue="Local da Imagem" value={imageAsUrl}/>
-
-                
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="Percentual Repasse"
-                  type="text"
-                  defaultValue="Local" value={percentual} onChange={(e) => setPercentual(e.target.value)} />
-
-                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAdd}>Incluir Cadastro</Button><br />
-  
-                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={editarProduto}>Atualizar Cadastro</Button><br />
-
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-
-        <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Produto cadastrado com sucesso!
-          </Alert>
-        </Snackbar>
-        </Stack>
-
-        <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Erro na gravação do Produto!
-          </Alert>
-        </Snackbar>
-        </Stack>
-
         <ThemeProvider theme={theme}>
-          <Container fixed id="topo"
-            sx={{height: 150, marginTop: 6}}>
+          <Container fixed id="topo" sx={{height: 100, marginTop: 6}}>
             <Typography variant="h3" gutterBottom component="div" align="center">
-              Produtos cadastrados
+              Meus produtos cadastrados
             </Typography>
           </Container>
           <Container fixed>
@@ -388,6 +281,94 @@ function Admprodutousuario() {
 
           </Container>
         </ThemeProvider>
+
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square class="grid">
+              <Box component="form" noValidate sx={{ mt: 1 }} align="center">
+              
+              <h2>Manutenção de cadastro de produto</h2>
+
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  required
+                  size="small"
+                  id="descricao-form"
+                  label="Descricao"
+                  defaultValue="Descricao"
+                  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+  
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-required"
+                  label="Info"
+                  type="text"
+                  defaultValue="CEP" 
+                  value={info} onChange={(e) => setInfo(e.target.value)} />
+  
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-required"
+                  label="Preco"
+                  type="number"
+                  defaultValue="Preco" 
+                  value={preco} onChange={(e) => setPreco(e.target.value)} />
+
+                <text>Imagem: </text>
+                <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                <br />
+                {image ? <img src={URL.createObjectURL(image)}alt="imagem" width="150" height="150"/>
+                 : 
+                 <img src={endImg} alt="imagem" width="150" height="150" /> }
+                <br />
+                <button onClick={upload}>Upload file</button>
+
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-required"
+                  type="text"
+                  defaultValue="Local da Imagem" value={imageAsUrl}/>
+
+                
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="small"
+                  id="outlined-required"
+                  label="Percentual Repasse"
+                  type="text"
+                  defaultValue="Local" value={percentual} onChange={(e) => setPercentual(e.target.value)} />
+
+                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+                  onClick={handleAdd}>Incluir Cadastro</Button><br />
+  
+                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
+                  onClick={editarProduto}>Atualizar Cadastro</Button><br />
+
+              </Box>
+          </Grid>
+
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Produto cadastrado com sucesso!
+          </Alert>
+        </Snackbar>
+        </Stack>
+
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Erro na gravação do Produto!
+          </Alert>
+        </Snackbar>
+        </Stack>
+
       </ThemeProvider>
     );
 }

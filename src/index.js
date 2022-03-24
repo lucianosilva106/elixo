@@ -4,6 +4,9 @@ import App from './App';
 import { createTheme } from '@material-ui/core/styles';
 import { orange, green } from '@material-ui/core/colors';
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
+import * as serviceWorkerRegistration from './registerServiceWorker';
+//import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
 
 const client = new GraphQLClient({
   url: "https://graphql.datocms.com/preview",
@@ -21,6 +24,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-  
+serviceWorkerRegistration.unregister();
+
 
 

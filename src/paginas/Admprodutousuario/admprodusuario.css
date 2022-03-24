@@ -2,3 +2,9 @@
     background-image: url("../img/sucata.jpg");
     background-size: auto;
 }
+
+.grid{
+    justify-content: center; 
+    margin-left: 20%;
+    margin-right: 20%;
+}
