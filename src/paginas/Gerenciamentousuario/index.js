@@ -292,7 +292,7 @@ export default function Gerenciamentousuario() {
   function fazerLogout() {
     firebase.auth().signOut();
     localStorage.clear();
-    window.location.href = '/';
+    window.location.href = '/login';
   }
   function abrirHome() {
     window.location.href = '/';

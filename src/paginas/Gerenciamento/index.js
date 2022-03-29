@@ -335,7 +335,7 @@ export default function Gerenciamento() {
   function fazerLogout() {
     firebase.auth().signOut();
     localStorage.clear();
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 
   function abrirHome() {

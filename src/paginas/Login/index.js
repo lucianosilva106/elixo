@@ -191,7 +191,7 @@ export default function SignInSide() {
               <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
                 onClick={DuasFunction}
               >Entrar</Button>
-              <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
+              <Button type="submit" fullWidth variant="outlined" disableElevation sx={{ mt: 1, mb: 2, color: 'primary' }}
                 onClick={cadastrarCliente}
               >Cadastre-se</Button>
 
