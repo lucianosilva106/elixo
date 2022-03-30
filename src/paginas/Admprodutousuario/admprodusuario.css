@@ -8,3 +8,6 @@
     margin-left: 20%;
     margin-right: 20%;
 }
+#cadastroprodbackground{
+    background-image: url(/src/paginas/img/cad-prod.svg);
+}
