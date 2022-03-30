@@ -307,7 +307,7 @@ function Admprodutousuario() {
           sx={{
             bgcolor: '#fafafa',
             pt: 8,
-            pb: 6,
+            pb: 10,
           }}
         >
           <Container maxWidth="sm">
@@ -328,21 +328,22 @@ function Admprodutousuario() {
           <Grid container component="main"
             sx={{
               alignItems: 'center', justifyContent: 'space-evenly',
-              bgcolor: '#fafafa', alignContent: 'center'
+              bgcolor: '#fafafa', alignContent: 'center',
             }}>
-            <Stack direction={{ sm: 'row', marginTop: '2%' }}
-              spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="center">
+            <Stack direction={{ xs: 'column', sm: 'row', marginTop: '2%', }}
+              spacing={{ xs: 1, sm: 2, md: 12 }}>
               <Box sx={{
-                maxWidth: '38%',
+                textAlign: 'center',
                 border: 2,
                 borderRadius: 2,
                 boxShadow: 2,
                 color: 'primary.main',
                 '&:hover': {
                   boxShadow: 6,
-                  border: 3,}
+                  border: 3,},
+                  alignSelf: 'center'
               }}>
-                <IconButton sx={{ color: 'primary.main', fontSize: 130, marginLeft: '14%' }} variant="rounded">
+                <IconButton sx={{ color: 'primary.main', fontSize: 120, }} variant="rounded">
                   <MonetizationOnSharpIcon fontSize="inherit" />
                 </IconButton>
                 <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary' }}
@@ -350,7 +351,7 @@ function Admprodutousuario() {
               </Box>
 
               <Box sx={{
-                maxWidth: '38%',
+                textAlign: 'center',
                 borderColor: 'primary.main',
                 border: 2,
                 borderRadius: 2,
@@ -360,7 +361,7 @@ function Admprodutousuario() {
                   boxShadow: 6,
                   border: 3,}
               }}>
-                <IconButton sx={{ color: 'primary.main', fontSize: 130, marginLeft: '14%' }} variant="rounded">
+                <IconButton sx={{ color: 'primary.main', fontSize: 120, }} variant="rounded">
                   <LoyaltyIcon fontSize="inherit" />
                 </IconButton>
                 <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary' }}
@@ -376,7 +377,7 @@ function Admprodutousuario() {
           sx={{
             bgcolor: 'primary.main',
             pt: 8,
-            pb: 6,
+            pb: 10,
           }}
         >
           <Container maxWidth="sm">
@@ -396,14 +397,15 @@ function Admprodutousuario() {
 
           <Grid container component="main"
             sx={{
-              alignItems: 'center', justifyContent: 'space-evenly',
-              bgcolor: 'primary.main', alignContent: 'center'
+              justifyContent: 'space-evenly',
+              bgcolor: 'primary.main', 
+              alignContent: 'center'
             }}>
-            <Stack direction={{ sm: 'row', marginTop: '2%' }}
-              spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="center">
-
+            <Stack direction={{ xs: 'column', sm: 'row',  marginTop: '2%', }}
+              spacing={{ xs: 1, sm: 2, md: 12 }} >
+         
               <Box sx={{
-                maxWidth: '38%',
+                textAlign: 'center',
                 borderColor: 'primary.main',
                 border: 2,
                 borderRadius: 2,
@@ -411,9 +413,10 @@ function Admprodutousuario() {
                 color: 'white',
                 '&:hover': {
                   boxShadow: 6,
-                  border: 3,}
-              }}>
-                <IconButton sx={{ color: 'white', fontSize: 130, marginLeft: '14%' }} variant="rounded">
+                  border: 3,},
+                  alignContent: 'center'
+               }}>
+                <IconButton sx={{ color: 'white', fontSize: 120, }} variant="rounded">
                   <AssignmentTurnedInIcon fontSize="inherit" />
                 </IconButton>
                 <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}
@@ -421,18 +424,18 @@ function Admprodutousuario() {
               </Box>
 
               <Box sx={{
-                maxWidth: '38%',
+                textAlign: 'center',
+                alignContent: 'center',
                 borderColor: 'primary.main',
                 border: 2,
                 borderRadius: 2,
                 boxShadow: 2,
                 color: 'white',
-                alignSelf: 'center',
                 '&:hover': {
                   boxShadow: 6,
                   border: 3,}
               }}>
-                <IconButton sx={{ color: 'white', fontSize: 130, marginLeft: '15%', }} variant="rounded">
+                <IconButton sx={{ color: 'white', fontSize: 120, }} variant="rounded">
                   <AutorenewIcon fontSize="inherit" />
                 </IconButton>
                 <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}
@@ -440,7 +443,8 @@ function Admprodutousuario() {
               </Box>
 
               <Box sx={{
-                maxWidth: '38%',
+                textAlign: 'center',
+                alignContent: 'center',
                 border: 2,
                 borderRadius: 2,
                 boxShadow: 2,
@@ -449,12 +453,13 @@ function Admprodutousuario() {
                   boxShadow: 6,
                   border: 3,}
               }}>
-                <IconButton sx={{ color: 'white', fontSize: 130, marginLeft: '20%' }} variant="rounded">
+                <IconButton sx={{ color: 'white', fontSize: 120, }} variant="rounded">
                   <BrokenImageIcon fontSize="inherit" />
                 </IconButton>
                 <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}
                 >Estragado</Button>
               </Box>
+              
             </Stack>
           </Grid>
         </Box>
@@ -469,7 +474,7 @@ function Admprodutousuario() {
             md={7}
             sx={{
               backgroundRepeat: 'no-repeat',
-              backgroundSize: 'auto',
+              backgroundSize: '80%',
               backgroundPosition: 'center',
             }}
           />
@@ -491,9 +496,9 @@ function Admprodutousuario() {
               </Typography>
               <Box component="form" noValidate sx={{ mt: 3 }}>
 
-                {image ? <Avatar src={URL.createObjectURL(image)} alt="imagem" sx={{ width: 150, height: 150 }} variant="rounded" />
+                {image ? <Avatar src={URL.createObjectURL(image)} alt="imagem" sx={{ width: 150, height: 150, border: 2, borderColor: 'primary.main', }} variant="rounded" />
                   :
-                  <Avatar src={endImg} alt="imagem" sx={{ width: 150, height: 150 }} variant="rounded" />}
+                  <Avatar src={endImg} alt="imagem" sx={{ width: 150, height: 150, border: 2, borderColor: 'primary.main', }} variant="rounded" />}
                 <br />
 
                 <Button
@@ -553,38 +558,68 @@ function Admprodutousuario() {
                   }}
                   value={preco} onChange={(e) => setPreco(e.target.value)} />
 
-                <TextField
+                 {/*<TextField
                   fullWidth
                   margin="normal"
                   size="small"
                   id="outlined-required"
                   label="Percentual Repasse"
                   type="text"
-                  defaultValue="Local" value={percentual} onChange={(e) => setPercentual(e.target.value)} />
+                defaultValue="Local" value={percentual} onChange={(e) => setPercentual(e.target.value)} />*/}
 
                 <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
                   onClick={handleAdd}>Confirmar</Button>
 
-                <Button fullWidth variant="outlined" sx={{ mt: 1, mb: 2 }}
-                  onClick={editarProduto}>Atualizar Cadastro</Button>
+                {/*<Button fullWidth variant="outlined" sx={{ mt: 1, mb: 2 }}
+                  onClick={editarProduto}>Atualizar Cadastro</Button>*/}
 
               </Box>
             </Box>
           </Grid>
         </Grid>
 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <Box
+          sx={{
+            bgcolor: '#fafafa',
+            pt: 8,
+            pb: 10,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h1"
+              align="center"
+              gutterBottom
+              sx={{ color: 'primary.main' }}
+            >
+              Tem mais produtos?
+            </Typography>
+            <Typography variant="h2" align="center" color="text.secondary" paragraph>
+              Confira aqui! 
+            </Typography>
+          </Container>
+
+          <Grid container component="main"
+            sx={{
+              justifyContent: 'center', bgcolor: '#fafafa', alignContent: 'center'
+            }}>
+                <Button type="submit" variant="outlined" disableElevation sx={{ mt: 3, mb: 8, color: 'primary', width: '50%', }}
+                >Meus Produtos</Button>
+              
+          </Grid>
+        </Box>
+
       </ThemeProvider >
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      {/*
       <Container fixed>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -624,7 +659,7 @@ function Admprodutousuario() {
           </Table>
         </TableContainer>
 
-      </Container>
+            </Container>*/}
 
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
