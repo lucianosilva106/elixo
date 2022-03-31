@@ -3,7 +3,7 @@ import 'firebase/auth';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { TextField, Container, Typography, IconButton, Avatar } from "@material-ui/core";
+import { TextField, Container, Typography, IconButton, Avatar, FormControlLabel, Checkbox, Link } from "@material-ui/core";
 import { orange, blueGrey } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -19,6 +19,7 @@ import MuiAlert from '@material-ui/core/Alert';
 import MonetizationOnSharpIcon from '@material-ui/icons/MonetizationOnSharp';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import { green, grey } from '@material-ui/core/colors';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
 const theme = createTheme({
@@ -178,6 +179,7 @@ function Meucadastro() {
 
   return (
     <ThemeProvider theme={theme}>
+
       <Box
         sx={{
           bgcolor: '#fafafa',

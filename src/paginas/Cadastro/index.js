@@ -3,20 +3,19 @@ import 'firebase/auth';
 import * as React from 'react';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { TextField } from "@material-ui/core";
-import { orange, green } from '@material-ui/core/colors';
+import { TextField, Avatar, FormControlLabel, Checkbox, Link, Container, Typography } from "@material-ui/core";
+import { orange, green, grey } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { InputLabel } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
-import './cad.css'
+import HowToRegIcon from '@material-ui/icons/HowToReg';
 
 const theme = createTheme({
   palette: {
@@ -26,8 +25,57 @@ const theme = createTheme({
     secondary: {
       main: orange[500],
     },
+    textos: {
+      main: grey[800],
+    },
   },
 });
+
+theme.typography.h1 = {
+  fontSize: '1.7rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.5rem',
+  },
+};
+theme.typography.h5 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.4rem',
+  },
+};
+theme.typography.h6 = {
+  fontSize: '1.1rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem',
+  },
+};
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+};
+theme.typography.p = {
+  fontSize: '0.8rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.9rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1rem',
+  },
+};
 
 
 function Cadastro() {
@@ -52,17 +100,21 @@ function Cadastro() {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });  
     
-    const [open, setOpen, aberto] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [aberto, setAberto] = React.useState(false);
 
-    const handleClick = () => {
+    const handleClick1 = () => {
       setOpen(true);
+    };
+    const handleClick2 = () => {
+      setAberto(true);
     };
 
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
         return;
       }
-  
+      setAberto(false);
       setOpen(false);
     };
   
@@ -70,7 +122,7 @@ function Cadastro() {
     async function handleAdd(){
       await firebase.auth().createUserWithEmailAndPassword(email, senha)
       .then( async (value) => {
-          alert('Usuário cadastrado com sucesso!')
+          handleClick1()
           await firebase.firestore().collection('usuarios')
           .doc(value.user.uid)
           .set({
@@ -93,113 +145,117 @@ function Cadastro() {
           } else if (error.code === 'auth/weak-password'){
             alert('Senha muito fraca! Tente novamente.');
           } else if (error.code === 'auth/invalid-email'){
-            alert('E-mail inválido! Tente novamente.');
+            handleClick2();
           }
       })
     }
 
     return (
       <ThemeProvider theme={theme}>
-        <br />
-  
-        <Grid container component="main" sx={{ height: '100vh' }}>
-          <CssBaseline />
-          <Grid id="imgcontato"
-            xs={false}
-            sm={4}
-            item
-            md={7}
-            sx={{
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-            }}
-        
-          />
-          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
-            <Box
-              sx={{
-                my: 8,
-                mx: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Box component="form" noValidate sx={{ mt: 1 }}>
-              
-              <h2>Cadastro de Usuário / Cliente</h2>
 
+
+<Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 5,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <HowToRegIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Cadastre-se
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
               <TextField
                   fullWidth
-                  margin="normal"
+                  required
+                  size="small"
+                  id="cliente-form"
+                  label="Nome e Sobrenome"
+                  defaultValue="Cliente"
+                  autoComplete='cliente'
+                  value={nome} onChange={(e) => setNome(e.target.value)} />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                  fullWidth
                   required
                   size="small"
                   id="email-form"
                   label="Email"
+                  type="email"
                   defaultValue="Email"
+                  autoComplete='email'
                   value={email} onChange={(e) => setEmail(e.target.value)} />
-
-                <TextField
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
                   fullWidth
-                  margin="normal"
                   required
                   size="small"
                   id="senha-form"
                   label="Senha"
+                  type="password"
                   defaultValue="Senha"
                   value={senha} onChange={(e) => setSenha(e.target.value)} />
-
-
-                <TextField
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
                   fullWidth
-                  margin="normal"
                   required
                   size="small"
-                  id="cliente-form"
-                  label="Nome do cliente"
-                  defaultValue="Cliente"
-                  value={nome} onChange={(e) => setNome(e.target.value)} />
-  
-                <TextField
+                  id="senha-form"
+                  label="Confirmar senha"
+                  type="password"
+                  defaultValue="Senha" />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
                   fullWidth
-                  margin="normal"
-                  size="small"
-                  id="outlined-required"
-                  label="CEP"
-                  type="text"
-                  defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
-  
-                <TextField
-                  fullWidth
-                  margin="normal"
                   size="small"
                   id="outlined-required"
                   label="Endereço"
                   type="text"
                   defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
-  
-                <TextField
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <TextField
                   fullWidth
-                  margin="normal"
+                  size="small"
+                  id="outlined-required"
+                  label="CEP"
+                  type="number"
+                  defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <TextField
+                  fullWidth
                   size="small"
                   id="outlined-required"
                   label="Bairro"
                   type="text"
                   defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
-  
-                <TextField
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
                   fullWidth
-                  margin="normal"
                   size="small"
                   id="outlined-required"
                   label="Cidade"
                   type="text"
                   defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
-  
-                <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
                 <Select
                   fullWidth
-                  margin="normal"
                   size="small"
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
@@ -213,28 +269,39 @@ function Cadastro() {
                   <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
                   <MenuItem value={'MG'}>Minas Gerais</MenuItem>
                 </Select>
-  
-                <TextField
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <TextField
+              margin='normal'
                   fullWidth
-                   margin="normal"
                   size="small"
                   id="outlined-textarea"
                   label="Whatsapp"
                   placeholder="Contato"
-                  multiline value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
-  
-                <Button fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAdd}>Enviar Cadastro</Button><br /> <br />
-  
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
+                  type="tel"
+                  value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  component="h4"
+              variant="h4"
+                  label="Concordo e estou ciente dos Termos de Uso e Privacidade presentes nessa plataforma."
+                />
+              </Grid>
+            </Grid>
+            <Button fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
+                  onClick={handleAdd}>Enviar</Button>
+          </Box>
+        </Box>
+      </Container>
+
+
 
         <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Usuário / Cliente cadastrado com sucesso!
+            Cadastrado realizado com sucesso!
           </Alert>
         </Snackbar>
         </Stack>
@@ -242,7 +309,7 @@ function Cadastro() {
         <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Erro na gravação do Usuário / Cliente
+            Dados preenchidos incorretamente!
           </Alert>
         </Snackbar>
         </Stack>

@@ -155,7 +155,7 @@ export default function Header() {
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
                   <Button color="secondary" href="/noticia">Saiba Mais </Button>
-                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Login</Button> 
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Acessar Loja</Button> 
          {/* <text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>*/}
                 </Typography>
               </Toolbar>

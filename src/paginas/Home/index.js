@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { InputLabel } from "@material-ui/core";
+import { InputLabel, IconButton } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
@@ -26,6 +26,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 const theme = createTheme({
   palette: {
@@ -119,6 +122,10 @@ function Home() {
 
   const closeClicksm2 = () => {
     window.location.href='./quemsomos';
+  };
+
+  const openlogin = () => {
+    window.location.href='./login';
   };
 
   const handleClick = () => {
@@ -312,6 +319,52 @@ function Home() {
             </Box>
           </Stack>
           </Grid>
+
+
+          <Box
+          sx={{
+            bgcolor: '#fafafa',
+            pt: 8,
+            pb: 10,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h1"
+              align="center"
+              gutterBottom
+              sx={{ color: 'primary.main', }}
+            >
+              Conhece a nossa loja de componentes eletrônicos?
+            </Typography>
+            <Typography variant="h2" align="center" sx={{ color: 'textos.main' }} paragraph>
+              Confira a nova loja online e fique por dentro de todas as ofertas! 
+            </Typography>
+          </Container>
+
+          <Grid container component="main"
+            sx={{
+              justifyContent: 'center',
+              alignContent: 'center'
+            }}>
+            <Stack direction={{ sm: 'row',  marginTop: '2%', }}
+               >
+         
+              <Box sx={{
+                textAlign: 'center',
+                alignContent: 'center'
+               }}>
+                <Button fullWidth variant="contained" disableElevation sx={{ mt: 1, mb: 2, color: 'white' }}
+                onClick={openlogin}>Acesse a Loja</Button>
+              </Box>
+
+              
+              
+            </Stack>
+          </Grid>
+        </Box>
+
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />

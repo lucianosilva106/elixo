@@ -117,7 +117,7 @@ export default function SignInSide() {
           window.location.href = "/gerenciamento"
         }
         if (meutipo === 'Usuario') {
-          window.location.href = "/gerenciamentousuario"
+          window.location.href = "/produto"
         }
       })
       .catch((error) => {
