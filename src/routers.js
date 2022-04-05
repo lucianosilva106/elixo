@@ -1,5 +1,6 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from './components/Header';
+import HeaderLoja from './components/Header-Loja';
 import Home from './paginas/Home';
 import Erro from './paginas/Erro';
 import Login from './paginas/Login';
