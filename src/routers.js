@@ -1,6 +1,5 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from './components/Header';
-import HeaderLoja from './components/Header-Loja';
 import Home from './paginas/Home';
 import Erro from './paginas/Erro';
 import Login from './paginas/Login';
@@ -22,6 +21,7 @@ import Admprodutousuario from './paginas/Admprodutousuario';
 import Carrinhocompra from './paginas/Carrinhocompra';
 import Minhatransacao from './paginas/Minhatransacao';
 import Produtoupload from './paginas/Produtoupload';
+import Landingpage from './paginas/Landingpage';
 
 const Routes = () => {
     return(
@@ -46,6 +46,7 @@ const Routes = () => {
                 <Route exact path="/admavaliacao" component={AdmAvaliacao} />
                 <Route exact path="/carrinhocompra" component={Carrinhocompra} />
                 <Route exact path="/minhatransacao" component={Minhatransacao} />
+                <Route exact path="/landingpage" component={Landingpage} />
                 <Route exact path="/produtoupload" component={Produtoupload} />
                 <Route exact path="/info/:id" component={Info} />
                 <Route path="*" component={Erro} />

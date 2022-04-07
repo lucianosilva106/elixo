@@ -1,5 +1,6 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
+import 'firebase/storage';
 //import firebase from 'firebase';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -113,7 +114,7 @@ function Admprodutousuario() {
 
   var storage = firebase.storage();
   const [image, setImage] = useState('');
-  const [endImg] = useState('../img/drink1.jpg');
+  const [endImg] = useState('');
   const [imageAsUrl, setImageAsUrl] = useState('');
 
   const [idusuario, setIdUsuario] = useState('');
@@ -494,7 +495,7 @@ function Admprodutousuario() {
               <Typography component="h1" variant="h5">
                 Descrição do Produto
               </Typography>
-              <Box component="form" noValidate sx={{ mt: 3 }}>
+              <Box noValidate sx={{ mt: 3 }}>
 
                 {image ? <Avatar src={URL.createObjectURL(image)} alt="imagem" sx={{ width: 150, height: 150, border: 2, borderColor: 'primary.main', }} variant="rounded" />
                   :
@@ -567,7 +568,7 @@ function Admprodutousuario() {
                   type="text"
                 defaultValue="Local" value={percentual} onChange={(e) => setPercentual(e.target.value)} />*/}
 
-                <Button type="submit" fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
+                <Button fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
                   onClick={handleAdd}>Confirmar</Button>
 
                 {/*<Button fullWidth variant="outlined" sx={{ mt: 1, mb: 2 }}
