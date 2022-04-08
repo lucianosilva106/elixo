@@ -25,7 +25,6 @@ import Divider from '@material-ui/core/Divider';
 import { Box } from '@material-ui/system';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, blueGrey, grey } from '@material-ui/core/colors';
-import Admprodutousuario from '../Admprodutousuario/index';
 
 const theme = createTheme({
   palette: {
@@ -127,6 +126,8 @@ function Produtos() {
   };
 
   const [listaprodutos, setListaprodutos] = useState([]);
+  const [openchat, setOpenchat] = useState(false);
+  const[listachats, setListachats] = useState([]);
 
   const [open, setOpen] = useState(false);
   const [addcar, setAddcar] = useState(false);
@@ -146,6 +147,7 @@ function Produtos() {
 
   function handleOnClose(id) {
     setOpen(false);
+    setOpenchat(false);
     return handleToogle(id)
 
   }
@@ -158,6 +160,7 @@ function Produtos() {
     setAddcar(true);
   }
 
+  var contmsg = 0;
 
   useEffect(() => {
     async function loadProdutos() {
@@ -165,18 +168,38 @@ function Produtos() {
         .onSnapshot((doc) => {
           let meusProdutos = [];
           doc.forEach((item) => {
-            meusProdutos.push({
-              id: item.id,
-              descricao: item.data().descricao,
-              preco: item.data().preco,
-              info: item.data().info,
-              pathimagem: item.data().pathimagem
-            })
+            if (item.data().aprovado == true){
+              meusProdutos.push({
+                id: item.id,
+                descricao: item.data().descricao,
+                preco: item.data().preco,
+                info: item.data().info,
+                pathimagem: item.data().pathimagem
+              })
+            }
           })
           setListaprodutos(meusProdutos);
         })
     }
     loadProdutos();
+
+    async function loadChats() {
+      await firebase.firestore().collection('chats')
+        .onSnapshot((doc) => {
+          let meusChats = [];
+          doc.forEach((item) => {
+  //          if (item.data().idproduto == true){
+              meusChats.push({
+                mensagem: item.data().mensagem
+              })
+  //          }
+          })
+          setListachats(meusChats);
+          alert(listachats.length)
+        })
+    }
+    loadChats();
+  
 
   }, [])
 
@@ -210,6 +233,15 @@ function Produtos() {
     localStorage.setItem("produtocarrinho", JSON.stringify(old_data));
 
     alert("Array salvo com sucesso");
+
+  }
+  
+  const abreChat = () => {
+    setOpenchat(true);
+
+  }
+
+  function addChat(){
 
   }
 
@@ -315,6 +347,10 @@ function Produtos() {
                           onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco)} autoFocus>                            
                           Adicionar ao carrinho
                         </Button>
+                        <Button variant="outlined" disableElevation size="small"
+                          onClick={() => abreChat(listaproduto.id)} autoFocus>                            
+                          Chat
+                        </Button>
 
                       </DialogActions>
                     </Dialog>
@@ -327,6 +363,25 @@ function Produtos() {
                     
                   </div>
                 )}
+                {listaproduto.isOpen && (
+                  <div>
+                    <Dialog
+                      open={openchat}
+                      onClose={handleOnClose}
+//                      scroll={scroll}
+                      aria-labelledby="scroll-dialog-title"
+                      aria-describedby="scroll-dialog-description"
+                    >
+                    <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
+                    {listaprodutos
+                    .map((listaprodutos) => 
+                      `teste.`
+                      , )
+                      .join('\n')}
+                    </Dialog>
+                  </div>
+                )}
+
               </Grid>
             )
         })}

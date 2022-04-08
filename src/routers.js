@@ -22,6 +22,8 @@ import Carrinhocompra from './paginas/Carrinhocompra';
 import Minhatransacao from './paginas/Minhatransacao';
 import Produtoupload from './paginas/Produtoupload';
 import Landingpage from './paginas/Landingpage';
+import Admaprovacao from './paginas/Admaprovacao';
+import Chat from './paginas/Chat';
 
 const Routes = () => {
     return(
@@ -44,8 +46,10 @@ const Routes = () => {
                 <Route exact path="/admproposta" component={Admproposta} />
                 <Route exact path="/admproduto" component={Admproduto} />
                 <Route exact path="/admavaliacao" component={AdmAvaliacao} />
+                <Route exact path="/admaprovacao" component={Admaprovacao} />
                 <Route exact path="/carrinhocompra" component={Carrinhocompra} />
                 <Route exact path="/minhatransacao" component={Minhatransacao} />
+                <Route exact path="/chat" component={Chat} />
                 <Route exact path="/landingpage" component={Landingpage} />
                 <Route exact path="/produtoupload" component={Produtoupload} />
                 <Route exact path="/info/:id" component={Info} />

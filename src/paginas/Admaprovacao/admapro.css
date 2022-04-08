@@ -1,0 +1,29 @@
+.my-custom-scrollbar{
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.customers{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+    background: lightgray;
+}
+
+.customers td {
+  border: 2px solid #ddd;
+  padding: 8px;
+}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+

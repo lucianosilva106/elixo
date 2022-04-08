@@ -52,7 +52,7 @@ const upload = (imagem) => {
 
         })
     }
-
+0
     storage.ref(`/imagens/${imagem.name}`).put(imagem)
       .on("state_changed", alert("success"), alert);
 

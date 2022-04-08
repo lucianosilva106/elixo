@@ -1,7 +1,6 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
 import 'firebase/storage';
-//import firebase from 'firebase';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -200,6 +199,7 @@ function Admprodutousuario() {
         preco: preco,
         pathimagem: imageAsUrl,
         percentual: percentual,
+        aprovado: false,
         idusuario: userlog
       })
       .then(() => {
@@ -280,24 +280,23 @@ function Admprodutousuario() {
       })
   }
 
-  const upload = (e) => {
-    e.preventDefault();
+  const upload = () => {
 
     const uploadcom = storage.ref(`/imagens/${image.name}`).put(image)
 
     if (image == null) return;
 
-    uploadcom.on("state_changed", function () {
+    uploadcom.on("state_changed" , function(){
 
-      uploadcom.snapshot.ref.getDownloadURL().then(function (newurl) {
-        setImageAsUrl(newurl)
-        console.log("url:" + newurl)
-      })
+        uploadcom.snapshot.ref.getDownloadURL().then( function (newurl) {
+            setImageAsUrl(newurl)
+            console.log("url:" + newurl)
+        })
 
-    }, function (error) {
-      console.log("Erro ao salvar arquivo!")
+    }, function(error){
+            console.log("Erro ao salvar arquivo!")
     })
-  }
+  } 
 
   return (
     <ThemeProvider theme={theme}>
@@ -502,26 +501,13 @@ function Admprodutousuario() {
                   <Avatar src={endImg} alt="imagem" sx={{ width: 150, height: 150, border: 2, borderColor: 'primary.main', }} variant="rounded" />}
                 <br />
 
+                <input type="file" onChange={(e) =>{setImage(e.target.files[0])}} />
                 <Button
                   variant="outlined"
                   component="label"
-                  onChange={upload}
+                  onClick={upload}
                   startIcon={<CloudUploadIcon />}
-                >
-                  Carregar Imagem
-                  <input
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                    hidden
-                  />
-                </Button>
-                {/*<TextField
-            fullWidth
-            margin="normal"
-            size="small"
-            id="outlined-required"
-            type="text"
-              defaultValue="Local da Imagem" value={imageAsUrl} />*/}
+                >Carregar Imagem</Button>
 
                 <TextField
                   fullWidth
