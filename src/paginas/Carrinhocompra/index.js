@@ -179,11 +179,12 @@ function Carrinhocompra() {
       })
     }
 
-    async function deletaProduto(){
-      alert('vou apagar')
+    async function deletaProduto(procarid){
 //    excluir posicao e recarregar carrinho      
+      const data = JSON.parse(localStorage.getItem('produtocarrinho'))
+      .filter(item => item.idprod !== procarid)
+      localStorage.setItem('produtocarrinho', JSON.stringify(data))
       carrinho = JSON.parse(localStorage.getItem('produtocarrinho'));
-
     }
 
     var total = 0;
@@ -202,6 +203,7 @@ function Carrinhocompra() {
               <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead sx={{ color: 'primary' }}>
                   <TableRow>
+                    <TableCell align="center">Imagem</TableCell>
                     <TableCell align="center">Produto</TableCell>
                     <TableCell align="center">Preço</TableCell>
                   </TableRow>
@@ -214,11 +216,12 @@ function Carrinhocompra() {
                       total += vl;
                       return (
                         <TableRow key={carrinho.key} sx={{ '&:last-child td, &:last-child th': { border: 0 }}} >
+                          <TableCell><img src={item.imgpath} height="60" width="80" /></TableCell>
                           <TableCell scope="row">{item.descprod}</TableCell>
                           <TableCell align="center">{item.valor}</TableCell>
                           <Button
                             variant="outlined" startIcon={<DeleteIcon />}
-                            onClick={() => deletaProduto(item.key)}
+                            onClick={() => deletaProduto(item.idprod)}
                             sx={{ margin: 1 }}
                             color="secondary">Excluir</Button>                       
                         </TableRow>

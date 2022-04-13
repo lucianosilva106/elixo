@@ -342,6 +342,7 @@ export default function Gerenciamentousuario() {
             >
               <AccountCircle />
             </IconButton>
+            {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}

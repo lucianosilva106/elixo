@@ -218,9 +218,9 @@ function Produtos() {
     window.location.href = '/carrinho';
   }
 
-  function salvarProdutocarrinho(idproduto, descricao, preco){
+  function salvarProdutocarrinho(idproduto, descricao, preco, pathimg){
 
-    var new_data = {idprod: idproduto, descprod: descricao, valor: preco};
+    var new_data = {idprod: idproduto, descprod: descricao, valor: preco, imgpath: pathimg};
 
     if (localStorage.getItem('produtocarrinho') == null){
       localStorage.setItem('produtocarrinho', '[]');
@@ -345,7 +345,7 @@ function Produtos() {
                       <DialogActions>
                         <Button variant="outlined" disableElevation size="small"
 //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
-                          onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco)} autoFocus>                            
+                          onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>                            
                           Adicionar ao carrinho
                         </Button>
                         <Button variant="outlined" disableElevation size="small"
