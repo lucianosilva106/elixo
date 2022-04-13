@@ -48,6 +48,7 @@ function Admaprovacao() {
   };
 
   const [open, setOpen, excluiu] = React.useState(false);
+  const [openaprovado, setOpenaprovado] = React.useState(false);
 
   async function checkLogin() {
     await firebase.auth().onAuthStateChanged((user) => {
@@ -75,6 +76,7 @@ function Admaprovacao() {
 
   const handleClick = (id) => {
     setOpen(true);
+    setOpenaprovado(true);
     return handleToogle(id)
   };
 
@@ -122,7 +124,7 @@ function Admaprovacao() {
           aprovado: true
       })
       .then(() => {
-            alert('Produto aprovado com sucesso!')
+            handleClick();
       })
       .catch((error) =>{
           alert('Erro ao aprovar produto: ' + error)
@@ -143,6 +145,7 @@ function Admaprovacao() {
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead sx={{ color: 'primary' }}>
               <TableRow>
+                <TableCell align="center">Imagem</TableCell>
                 <TableCell align="center">Descricao</TableCell>
                 <TableCell align="center">Informações</TableCell>
                 <TableCell align="center">Preço</TableCell>
@@ -152,6 +155,7 @@ function Admaprovacao() {
               {produtos.map((produto) => {
                 return (
                   <TableRow key={produto.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableCell><img src={produto.pathimagem} height="60" width="80" /></TableCell>
                     <TableCell component="th" scope="row">{produto.descricao}</TableCell>
                     <TableCell align="center">{produto.info}</TableCell>
                     <TableCell align="center">{produto.valor}</TableCell>
@@ -167,15 +171,22 @@ function Admaprovacao() {
               )
               })}
             </TableBody>
+
             <Stack spacing={2} sx={{ width: '100%' }}>
-              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Snackbar open={openaprovado} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                  Produto excluída com sucesso!
+                  Produto aprovado com sucesso!
                 </Alert>
               </Snackbar>
             </Stack>
 
-
+            <Stack spacing={2} sx={{ width: '100%' }}>
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Produto excluído com sucesso!
+                </Alert>
+              </Snackbar>
+            </Stack>
           </Table>
         </TableContainer>
       </Container>

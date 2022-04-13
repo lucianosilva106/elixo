@@ -155,6 +155,28 @@ const card1 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
+        Loja
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Produtos
+      </Typography>
+      <Typography variant="p">
+        Acesse a loja, veja os produtos disponível, converse com o vendedor e faça sua compra.
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/produto" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
+
+const card8 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
         Posto de Coleta
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -171,6 +193,7 @@ const card1 = (
     </ThemeProvider>
   </React.Fragment>
 );
+
 const card2 = (
   <React.Fragment>
     <ThemeProvider theme={theme}>

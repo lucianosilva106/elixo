@@ -396,35 +396,35 @@ export default function Gerenciamentousuario() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{justifyContent: 'center'}}>
-            <Box sx={{ minWidth: 275, }}>
+            <Box sx={{ minWidth: 250 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card1}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 250 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card2}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 250 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card3}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 250 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card4}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 250 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',

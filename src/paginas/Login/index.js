@@ -112,13 +112,15 @@ export default function SignInSide() {
         .then((snapshot) => {
           meutipo = snapshot.data().tipo;
           localStorage.setItem('nomelogado', snapshot.data().nome)
+          localStorage.setItem('tipouser', snapshot.data().tipo)
         })
-        if (meutipo === 'Administrador') {
-          window.location.href = "/gerenciamento"
-        }
-        if (meutipo === 'Usuario') {
-          window.location.href = "/produto"
-        }
+//        if (meutipo === 'Administrador') {
+//          window.location.href = "/gerenciamento"
+//        }
+//        if (meutipo === 'Usuario') {
+//          window.location.href = "/gerenciamentousuario"
+//        }
+        window.location.href = "/produto"
       })
       .catch((error) => {
         handleClick();

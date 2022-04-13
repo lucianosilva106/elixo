@@ -80,10 +80,9 @@ export default function Header() {
   async function checkLogin() {
     await firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        window.location.href = '/gerenciamento';
-
+          window.location.href = '/produto';
       } else {
-        window.location.href = '/login';
+          window.location.href = '/login';
       }
     })
   }
@@ -99,6 +98,15 @@ export default function Header() {
   };
   const NoticiaClick = () => {
     window.location.href = '/noticia';
+  };
+  const PainelClick = () => {
+    var meutipo = localStorage.getItem('tipouser');
+    if (meutipo == 'Administrador') {
+      window.location.href = '/gerenciamento'
+    }
+    if (meutipo == 'Usuario') {
+      window.location.href = '/gerenciamentousuario'
+    }
   };
 
   const [state, setState] = React.useState({
@@ -149,6 +157,13 @@ export default function Header() {
           </ListItemIcon>
           <ListItemText primary="Saiba Mais" />
         </ListItemButton>
+        <ListItemButton onClick={() => PainelClick()}>
+          <ListItemIcon>
+            <MoreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Painel de Controle" />
+        </ListItemButton>
+
       </List>
       <Divider />
       <List>
@@ -192,8 +207,9 @@ export default function Header() {
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
                   <Button color="secondary" href="/noticia">Saiba Mais </Button>
+                  <Button color="secondary" onClick={PainelClick}>Painel de Controle</Button>
                   <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Acessar Loja</Button> 
-         {/* <text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>*/}
+                   {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
                 </Typography>
               </Toolbar>
             </AppBar>

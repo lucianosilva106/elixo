@@ -199,31 +199,57 @@ function Admproduto() {
     return (
       <ThemeProvider theme={theme}>
         <br />
-  
-        <Grid container component="main" sx={{ height: '100vh' }}>
-          <CssBaseline />
-          <Grid id="imgdrink"
-            xs={false}
-            sm={4}
-            item
-            md={7}
-            sx={{
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-            }}
-        
-          />
-          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
-            <Box
-              sx={{
-                my: 8,
-                mx: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+
+        <ThemeProvider theme={theme}>
+          <Container fixed id="topo"
+            sx={{height: 150, marginTop: 6}}>
+            <Typography variant="h3" gutterBottom component="div" align="center">
+              Produtos cadastrados
+            </Typography>
+          </Container>
+          <Container fixed>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead sx={{ color: 'primary' }}>
+                  <TableRow>
+                    <TableCell align="center">Imagem</TableCell>
+                    <TableCell align="center">Produto</TableCell>
+                    <TableCell align="center">Informações</TableCell>
+                    <TableCell align="center">Preço</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {produtos.map((produto) => {
+                    return (
+                      <TableRow
+                        key={produto.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell><img src={produto.pathimagem} height="60" width="80" /></TableCell>
+                        <TableCell component="th" scope="row">{produto.descricao}</TableCell>
+                        <TableCell align="center">{produto.info}</TableCell>
+                        <TableCell align="center">{produto.preco}</TableCell>
+                        <Button
+                          variant="outlined" startIcon={<DeleteIcon />}
+                          onClick={() => pegaProduto(produto.id)}
+                          sx={{ margin: 1 }}
+                          color="secondary">Alterar</Button>                       
+                      </TableRow>
+                    )
+                  })}
+               </TableBody>
+               <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={excluir} autoHideDuration={6000} onClose={handleExcluir}>
+                  <Alert onClose={handleExcluir} severity="error" sx={{ width: '100%' }}>
+                    Produto removido com sucesso!
+                  </Alert>
+                </Snackbar>
+               </Stack>
+              </Table>
+            </TableContainer>
+
+          </Container>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
               
               <h2>Cadastro de Produtos</h2>
 
@@ -282,10 +308,8 @@ function Admproduto() {
                   onClick={editarProduto}>Atualizar Cadastro</Button><br />
 
               </Box>
-            </Box>
-          </Grid>
-        </Grid>
 
+        </ThemeProvider>
         <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -302,54 +326,6 @@ function Admproduto() {
         </Snackbar>
         </Stack>
 
-        <ThemeProvider theme={theme}>
-          <Container fixed id="topo"
-            sx={{height: 150, marginTop: 6}}>
-            <Typography variant="h3" gutterBottom component="div" align="center">
-              Produtos cadastrados
-            </Typography>
-          </Container>
-          <Container fixed>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                <TableHead sx={{ color: 'primary' }}>
-                  <TableRow>
-                    <TableCell align="center">Produto</TableCell>
-                    <TableCell align="center">Informações</TableCell>
-                    <TableCell align="center">Preço</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {produtos.map((produto) => {
-                    return (
-                      <TableRow
-                        key={produto.id}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row">{produto.descricao}</TableCell>
-                        <TableCell align="center">{produto.info}</TableCell>
-                        <TableCell align="center">{produto.preco}</TableCell>
-                        <Button
-                          variant="outlined" startIcon={<DeleteIcon />}
-                          onClick={() => pegaProduto(produto.id)}
-                          sx={{ margin: 1 }}
-                          color="secondary">Alterar</Button>                       
-                      </TableRow>
-                    )
-                  })}
-               </TableBody>
-               <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={excluir} autoHideDuration={6000} onClose={handleExcluir}>
-                  <Alert onClose={handleExcluir} severity="error" sx={{ width: '100%' }}>
-                    Produto removido com sucesso!
-                  </Alert>
-                </Snackbar>
-               </Stack>
-              </Table>
-            </TableContainer>
-
-          </Container>
-        </ThemeProvider>
       </ThemeProvider>
     );
 }

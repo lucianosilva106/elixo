@@ -195,7 +195,7 @@ function Produtos() {
   //          }
           })
           setListachats(meusChats);
-          alert(listachats.length)
+//          alert(listachats.length)
         })
     }
     loadChats();
@@ -237,6 +237,7 @@ function Produtos() {
   }
   
   const abreChat = () => {
+
     setOpenchat(true);
 
   }
