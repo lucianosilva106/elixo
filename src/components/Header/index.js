@@ -99,6 +99,7 @@ export default function Header() {
     window.location.href = '/noticia';
   };
   const painelClick = () => {
+    checkLogin();
     var meutipo = localStorage.getItem('tipouser');
     if (meutipo == 'Administrador') {
       window.location.href = '/gerenciamento'
@@ -205,7 +206,6 @@ export default function Header() {
                   </MenuIcon>
 
                 </IconButton>
-                <Box></Box>
                 <Typography className="geral">
                   <Button color="secondary" href="/">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
