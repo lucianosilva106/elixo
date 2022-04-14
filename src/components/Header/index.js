@@ -201,15 +201,14 @@ export default function Header() {
                   </MenuIcon>
 
                 </IconButton>
-                <Box></Box>
                 <Typography className="geral">
                   <Button color="secondary" href="/">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
-                  <Button color="secondary" href="/noticia">Saiba Mais </Button>
+                  <Button color="secondary" href="/noticia">Saiba Mais</Button>
                   <Button color="secondary" onClick={PainelClick}>Painel de Controle</Button>
-                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Acessar Loja</Button> 
-                   {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Entrar</Button> 
+                  {/* {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>} */}
                 </Typography>
               </Toolbar>
             </AppBar>
