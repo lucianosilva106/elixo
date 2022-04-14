@@ -80,6 +80,12 @@ function Admaprovacao() {
     return handleToogle(id)
   };
 
+  const handleClickAprov = (id) => {
+    setOpenaprovado(true);
+    return handleToogle(id)
+  };
+
+
   const handleClose = (id) => {
     setOpen(false);
     return handleToogle(id)
@@ -124,7 +130,7 @@ function Admaprovacao() {
           aprovado: true
       })
       .then(() => {
-            handleClick();
+            handleClickAprov();
       })
       .catch((error) =>{
           alert('Erro ao aprovar produto: ' + error)

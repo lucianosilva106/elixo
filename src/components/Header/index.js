@@ -78,13 +78,12 @@ theme.typography.p = {
 export default function Header() {
 
   async function checkLogin() {
-    await firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-          window.location.href = '/produto';
-      } else {
+
+    if (localStorage.getItem('nomelogado') == null) {
           window.location.href = '/login';
-      }
-    })
+    } else {
+          window.location.href = '/produto';
+    }
   }
 
   const HomeClick = () => {
@@ -99,7 +98,7 @@ export default function Header() {
   const NoticiaClick = () => {
     window.location.href = '/noticia';
   };
-  const PainelClick = () => {
+  const painelClick = () => {
     var meutipo = localStorage.getItem('tipouser');
     if (meutipo == 'Administrador') {
       window.location.href = '/gerenciamento'
@@ -157,13 +156,18 @@ export default function Header() {
           </ListItemIcon>
           <ListItemText primary="Saiba Mais" />
         </ListItemButton>
-        <ListItemButton onClick={() => PainelClick()}>
+        <ListItemButton onClick={() => painelClick()}>
           <ListItemIcon>
             <MoreIcon />
           </ListItemIcon>
           <ListItemText primary="Painel de Controle" />
         </ListItemButton>
-
+        <ListItemButton onClick={() => checkLogin()}>
+          <ListItemIcon>
+            <MoreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Acesso a Loja" />
+        </ListItemButton>
       </List>
       <Divider />
       <List>
@@ -205,9 +209,8 @@ export default function Header() {
                 <Typography className="geral">
                   <Button color="secondary" href="/">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
-                  <Button color="secondary" href="/postocoleta">Postos de Coleta</Button>
                   <Button color="secondary" href="/noticia">Saiba Mais </Button>
-                  <Button color="secondary" onClick={PainelClick}>Painel de Controle</Button>
+                  <Button color="secondary" onClick={painelClick}>Painel de Controle</Button>
                   <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Acessar Loja</Button> 
                    {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
                 </Typography>

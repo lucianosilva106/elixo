@@ -264,7 +264,6 @@ function Produtos() {
             sx={{color:'primary.main'}}
           >
             Re-user / Produtos ofertados{idvenda}
-            <button onclick={() => window.location.href = '/carrinho'}>Ir para Carrinho</button>
           </Typography>
         </Container>
       </Box>

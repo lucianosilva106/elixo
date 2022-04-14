@@ -388,7 +388,7 @@ export default function Gerenciamentousuario() {
             {['Logout'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <ExitToAppIcon color="secondary" onClick={() => fazerLogout()} /> : <MailIcon color="secondary" />}
+                  <ExitToAppIcon color="secondary" onClick={() => fazerLogout()} />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
