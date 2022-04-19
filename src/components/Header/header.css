@@ -13,6 +13,10 @@ header{
     cursor: pointer;
 }
 
+#logo{
+    background-image: url(/src/paginas/img/logo_transparent_new.svg);
+}
+
 @media only screen and (max-width: 600px) {
     
     .geral{

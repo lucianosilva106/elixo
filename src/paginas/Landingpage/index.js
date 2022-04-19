@@ -161,7 +161,7 @@ function Landingpage() {
               color: 'white',
               alignItems: 'center'
             }}>
-              <IconButton sx={{ color: 'white', fontSize: 80, }} variant="rounded">
+              <IconButton id="btnicon" sx={{ color: 'white', fontSize: 80, }} variant="rounded">
                 <OfflineBoltIcon fontSize="inherit" />
               </IconButton>
               <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}
@@ -174,7 +174,7 @@ function Landingpage() {
               textAlign: 'center',
               color: 'white',
             }}>
-              <IconButton sx={{ color: 'white', fontSize: 80, }} variant="rounded">
+              <IconButton id="btnicon" sx={{ color: 'white', fontSize: 80, }} variant="rounded">
                 <DevicesIcon fontSize="inherit" />
               </IconButton>
               <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}
@@ -187,7 +187,7 @@ function Landingpage() {
               textAlign: 'center',
               color: 'white',
             }}>
-              <IconButton sx={{ color: 'white', fontSize: 80, }} variant="rounded">
+              <IconButton id="btnicon" sx={{ color: 'white', fontSize: 80, }} variant="rounded">
                 <FlipCameraAndroidIcon fontSize="inherit" />
               </IconButton>
               <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'white' }}

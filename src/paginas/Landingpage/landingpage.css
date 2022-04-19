@@ -4,3 +4,22 @@
 #landingpage2{
     background-image: url(/src/paginas/img/landingpage2.svg);
 }
+
+@media only screen and (max-width: 600px) {
+    #landingpage1{
+        background-size: 70%;
+        min-width: 200px;
+        min-height: 200px;
+    }
+    #landingpage2{
+        background-size: 70%;
+        min-width: 250px;
+        min-height: 250px;
+        align-self: center;
+        justify-content: center;
+        text-align: center;
+    }
+    #btnicon{
+        font-size: 40;
+    }
+}

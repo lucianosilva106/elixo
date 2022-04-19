@@ -26,9 +26,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
-import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 const theme = createTheme({
   palette: {

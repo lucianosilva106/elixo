@@ -6,13 +6,13 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import { green } from '@material-ui/core/colors';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider, styled } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Menu, Container, Avatar, Tooltip, MenuItem, Badge } from '@material-ui/core';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -24,6 +24,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 import FlagIcon from '@material-ui/icons/Flag';
 import MoreIcon from '@material-ui/icons/More';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListItemButton from '@material-ui/core/ListItemButton';
 
 
@@ -75,14 +76,23 @@ theme.typography.p = {
   },
 };
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
+
 export default function Header() {
 
   async function checkLogin() {
 
     if (localStorage.getItem('nomelogado') == null) {
-          window.location.href = '/login';
+      window.location.href = '/login';
     } else {
-          window.location.href = '/produto';
+      window.location.href = '/produto';
     }
   }
 
@@ -98,6 +108,20 @@ export default function Header() {
   const NoticiaClick = () => {
     window.location.href = '/noticia';
   };
+  const MeuCadastroClick = () => {
+    if (localStorage.getItem('nomelogado') == null) {
+      window.location.href = '/login';
+    } else {
+      window.location.href = '/meucadastro';
+    }
+  };
+  const MeuCarrinhoClick = () => {
+    if (localStorage.getItem('nomelogado') == null) {
+      window.location.href = '/login';
+    } else {
+      window.location.href = '/carrinhocompra';
+    }
+  };
   const painelClick = () => {
     checkLogin();
     var meutipo = localStorage.getItem('tipouser');
@@ -108,6 +132,12 @@ export default function Header() {
       window.location.href = '/gerenciamentousuario'
     }
   };
+
+  function fazerLogout() {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location.href = '/login';
+  }
 
   const [state, setState] = React.useState({
     left: false,
@@ -184,11 +214,29 @@ export default function Header() {
     </Box>
   );
 
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
 
     <header>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        {/* <CssBaseline />
         {['left'].map((anchor) => (
           <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" color="primary" elevation={0}>
@@ -211,14 +259,118 @@ export default function Header() {
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/noticia">Saiba Mais </Button>
                   <Button color="secondary" onClick={painelClick}>Painel de Controle</Button>
-                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Acessar Loja</Button> 
-                   {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Entrar</Button> 
+                  {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>} 
                 </Typography>
               </Toolbar>
             </AppBar>
-          </Box>))}
+        </Box>))} */}
 
-         
+        <AppBar position="fixed" color="primary" elevation={0} sx={{ color: 'secondary.main' }}>
+          <Container maxWidth="xl" sx={{ color: 'secondary.main' }}>
+            <Toolbar disableGutters sx={{ color: 'secondary.main' }}>
+
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                onClick={checkLogin}
+              >
+                Re-user
+              </Typography>
+
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: 'secondary.main' }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                    color: 'textos.main'
+                  }}
+                >
+                  <MenuItem textAlign="center" color="secondary" onClick={HomeClick}>Home</MenuItem>
+                  <MenuItem textAlign="center" color="secondary" onClick={QuemClick}>Quem Somos</MenuItem>
+                  <MenuItem textAlign="center" color="secondary" onClick={NoticiaClick}>Saiba Mais</MenuItem>
+                  <MenuItem textAlign="center" color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Entrar</MenuItem>
+                </Menu>
+              </Box>
+
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                onClick={checkLogin}
+              >
+                Re-User
+              </Typography>
+
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: 'textos.main' }}>
+                <Typography className="geral">
+                  <Button color="secondary" href="/">Home</Button>
+                  <Button color="secondary" href="/quemsomos">Quem Somos</Button>
+                  <Button color="secondary" href="/noticia">Saiba Mais</Button>
+                  <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Entrar</Button>
+                </Typography>
+              </Box>
+
+              <IconButton aria-label="cart" onClick={MeuCarrinhoClick} >
+                    <ShoppingCartIcon />
+                </IconButton>
+
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Login">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px', color: 'textos.main' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem textAlign="center" onClick={MeuCadastroClick}>Meu Perfil</MenuItem>
+                  <MenuItem textAlign="center" onClick={painelClick}>Painel de Controle</MenuItem>
+                  <MenuItem textAlign="center" onClick={NoticiaClick}>Ajuda</MenuItem>
+                  <MenuItem textAlign="center" onClick={fazerLogout}>Logout</MenuItem>
+                </Menu>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
 
         {['left'].map((anchor) => (
           <React.Fragment key={anchor}>

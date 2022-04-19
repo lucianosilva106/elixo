@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { CardActionArea, Container } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
+import { Grid, Avatar, Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,8 +23,15 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/core/Alert';
 import Divider from '@material-ui/core/Divider';
 import { Box } from '@material-ui/system';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import AssistantIcon from '@material-ui/icons/Assistant';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import AllInboxIcon from '@material-ui/icons/AllInbox';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { orange, blueGrey, grey } from '@material-ui/core/colors';
+import { orange, blueGrey, grey, green } from '@material-ui/core/colors';
+import '../Produto/produto.css'
 
 const theme = createTheme({
   palette: {
@@ -36,6 +43,9 @@ const theme = createTheme({
     },
     textos: {
       main: grey[800],
+    },
+    banner: {
+      main: green[500],
     },
   },
 });
@@ -90,11 +100,11 @@ theme.typography.p = {
 
 function Produtos() {
 
-    const BootstrapDialogTitle = (props) => {
+  const BootstrapDialogTitle = (props) => {
     const { children, onClose, ...other } = props;
 
     const [open, setOpen, aberto] = React.useState(false);
-  
+
     const handleClick = () => {
       setOpen(true);
     };
@@ -127,7 +137,7 @@ function Produtos() {
 
   const [listaprodutos, setListaprodutos] = useState([]);
   const [openchat, setOpenchat] = useState(false);
-  const[listachats, setListachats] = useState([]);
+  const [listachats, setListachats] = useState([]);
 
   const [open, setOpen] = useState(false);
   const [addcar, setAddcar] = useState(false);
@@ -168,7 +178,7 @@ function Produtos() {
         .onSnapshot((doc) => {
           let meusProdutos = [];
           doc.forEach((item) => {
-            if (item.data().aprovado == true){
+            if (item.data().aprovado == true) {
               meusProdutos.push({
                 id: item.id,
                 descricao: item.data().descricao,
@@ -188,18 +198,18 @@ function Produtos() {
         .onSnapshot((doc) => {
           let meusChats = [];
           doc.forEach((item) => {
-  //          if (item.data().idproduto == true){
-              meusChats.push({
-                mensagem: item.data().mensagem
-              })
-  //          }
+            //          if (item.data().idproduto == true){
+            meusChats.push({
+              mensagem: item.data().mensagem
+            })
+            //          }
           })
           setListachats(meusChats);
-//          alert(listachats.length)
+          //          alert(listachats.length)
         })
     }
     loadChats();
-  
+
 
   }, [])
 
@@ -213,16 +223,16 @@ function Produtos() {
   var ano = data.getFullYear();
   dataAtual = dia + '/' + mes + '/' + ano;
 
-  function irCarrinho(){
+  function irCarrinho() {
     alert('vai para o carrinho')
     window.location.href = '/carrinho';
   }
 
-  function salvarProdutocarrinho(idproduto, descricao, preco, pathimg){
+  function salvarProdutocarrinho(idproduto, descricao, preco, pathimg) {
 
-    var new_data = {idprod: idproduto, descprod: descricao, valor: preco, imgpath: pathimg};
+    var new_data = { idprod: idproduto, descprod: descricao, valor: preco, imgpath: pathimg };
 
-    if (localStorage.getItem('produtocarrinho') == null){
+    if (localStorage.getItem('produtocarrinho') == null) {
       localStorage.setItem('produtocarrinho', '[]');
     }
 
@@ -235,14 +245,14 @@ function Produtos() {
     alert("Array salvo com sucesso");
 
   }
-  
+
   const abreChat = () => {
 
     setOpenchat(true);
 
   }
 
-  function addChat(){
+  function addChat() {
 
   }
 
@@ -252,48 +262,298 @@ function Produtos() {
         sx={{
           bgcolor: '#fafafa',
           pt: 8,
-          pb: 6,
+          pb: 15,
         }}
       >
-        <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            gutterBottom
-            sx={{color:'primary.main'}}
-          >
-            Re-user / Produtos ofertados{idvenda}
-          </Typography>
+        <Container maxWidth="xl">
+          <Grid id="grid-bg1" container component="main" align="left"
+            sx={{ alignItems: 'center', height: '450px', justifyContent: 'center' }}>
+            <Stack direction={{ sm: 'row' }}
+              spacing={{ xs: 1, sm: 2, md: 2 }} alignItems="center" justifyContent="space-evenly">
+              <Box>
+                <Card id="card1" sx={{ maxWidth: 750, borderRadius: 3 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="350"
+                      sx={{
+                        backgroundSize: 'cover',
+                      }}
+                    />
+                    <CardContent className='card-content'>
+                      <Typography gutterBottom color="white" variant="h4" component="div">
+                        Lizard
+                      </Typography>
+                      <Typography variant="body2" color="white">
+                        Lizards are a widespread group of squamate reptiles, with over 6,000
+                        species, ranging across all continents except Antarctica
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Box>
+
+              <Box direction={{ sm: 'row' }} sx={{ mt: 1, mb: 2, }}>
+                <Box>
+                  <Card id="card1" sx={{ maxWidth: 350, borderRadius: 3, mt: 1, mb: 2, }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="100"
+                        sx={{
+                          backgroundSize: 'cover',
+                        }}
+                      />
+                      <CardContent className='card-content'>
+                        <Typography gutterBottom color="white" variant="h5" component="div">
+                          Lizard
+                        </Typography>
+                        <Typography variant="body2" color="white">
+                          Lizards are a widespread group of squamate reptiles, with over 6,000
+                          species, ranging across all continents except Antarctica
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Box>
+
+                <Box>
+                  <Card id="card1" sx={{ maxWidth: 350, borderRadius: 3 }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="100"
+                        sx={{
+                          backgroundSize: 'cover',
+                        }}
+                      />
+                      <CardContent className='card-content'>
+                        <Typography gutterBottom color="white" variant="h5" component="div">
+                          Lizard
+                        </Typography>
+                        <Typography variant="body2" color="white">
+                          Lizards are a widespread group of squamate reptiles, with over 6,000
+                          species, ranging across all continents except Antarctica
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Box>
+              </Box>
+
+            </Stack>
+          </Grid>
         </Container>
+
+        <Grid container component="main"
+          sx={{
+            justifyContent: 'space-around',
+            bgcolor: '#fafafa',
+            alignContent: 'center',
+          }}>
+          <Stack direction={{
+            xs: 'column', sm: 'row', marginTop: '4%',
+          }}
+            spacing={{ xs: 1, sm: 2, md: 6 }} >
+
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+              alignItems: 'center'
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <AssistantIcon fontSize="inherit" />
+              </IconButton>
+              <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Praticidade</Button>
+            </Box>
+
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <PanToolIcon fontSize="inherit" />
+              </IconButton>
+              <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Acessibilidade</Button>
+            </Box>
+
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <AttachMoneyIcon fontSize="inherit" />
+              </IconButton>
+              <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Preço</Button>
+            </Box>
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+              alignItems: 'center'
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <AssignmentIndIcon fontSize="inherit" />
+              </IconButton>
+              <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Vendedores Locais</Button>
+            </Box>
+
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <LocalShippingIcon fontSize="inherit" />
+              </IconButton>
+              <Button fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Entrega Rápida</Button>
+            </Box>
+
+            <Box sx={{
+              textAlign: 'center',
+              color: 'white',
+            }}>
+              <IconButton id="btnicon" sx={{ color: 'primary.main', fontSize: 40, }} variant="rounded">
+                <AllInboxIcon fontSize="inherit" />
+              </IconButton>
+              <Button type="submit" fullWidth variant="text" disableElevation sx={{ mt: 0, mb: 2, color: 'primary.main' }}
+              >Produtos Especializados</Button>
+            </Box>
+
+          </Stack>
+        </Grid>
+
       </Box>
 
-    <Container fixed
-    sx={{marginTop: '2%'}}>
-      
-      <Stack direction={{ xs: 'column', sm: 'row' }}
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={{ sm: 2, md: 2 }}
-        alignItems="center"
-        justifyContent="center"
-        sx={{
-          alignItems: 'center',
-          alignSelf: 'center',
-          justifySelf: 'center'
-        }}>
 
-        {listaprodutos.map((listaproduto) => {
+      <Grid container component="main"
+        sx={{
+          justifyContent: 'space-around',
+          alignContent: 'center',
+          textAlign: 'center'
+        }}>
+        <Stack direction={{
+          xs: 'column', sm: 'row', marginTop: '2%', alignContent: 'center', textAlign: 'center',
+        }}
+          spacing={{ xs: 1, sm: 2, md: 6 }} >
+
+          <Box sx={{
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <Box
+              alt="imagem"
+              id="computadores-categorias"
+              sx={{ width: 120, height: 120, borderRadius: 50 }}
+            />
+            <Typography sx={{ marginTop: '5%', textAlign: 'center' }} gutterBottom variant='h6'>Computadores</Typography>
+          </Box>
+
+          <Box sx={{
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <Box
+              id="celulares-categorias"
+              sx={{ width: 120, height: 120, borderRadius: 50 }}
+            />
+            <Typography sx={{ marginTop: '5%', textAlign: 'center' }} gutterBottom variant='h6'>Celulares</Typography>
+          </Box>
+
+          <Box sx={{
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <Box
+              id="tvs-categorias"
+              sx={{ width: 120, height: 120, borderRadius: 50 }}
+            />
+            <Typography sx={{ marginTop: '5%', textAlign: 'center' }} gutterBottom variant='h6'>TV's</Typography>
+          </Box>
+
+          <Box sx={{
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <Box
+              id="videogames-categorias"
+              sx={{ width: 120, height: 120, borderRadius: 50 }}
+            />
+            <Typography sx={{ marginTop: '5%', textAlign: 'center' }} gutterBottom variant='h6'>Video-Games</Typography>
+          </Box>
+
+          <Box sx={{
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <Box
+              id="casa-categorias"
+              sx={{ width: 120, height: 120, borderRadius: 50 }}
+            />
+            <Typography sx={{ marginTop: '5%', textAlign: 'center' }} gutterBottom variant='h6'>Eletrodomésticos</Typography>
+          </Box>
+
+        </Stack>
+      </Grid>
+
+      <Box
+        sx={{
+          pt: 8,
+          pb: 15,
+          alignItems: 'center',
+                alignContent: 'center',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+        }}
+      >
+        <Container maxWidth="lg">
+            <Paper elevation={0}
+              sx={{
+                minHeight: '450px',
+                bgcolor: 'primary.main',
+                alignItems: 'center',
+                alignContent: 'center',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+              }}>
+
+<Container fixed
+        sx={{ marginTop: '2%' }}>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }}
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={{ sm: 2, md: 2 }}
+          alignItems="center"
+          justifyContent="center"
+          sx={{
+            alignItems: 'center',
+            alignSelf: 'center',
+            justifySelf: 'center',
+          }}>
+
+          {listaprodutos.map((listaproduto) => {
             posicao = posicao + 1;
             return (
               <Grid sx={{
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'center',
-                justifySelf: 'center'
+                justifySelf: 'center',
+                marginTop: '10%'
               }}
                 key={listaproduto.id}>
 
-                <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center' }}>
+                <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -308,21 +568,10 @@ function Produtos() {
                       <Typography gutterBottom component="div"> {listaproduto.descricao} </Typography>
                     </CardContent>
                   </CardActionArea>
-
-                  <IconButton sx={{
-                    top: '50%',
-                    left: '42%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    justifySelf: 'center'
-                  }}
-                    aria-label="circle"
-                    onClick={() => handleOnOpen(listaproduto.id)}><AddCircleIcon 
-                    sx={{ alignSelf: 'center', justifyContent: 'center', color: 'primary.main' }} />
-                  </IconButton>
+                  <Button fullWidth variant="outlined" disableElevation 
+                  size='small' onClick={() => handleOnOpen(listaproduto.id)}>Adicionar ao Carrinho</Button>
                 </Card>
-                <p>{listaproduto.isOpen}</p>
+                <Typography gutterBottom variant='p'>{listaproduto.isOpen}</Typography>
                 {listaproduto.isOpen && (
                   <div>
                     <Dialog
@@ -331,11 +580,11 @@ function Produtos() {
                       aria-labelledby="alert-dialog-title"
                       aria-describedby="alert-dialog-description"
                     >
-                      <DialogTitle variant="h5" sx={{color:'primary.main'}} id="alert-dialog-title">
+                      <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
                         {listaproduto.descricao}
                       </DialogTitle>
                       <DialogContent>
-                        <DialogContentText id="alert-dialog-description">                        
+                        <DialogContentText id="alert-dialog-description">
                           <Typography variant="h6" gutterBottom>Informações:</Typography>
                           <Typography variant="h6" gutterBottom> Preço de Venda: R$ {listaproduto.preco} </Typography>
                           <Typography variant="h6" gutterBottom>Preparo: {listaproduto.info} </Typography>
@@ -343,12 +592,12 @@ function Produtos() {
                       </DialogContent>
                       <DialogActions>
                         <Button variant="outlined" disableElevation size="small"
-//                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
-                          onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>                            
+                          //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
+                          onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>
                           Adicionar ao carrinho
                         </Button>
                         <Button variant="outlined" disableElevation size="small"
-                          onClick={() => abreChat(listaproduto.id)} autoFocus>                            
+                          onClick={() => abreChat(listaproduto.id)} autoFocus>
                           Chat
                         </Button>
 
@@ -360,7 +609,7 @@ function Produtos() {
                         Produto adicionado ao carrinho!
                       </Alert>
                     </Snackbar>
-                    
+
                   </div>
                 )}
                 {listaproduto.isOpen && (
@@ -368,26 +617,32 @@ function Produtos() {
                     <Dialog
                       open={openchat}
                       onClose={handleOnClose}
-//                      scroll={scroll}
+                      //                      scroll={scroll}
                       aria-labelledby="scroll-dialog-title"
                       aria-describedby="scroll-dialog-description"
                     >
-                    <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
-                    {listaprodutos
-                    .map((listaprodutos) => 
-                      `teste.`
+                      <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
+                      {listaprodutos
+                        .map((listaprodutos) =>
+                          `teste.`
                       , )
-                      .join('\n')}
+                        .join('\n')}
                     </Dialog>
                   </div>
                 )}
 
               </Grid>
             )
-        })}
-      </Stack>
+          })}
+        </Stack>
 
-    </Container>
+      </Container>
+
+            </Paper>
+        </Container>
+      </Box>
+
+      
     </ThemeProvider>
   )
 

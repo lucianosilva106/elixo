@@ -231,16 +231,18 @@ function Meucadastro() {
       </Box>
 
 
-      <Container
+      <Container component="main" maxWidth="xs">
+           <Box
           sx={{
-            alignSelf: 'center',
-             justifyContent: 'space-evenly', 
-          }}>
-           
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
 
         <TextField
 
           margin="normal"
+          fullWidth
           required
           size="small"
           id="usuario-form"
@@ -251,6 +253,7 @@ function Meucadastro() {
         <TextField
 
           margin="normal"
+          fullWidth
           size="small"
           id="outlined-required"
           label="CEP"
@@ -260,6 +263,7 @@ function Meucadastro() {
         <TextField
 
           margin="normal"
+          fullWidth
           size="small"
           id="outlined-required"
           label="Endereço"
@@ -270,6 +274,7 @@ function Meucadastro() {
         <TextField
 
           margin="normal"
+          fullWidth
           size="small"
           id="outlined-required"
           label="Bairro"
@@ -279,6 +284,7 @@ function Meucadastro() {
         <TextField
 
           margin="normal"
+          fullWidth
           size="small"
           id="outlined-required"
           label="Cidade"
@@ -290,6 +296,7 @@ function Meucadastro() {
         <Select
 
           margin="normal"
+          fullWidth
           size="small"
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
@@ -307,6 +314,7 @@ function Meucadastro() {
         <TextField
 
           margin="normal"
+          fullWidth
           size="small"
           id="outlined-required"
           label="Whatsapp"
@@ -314,13 +322,15 @@ function Meucadastro() {
           defaultValue="Whatsapp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
 <br/>
 
-        <Button variant="contained" disableElevation sx={{color:'white', justifyContent: 'center'}} size="small"
+        <Button variant="contained" fullWidth disableElevation sx={{ mt: 1, mb: 2, color:'white', justifyContent: 'center'}} 
           onClick={atualizaUsuario}>Salvar</Button>
 
-        <Button variant="outlined" disableElevation size="small" sx={{justifyContent: 'center'}}
+        <Button variant="outlined" fullWidth disableElevation size="small" sx={{justifyContent: 'center'}}
           onClick={voltarMenu}>Cancelar</Button>
 
       
+</Box>
+
       </Container>
 
 

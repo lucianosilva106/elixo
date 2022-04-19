@@ -1,0 +1,45 @@
+#card1{
+    background-image: url(/src/paginas/img/sucata.jpg);
+}
+.card-content{
+    background: linear-gradient(
+        hsl(0 0% 0% / 0),
+        hsl(20 0% 0% / 0.5) 5%,
+        hsl(0 0% 0% / 3)
+    );
+}
+#computadores-categorias{
+    background-image: url(/src/paginas/img/computadores_categorias.png);
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fafafa;
+}
+#celulares-categorias{
+    background-image: url(/src/paginas/img/celulares_categorias.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fafafa;
+}
+#tvs-categorias{
+    background-image: url(/src/paginas/img/tvs_categorias.png);
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fafafa;
+}
+#videogames-categorias{
+    background-image: url(/src/paginas/img/videogames_categorias.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fafafa;
+}
+#casa-categorias{
+    background-image: url(/src/paginas/img/casa_categorias.png);
+    background-size: 110%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fafafa;
+}
