@@ -509,140 +509,139 @@ function Produtos() {
           pt: 8,
           pb: 15,
           alignItems: 'center',
-                alignContent: 'center',
-                alignSelf: 'center',
-                justifyContent: 'center',
-                textAlign: 'center'
+          alignContent: 'center',
+          alignSelf: 'center',
+          justifyContent: 'center',
+          textAlign: 'center'
         }}
       >
         <Container maxWidth="lg">
-            <Paper elevation={0}
-              sx={{
-                minHeight: '450px',
-                bgcolor: 'primary.main',
-                alignItems: 'center',
-                alignContent: 'center',
-                alignSelf: 'center',
-                justifyContent: 'center',
-                textAlign: 'center'
-              }}>
+          <Paper elevation={0}
+            sx={{
+              minHeight: '450px',
+              bgcolor: 'primary.main',
+              alignItems: 'center',
+              alignContent: 'center',
+              alignSelf: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}>
 
-<Container fixed
-        sx={{ marginTop: '2%' }}>
+            <Container fixed
+              sx={{ marginTop: '2%' }}>
 
-        <Stack direction={{ xs: 'column', sm: 'row' }}
-          divider={<Divider orientation="vertical" flexItem />}
-          spacing={{ sm: 2, md: 2 }}
-          alignItems="center"
-          justifyContent="center"
-          sx={{
-            alignItems: 'center',
-            alignSelf: 'center',
-            justifySelf: 'center',
-          }}>
+              <Stack direction={{ xs: 'column', sm: 'row' }}
+                spacing={{ sm: 2, md: 2 }}
+                alignItems="center"
+                justifyContent="center"
+                sx={{
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  justifySelf: 'center',
+                }}>
 
-          {listaprodutos.map((listaproduto) => {
-            posicao = posicao + 1;
-            return (
-              <Grid sx={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-                justifySelf: 'center',
-                marginTop: '10%'
-              }}
-                key={listaproduto.id}>
+                {listaprodutos.map((listaproduto) => {
+                  posicao = posicao + 1;
+                  return (
+                    <Grid sx={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      justifySelf: 'center',
+                      marginTop: '10%'
+                    }}
+                      key={listaproduto.id}>
 
-                <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={listaproduto.pathimagem}
-                      alt="produto"
-                    />
-                    <CardContent sx={{
-                      justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
-                      justifySelf: 'center'
-                    }}>
-                      <Typography gutterBottom component="div"> {listaproduto.descricao} </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <Button fullWidth variant="outlined" disableElevation 
-                  size='small' onClick={() => handleOnOpen(listaproduto.id)}>Adicionar ao Carrinho</Button>
-                </Card>
-                <Typography gutterBottom variant='p'>{listaproduto.isOpen}</Typography>
-                {listaproduto.isOpen && (
-                  <div>
-                    <Dialog
-                      open={open}
-                      onClose={() => handleOnClose(listaproduto.id)}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-                      <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
-                        {listaproduto.descricao}
-                      </DialogTitle>
-                      <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                          <Typography variant="h6" gutterBottom>Informações:</Typography>
-                          <Typography variant="h6" gutterBottom> Preço de Venda: R$ {listaproduto.preco} </Typography>
-                          <Typography variant="h6" gutterBottom>Preparo: {listaproduto.info} </Typography>
-                        </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button variant="outlined" disableElevation size="small"
-                          //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
-                          onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>
-                          Adicionar ao carrinho
-                        </Button>
-                        <Button variant="outlined" disableElevation size="small"
-                          onClick={() => abreChat(listaproduto.id)} autoFocus>
-                          Chat
-                        </Button>
+                      <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                        <CardActionArea>
+                          <CardMedia
+                            component="img"
+                            height="140"
+                            image={listaproduto.pathimagem}
+                            alt="produto"
+                          />
+                          <CardContent sx={{
+                            justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
+                            justifySelf: 'center'
+                          }}>
+                            <Typography gutterBottom component="div"> {listaproduto.descricao} </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                        <Button fullWidth variant="outlined" disableElevation
+                          size='small' onClick={() => handleOnOpen(listaproduto.id)}>Adicionar ao Carrinho</Button>
+                      </Card>
+                      <Typography gutterBottom variant='p'>{listaproduto.isOpen}</Typography>
+                      {listaproduto.isOpen && (
+                        <div>
+                          <Dialog
+                            open={open}
+                            onClose={() => handleOnClose(listaproduto.id)}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
+                              {listaproduto.descricao}
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                <Typography variant="h6" gutterBottom>Informações:</Typography>
+                                <Typography variant="h6" gutterBottom> Preço de Venda: R$ {listaproduto.preco} </Typography>
+                                <Typography variant="h6" gutterBottom>Preparo: {listaproduto.info} </Typography>
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button variant="outlined" disableElevation size="small"
+                                //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
+                                onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>
+                                Adicionar ao carrinho
+                              </Button>
+                              <Button variant="outlined" disableElevation size="small"
+                                onClick={() => abreChat(listaproduto.id)} autoFocus>
+                                Chat
+                              </Button>
 
-                      </DialogActions>
-                    </Dialog>
+                            </DialogActions>
+                          </Dialog>
 
-                    <Snackbar open={addcar} autoHideDuration={6000} onClose={handleClose}>
-                      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Produto adicionado ao carrinho!
-                      </Alert>
-                    </Snackbar>
+                          <Snackbar open={addcar} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                              Produto adicionado ao carrinho!
+                            </Alert>
+                          </Snackbar>
 
-                  </div>
-                )}
-                {listaproduto.isOpen && (
-                  <div>
-                    <Dialog
-                      open={openchat}
-                      onClose={handleOnClose}
-                      //                      scroll={scroll}
-                      aria-labelledby="scroll-dialog-title"
-                      aria-describedby="scroll-dialog-description"
-                    >
-                      <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
-                      {listaprodutos
-                        .map((listaprodutos) =>
-                          `teste.`
+                        </div>
+                      )}
+                      {listaproduto.isOpen && (
+                        <div>
+                          <Dialog
+                            open={openchat}
+                            onClose={handleOnClose}
+                            //                      scroll={scroll}
+                            aria-labelledby="scroll-dialog-title"
+                            aria-describedby="scroll-dialog-description"
+                          >
+                            <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
+                            {listaprodutos
+                              .map((listaprodutos) =>
+                                `teste.`
                       , )
-                        .join('\n')}
-                    </Dialog>
-                  </div>
-                )}
+                              .join('\n')}
+                          </Dialog>
+                        </div>
+                      )}
 
-              </Grid>
-            )
-          })}
-        </Stack>
+                    </Grid>
+                  )
+                })}
+              </Stack>
 
-      </Container>
+            </Container>
 
-            </Paper>
+          </Paper>
         </Container>
       </Box>
 
-      
+
     </ThemeProvider>
   )
 
