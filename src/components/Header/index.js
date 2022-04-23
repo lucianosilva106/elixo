@@ -362,6 +362,8 @@ export default function Header() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
+                  <MenuItem textAlign="center" disabled><Typography variant='p' color="textos.main">{'Olá, ' + localStorage.getItem('nomelogado') + '.'}</Typography></MenuItem>
+                  <Divider />
                   <MenuItem textAlign="center" onClick={MeuCadastroClick}>Meu Perfil</MenuItem>
                   <MenuItem textAlign="center" onClick={painelClick}>Painel de Controle</MenuItem>
                   <MenuItem textAlign="center" onClick={NoticiaClick}>Ajuda</MenuItem>
