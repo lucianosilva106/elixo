@@ -298,6 +298,10 @@ function Admprodutousuario() {
     })
   } 
 
+  const openmeusprodutos = () => {
+    window.location.href='./meusprodutos';
+  };
+
   return (
     <ThemeProvider theme={theme}>
 
@@ -598,7 +602,7 @@ function Admprodutousuario() {
             sx={{
               justifyContent: 'center', bgcolor: '#fafafa', alignContent: 'center'
             }}>
-                <Button type="submit" variant="outlined" disableElevation sx={{ mt: 3, mb: 8, color: 'primary', width: '50%', }}
+                <Button type="submit" variant="outlined" onClick={openmeusprodutos} disableElevation sx={{ mt: 3, mb: 8, color: 'primary', width: '50%', }}
                 >Meus Produtos</Button>
               
           </Grid>

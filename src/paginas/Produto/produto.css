@@ -1,12 +1,32 @@
 #card1{
     background-image: url(/src/paginas/img/sucata.jpg);
 }
+#card-off{
+    background-image: url(/src/paginas/img/30off.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#card-main{
+    background-image: url(/src/paginas/img/card-main.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #357a38;
+}
+#card-donation{
+    background-image: url(/src/paginas/img/Doacoes.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .card-content{
     background: linear-gradient(
         hsl(0 0% 0% / 0),
-        hsl(20 0% 0% / 0.5) 5%,
+        hsl(20 0% 0% / 0.2) 5%,
         hsl(0 0% 0% / 3)
     );
+    border: 0;
 }
 #computadores-categorias{
     background-image: url(/src/paginas/img/computadores_categorias.png);

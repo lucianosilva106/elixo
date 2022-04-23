@@ -81,49 +81,49 @@ theme.typography.p = {
 function Cadastro() {
 
 
-    const[email, setEmail] = useState('');
-    const[senha, setSenha] = useState('');
-    const[idusuario, setIdUsuario] = useState('');
-    const[nome, setNome] = useState('');
-    const[cep, setCep] = useState('');
-    const[endereco, setEndereco] = useState('');
-    const[bairro, setBairro] = useState('');
-    const[cidade, setCidade] = useState('');
-    const[estado, setEstado] = useState('');
-    const[whatsapp, setWhatsapp] = useState('');
-    const[tipo, setTipo] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [idusuario, setIdUsuario] = useState('');
+  const [nome, setNome] = useState('');
+  const [cep, setCep] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [tipo, setTipo] = useState('');
 
-    const[user, setUser] = useState('false');
-    const [userLogged, setUserLogged] = useState({});
-    
-    const Alert = React.forwardRef(function Alert(props, ref) {
-      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });  
-    
-    const [open, setOpen] = React.useState(false);
-    const [aberto, setAberto] = React.useState(false);
+  const [user, setUser] = useState('false');
+  const [userLogged, setUserLogged] = useState({});
 
-    const handleClick1 = () => {
-      setOpen(true);
-    };
-    const handleClick2 = () => {
-      setAberto(true);
-    };
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setAberto(false);
-      setOpen(false);
-    };
-  
-    
-    async function handleAdd(){
-      await firebase.auth().createUserWithEmailAndPassword(email, senha)
-      .then( async (value) => {
-          handleClick1()
-          await firebase.firestore().collection('usuarios')
+  const [open, setOpen] = React.useState(false);
+  const [aberto, setAberto] = React.useState(false);
+
+  const handleClick1 = () => {
+    setOpen(true);
+  };
+  const handleClick2 = () => {
+    setAberto(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAberto(false);
+    setOpen(false);
+  };
+
+
+  async function handleAdd() {
+    await firebase.auth().createUserWithEmailAndPassword(email, senha)
+      .then(async (value) => {
+        handleClick1()
+        await firebase.firestore().collection('usuarios')
           .doc(value.user.uid)
           .set({
             nome: nome,
@@ -135,26 +135,24 @@ function Cadastro() {
             whatsapp: whatsapp,
             tipo: 'Usuario'
           })
-          firebase.auth().signOut();
-          localStorage.clear();
-          window.location.href = '/login';
+        firebase.auth().signOut();
+        localStorage.clear();
+        window.location.href = '/login';
       })
       .catch((error) => {
-          if (error.code === 'auth/email-already-in-use'){
-              alert('Este e-mail já está cadastrado! Informe sua senha apenas.');
-          } else if (error.code === 'auth/weak-password'){
-            alert('Senha muito fraca! Tente novamente.');
-          } else if (error.code === 'auth/invalid-email'){
-            handleClick2();
-          }
+        if (error.code === 'auth/email-already-in-use') {
+          alert('Este e-mail já está cadastrado! Informe sua senha apenas.');
+        } else if (error.code === 'auth/weak-password') {
+          alert('Senha muito fraca! Tente novamente.');
+        } else if (error.code === 'auth/invalid-email') {
+          handleClick2();
+        }
       })
-    }
+  }
 
-    return (
-      <ThemeProvider theme={theme}>
-
-
-<Container component="main" maxWidth="xs">
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -173,7 +171,7 @@ function Cadastro() {
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   required
                   size="small"
@@ -184,7 +182,7 @@ function Cadastro() {
                   value={nome} onChange={(e) => setNome(e.target.value)} />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   required
                   size="small"
@@ -196,7 +194,7 @@ function Cadastro() {
                   value={email} onChange={(e) => setEmail(e.target.value)} />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   required
                   size="small"
@@ -207,7 +205,7 @@ function Cadastro() {
                   value={senha} onChange={(e) => setSenha(e.target.value)} />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   required
                   size="small"
@@ -217,7 +215,7 @@ function Cadastro() {
                   defaultValue="Senha" />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   size="small"
                   id="outlined-required"
@@ -226,7 +224,7 @@ function Cadastro() {
                   defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <TextField
+                <TextField
                   fullWidth
                   size="small"
                   id="outlined-required"
@@ -235,7 +233,7 @@ function Cadastro() {
                   defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <TextField
+                <TextField
                   fullWidth
                   size="small"
                   id="outlined-required"
@@ -244,7 +242,7 @@ function Cadastro() {
                   defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   size="small"
                   id="outlined-required"
@@ -253,7 +251,7 @@ function Cadastro() {
                   defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
               </Grid>
               <Grid item xs={12} sm={6}>
-              <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
                 <Select
                   fullWidth
                   size="small"
@@ -271,8 +269,8 @@ function Cadastro() {
                 </Select>
               </Grid>
               <Grid item xs={12} sm={6}>
-              <TextField
-              margin='normal'
+                <TextField
+                  margin='normal'
                   fullWidth
                   size="small"
                   id="outlined-textarea"
@@ -285,36 +283,36 @@ function Cadastro() {
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   component="h4"
-              variant="h4"
+                  variant="h4"
                   label="Concordo e estou ciente dos Termos de Uso e Privacidade presentes nessa plataforma."
                 />
               </Grid>
             </Grid>
             <Button fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
-                  onClick={handleAdd}>Enviar</Button>
+              onClick={handleAdd}>Enviar</Button>
           </Box>
         </Box>
       </Container>
 
 
 
-        <Stack spacing={2} sx={{ width: '100%' }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
             Cadastrado realizado com sucesso!
           </Alert>
         </Snackbar>
-        </Stack>
+      </Stack>
 
-        <Stack spacing={2} sx={{ width: '100%' }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={aberto} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
             Dados preenchidos incorretamente!
           </Alert>
         </Snackbar>
-        </Stack>
-      </ThemeProvider>
-    );
+      </Stack>
+    </ThemeProvider>
+  );
 }
-  
+
 export default Cadastro;

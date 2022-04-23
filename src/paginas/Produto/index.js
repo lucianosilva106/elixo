@@ -271,18 +271,16 @@ function Produtos() {
             <Stack direction={{ sm: 'row' }}
               spacing={{ xs: 1, sm: 2, md: 2 }} alignItems="center" justifyContent="space-evenly">
               <Box>
-                <Card id="card1" sx={{ maxWidth: 750, borderRadius: 3 }}>
+                <Card id="card-main" sx={{ maxWidth: 750, borderRadius: 3 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       height="350"
-                      sx={{
-                        backgroundSize: 'cover',
-                      }}
-                    />
-                    <CardContent className='card-content'>
-                      <Typography gutterBottom color="white" variant="h4" component="div">
-                        Lizard
+                      elevation={0}
+                      sx={{ border: 0 }}/>
+                    <CardContent elevation={0} className='card-content'>
+                      <Typography gutterBottom color="white" variant="h4">
+                        Encontre seu usado
                       </Typography>
                       <Typography variant="body2" color="white">
                         Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -295,7 +293,7 @@ function Produtos() {
 
               <Box direction={{ sm: 'row' }} sx={{ mt: 1, mb: 2, }}>
                 <Box>
-                  <Card id="card1" sx={{ maxWidth: 350, borderRadius: 3, mt: 1, mb: 2, }}>
+                  <Card id="card-off" sx={{ maxWidth: 350, borderRadius: 3, mt: 1, mb: 2, }}>
                     <CardActionArea>
                       <CardMedia
                         component="img"
@@ -306,11 +304,10 @@ function Produtos() {
                       />
                       <CardContent className='card-content'>
                         <Typography gutterBottom color="white" variant="h5" component="div">
-                          Lizard
+                          30% OFF
                         </Typography>
                         <Typography variant="body2" color="white">
-                          Lizards are a widespread group of squamate reptiles, with over 6,000
-                          species, ranging across all continents except Antarctica
+                          em Celulares
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -318,7 +315,7 @@ function Produtos() {
                 </Box>
 
                 <Box>
-                  <Card id="card1" sx={{ maxWidth: 350, borderRadius: 3 }}>
+                  <Card id="card-donation" sx={{ maxWidth: 350, borderRadius: 3 }}>
                     <CardActionArea>
                       <CardMedia
                         component="img"
@@ -329,11 +326,10 @@ function Produtos() {
                       />
                       <CardContent className='card-content'>
                         <Typography gutterBottom color="white" variant="h5" component="div">
-                          Lizard
+                          Descartes e doações
                         </Typography>
                         <Typography variant="body2" color="white">
-                          Lizards are a widespread group of squamate reptiles, with over 6,000
-                          species, ranging across all continents except Antarctica
+                          Tem algum item que gostaria de descartar? Nós te ajudamos!
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -531,7 +527,7 @@ function Produtos() {
               sx={{ marginTop: '2%' }}>
 
               <Stack direction={{ xs: 'column', sm: 'row' }}
-                spacing={{ sm: 2, md: 2 }}
+                spacing={{ md: 1 }}
                 alignItems="center"
                 justifyContent="center"
                 sx={{
@@ -546,8 +542,6 @@ function Produtos() {
                     <Grid sx={{
                       justifyContent: 'center',
                       alignItems: 'center',
-                      alignSelf: 'center',
-                      justifySelf: 'center',
                       marginTop: '10%'
                     }}
                       key={listaproduto.id}>

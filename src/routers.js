@@ -23,6 +23,7 @@ import Minhatransacao from './paginas/Minhatransacao';
 import Produtoupload from './paginas/Produtoupload';
 import Landingpage from './paginas/Landingpage';
 import Admaprovacao from './paginas/Admaprovacao';
+import Meuproduto from './paginas/Meusprodutos';
 import Chat from './paginas/Chat';
 
 const Routes = () => {
@@ -52,6 +53,7 @@ const Routes = () => {
                 <Route exact path="/chat" component={Chat} />
                 <Route exact path="/landingpage" component={Landingpage} />
                 <Route exact path="/produtoupload" component={Produtoupload} />
+                <Route exact path="/meusprodutos" component={Meuproduto} />
                 <Route exact path="/info/:id" component={Info} />
                 <Route path="*" component={Erro} />
             </Switch>
