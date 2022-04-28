@@ -104,6 +104,7 @@ function Admaprovacao() {
                 descricao: item.data().descricao,
                 info: item.data().info,
                 preco: item.data().preco,
+                pathimagem: item.data().pathimagem,
               })
             }
           })
