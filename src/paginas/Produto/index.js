@@ -95,7 +95,15 @@ theme.typography.p = {
     fontSize: '1rem',
   },
 };
-
+theme.typography.tag = {
+  fontSize: '0.65rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.65rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '0.65rem',
+  },
+};
 
 
 function Produtos() {
@@ -508,7 +516,7 @@ function Produtos() {
           alignContent: 'center',
           alignSelf: 'center',
           justifyContent: 'center',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <Container maxWidth="lg">
@@ -520,11 +528,13 @@ function Produtos() {
               alignContent: 'center',
               alignSelf: 'center',
               justifyContent: 'center',
-              textAlign: 'center'
+              textAlign: 'center',
             }}>
+              <Typography variant='h2' gutterBottom
+              sx={{color:'white', marginTop: '3%', }}>Últimas Ofertas</Typography>
 
             <Container fixed
-              sx={{ marginTop: '2%' }}>
+              sx={{ marginTop: '1%', }}>
 
               <Stack direction={{ xs: 'column', sm: 'row' }}
                 spacing={{ md: 1 }}
@@ -539,11 +549,12 @@ function Produtos() {
                 {listaprodutos.map((listaproduto) => {
                   posicao = posicao + 1;
                   return (
-                    <Grid sx={{
+                    <Grid xs zeroMinWidth sx={{
                       justifyContent: 'center',
                       alignItems: 'center',
-                      marginTop: '10%'
+                      marginTop: '10%',
                     }}
+                    
                       key={listaproduto.id}>
 
                       <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
@@ -573,25 +584,42 @@ function Produtos() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                           >
+                            <Avatar variant="rounded" src={listaproduto.pathimagem} 
+                            sx={{ width: 150, height: 150, marginTop: 3, alignItems: 'center', alignContent: 'center', alignSelf: 'center',
+                            justifyContent: 'center', textAlign: 'center', color: 'primary.main', border: 3, borderRadius: 1, }} />
                             <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
                               {listaproduto.descricao}
                             </DialogTitle>
+                            
                             <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                            <Box sx={{ bgcolor: 'primary.main', width: '20%', alignContent: 'center', color:'white',
+                              alignItems: 'center', alignContent: 'center', justifyContent: 'center', textAlign: 'center',
+                               borderRadius: 1, textJustify: 'center',}}>
+                            <Typography variant="tag" gutterBottom>USADO</Typography>
+                            </Box>
+                            </DialogContentText>
                               <DialogContentText id="alert-dialog-description">
-                                <Typography variant="h6" gutterBottom>Informações:</Typography>
-                                <Typography variant="h6" gutterBottom> Preço de Venda: R$ {listaproduto.preco} </Typography>
-                                <Typography variant="h6" gutterBottom>Preparo: {listaproduto.info} </Typography>
+                                <Typography variant="h6" gutterBottom>Informações</Typography>
+                                <Typography variant="p" gutterBottom>{listaproduto.info}</Typography>
+                              </DialogContentText>
+                              <DialogContentText sx={{marginTop: 2}} id="alert-dialog-description">
+                                <Box sx={{ bgcolor: '#fafafa', width: '20%', minHeight: 30, alignContent: 'center',
+                              alignItems: 'center', alignContent: 'center', justifyContent: 'center', textAlign: 'center',
+                              color: 'primary.main', border: 2, borderRadius: 1, textJustify: 'center',}}>
+                              <Typography variant="p" gutterBottom>R$ {listaproduto.preco}</Typography>
+                              </Box>
                               </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                              <Button variant="outlined" disableElevation size="small"
+                              <Button variant="contained" autoFocus disableElevation size="small"
                                 //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
                                 onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>
                                 Adicionar ao carrinho
                               </Button>
                               <Button variant="outlined" disableElevation size="small"
-                                onClick={() => abreChat(listaproduto.id)} autoFocus>
-                                Chat
+                                onClick={() => abreChat(listaproduto.id)} >
+                                Falar com vendedor
                               </Button>
 
                             </DialogActions>

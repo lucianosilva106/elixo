@@ -331,7 +331,7 @@ export default function Gerenciamentousuario() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" color="primary">
-              Dashboard Cliente/Usuário - Re-User
+              Dashboard - Re-User
             </Typography>
             <IconButton
               size="large"
@@ -342,7 +342,7 @@ export default function Gerenciamentousuario() {
             >
               <AccountCircle />
             </IconButton>
-            {<text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>}
+            {<Typography variant='p' disable>{'Olá, ' + localStorage.getItem('nomelogado') + '.'}</Typography>}
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -435,20 +435,6 @@ export default function Gerenciamentousuario() {
           </Stack>
 
           <br />
-
-          <Typography paragraph>
-            Essa rota de gerenciamento permite aos administradores da plataforma ter acesso  às
-            solicitações de adesão a um posto de coleta. Uma vez analisadas essas propostas, um
-            contato será realizado com cada local para analisar a viabilidade de sua adesão  em
-            atender as requisitos mínimos de coleta e armazenagem correta até que  os  produtos
-            reciclados possam ser retirados.
-          </Typography>
-          <Typography paragraph>
-            Também acessamos os postos de coletas para manutenções cadastrais, como  atualização
-            de dados, inclusão e exclusão, além de vincular sua posição  geográfica  no  intuito
-            de facilitar aos usuários o acesso mais rápido e fácil de chegar até o  endereço  do
-            posto de coleta desejado.
-          </Typography>
           <Typography paragraph>
             Clicando Em Avaliações do site, acessamos um gráfico de satisfação de nosso  projeto 
             e também uma lista de mensagens idenficadas que nos são enviadas nos permite  sentir
@@ -457,8 +443,6 @@ export default function Gerenciamentousuario() {
 
         </Box>
       </Box>
-
-
     </ThemeProvider>
 
   );

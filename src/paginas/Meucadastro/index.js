@@ -1,9 +1,11 @@
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
+import 'firebase/storage';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { TextField, Container, Typography, IconButton, Avatar, FormControlLabel, Checkbox, Link } from "@material-ui/core";
+import { TextField, Container, Typography, IconButton, 
+  Avatar, FormControlLabel, Checkbox, Link, Input } from "@material-ui/core";
 import { orange, blueGrey } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -18,6 +20,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import MonetizationOnSharpIcon from '@material-ui/icons/MonetizationOnSharp';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { green, grey } from '@material-ui/core/colors';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
@@ -93,7 +96,12 @@ function Meucadastro() {
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [pathimagem, setPathimagem] = useState('');
 
+  var storage = firebase.storage();
+  const [image, setImage] = useState('');
+  const [endImg] = useState('');
+  const [imageAsUrl, setImageAsUrl] = useState('');
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -134,6 +142,7 @@ function Meucadastro() {
               setCidade(snapshot.data().cidade)
               setEstado(snapshot.data().estado)
               setWhatsapp(snapshot.data().whatsapp)
+              setPathimagem(snapshot.data().pathimagem)
             })
         } else {
           firebase.auth().signOut();
@@ -157,7 +166,8 @@ function Meucadastro() {
         bairro: bairro,
         cidade: cidade,
         estado: estado,
-        whatsapp: whatsapp
+        whatsapp: whatsapp,
+        pathimagem: pathimagem
       })
     firebase.firestore().collection('usuarios')
       .doc(idusuario)
@@ -170,12 +180,36 @@ function Meucadastro() {
         setCidade(snapshot.data().cidade)
         setEstado(snapshot.data().estado)
         setWhatsapp(snapshot.data().whatsapp)
+        setPathimagem(snapshot.data().pathimagem)
       })
   }
 
   function voltarMenu() {
     window.location.href = '/gerenciamentousuario';
   }
+
+  const upload = () => {
+
+    const uploadcom = storage.ref(`/imagens/${image.name}`).put(image)
+
+    if (image == null) return;
+
+    uploadcom.on("state_changed", function () {
+
+      uploadcom.snapshot.ref.getDownloadURL().then(function (newurl) {
+        setImageAsUrl(newurl)
+        console.log("url:" + newurl)
+      })
+
+    }, function (error) {
+      console.log("Erro ao salvar arquivo!")
+    })
+  }
+
+  const UploadGeral = () => {
+    setImage(nome);
+    upload();
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -211,7 +245,8 @@ function Meucadastro() {
             alignItems: 'center', justifyContent: 'center', alignContent: 'center',
           }}>
           <Stack direction={{ sm: 'row', }}>
-            <Avatar alt="imagem" sx={{ width: 160, height: 160, border: 2, borderColor: 'primary.main', marginTop: '-85%', }} />
+            <Avatar src={pathimagem} alt="imagem" sx={{ width: 160, height: 160, border: 2, borderColor: 'primary.main', marginTop: '-85%', }} />
+
           </Stack>
         </Grid>
         <Container maxWidth="sm">
@@ -232,104 +267,110 @@ function Meucadastro() {
 
 
       <Container component="main" maxWidth="xs">
-           <Box
+        <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
           }}
         >
+          <Input type="file" onChange={(e) =>{setImage(e.target.files[0])}} />
+          <Button
+            variant="outlined"
+            component="file"
+            onClick={upload}
+            startIcon={<CloudUploadIcon />}
+          >Carregar Imagem</Button>
 
-        <TextField
+          <TextField
+            margin="normal"
+            fullWidth
+            required
+            size="small"
+            id="usuario-form"
+            label="Usuario"
+            defaultValue="Usuario"
+            value={nome} onChange={(e) => setNome(e.target.value)} />
 
-          margin="normal"
-          fullWidth
-          required
-          size="small"
-          id="usuario-form"
-          label="Usuario"
-          defaultValue="Usuario"
-          value={nome} onChange={(e) => setNome(e.target.value)} />
+          <TextField
 
-        <TextField
+            margin="normal"
+            fullWidth
+            size="small"
+            id="outlined-required"
+            label="CEP"
+            type="text"
+            defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
 
-          margin="normal"
-          fullWidth
-          size="small"
-          id="outlined-required"
-          label="CEP"
-          type="text"
-          defaultValue="CEP" value={cep} onChange={(e) => setCep(e.target.value)} />
+          <TextField
 
-        <TextField
-
-          margin="normal"
-          fullWidth
-          size="small"
-          id="outlined-required"
-          label="Endereço"
-          type="text"
-          defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
-          
-
-        <TextField
-
-          margin="normal"
-          fullWidth
-          size="small"
-          id="outlined-required"
-          label="Bairro"
-          type="text"
-          defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
-
-        <TextField
-
-          margin="normal"
-          fullWidth
-          size="small"
-          id="outlined-required"
-          label="Cidade"
-          type="text"
-          defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
+            margin="normal"
+            fullWidth
+            size="small"
+            id="outlined-required"
+            label="Endereço"
+            type="text"
+            defaultValue="Rua" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
 
 
-        <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
-        <Select
+          <TextField
 
-          margin="normal"
-          fullWidth
-          size="small"
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={estado}
-          label="Estado"
-          onChange={(e) => setEstado(e.target.value.toString())}
-        >
-          <MenuItem value="">
-          </MenuItem>
-          <MenuItem value={'SP'}>São Paulo</MenuItem>
-          <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
-          <MenuItem value={'MG'}>Minas Gerais</MenuItem>
-        </Select>
+            margin="normal"
+            fullWidth
+            size="small"
+            id="outlined-required"
+            label="Bairro"
+            type="text"
+            defaultValue="Rua" value={bairro} onChange={(e) => setBairro(e.target.value)} />
 
-        <TextField
+          <TextField
 
-          margin="normal"
-          fullWidth
-          size="small"
-          id="outlined-required"
-          label="Whatsapp"
-          type="text"
-          defaultValue="Whatsapp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
-<br/>
+            margin="normal"
+            fullWidth
+            size="small"
+            id="outlined-required"
+            label="Cidade"
+            type="text"
+            defaultValue="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} />
 
-        <Button variant="contained" fullWidth disableElevation sx={{ mt: 1, mb: 2, color:'white', justifyContent: 'center'}} 
-          onClick={atualizaUsuario}>Salvar</Button>
 
-        <Button variant="outlined" fullWidth disableElevation size="small" sx={{justifyContent: 'center'}}
-          onClick={voltarMenu}>Cancelar</Button>
+          <InputLabel id="demo-simple-select-helper-label">Estado</InputLabel>
+          <Select
 
-      
-</Box>
+            margin="normal"
+            fullWidth
+            size="small"
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            value={estado}
+            label="Estado"
+            onChange={(e) => setEstado(e.target.value.toString())}
+          >
+            <MenuItem value="">
+            </MenuItem>
+            <MenuItem value={'SP'}>São Paulo</MenuItem>
+            <MenuItem value={'RJ'}>Rio de Janeiro</MenuItem>
+            <MenuItem value={'MG'}>Minas Gerais</MenuItem>
+          </Select>
+
+          <TextField
+
+            margin="normal"
+            fullWidth
+            size="small"
+            id="outlined-required"
+            label="Whatsapp"
+            type="text"
+            defaultValue="Whatsapp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />
+          <br />
+
+          <Button variant="contained" fullWidth disableElevation sx={{ mt: 1, mb: 2, color: 'white', justifyContent: 'center' }}
+            onClick={atualizaUsuario}>Salvar</Button>
+
+          <Button variant="outlined" fullWidth disableElevation size="small" sx={{ justifyContent: 'center' }}
+            onClick={voltarMenu}>Cancelar</Button>
+
+
+        </Box>
 
       </Container>
 
