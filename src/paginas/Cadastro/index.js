@@ -133,7 +133,7 @@ function Cadastro() {
             cidade: cidade,
             estado: estado,
             whatsapp: whatsapp,
-            tipo: 'Usuario'
+            tipo: 'Usuario',
           })
         firebase.auth().signOut();
         localStorage.clear();

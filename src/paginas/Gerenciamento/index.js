@@ -448,7 +448,7 @@ export default function Gerenciamento() {
               <MenuItem onClick={() => abrirHome()}>Home</MenuItem>
               <MenuItem onClick={() => fazerLogout()}>Logout</MenuItem>
             </Menu>
-            <text>{'    Seja bem-vindo, ' + localStorage.getItem('nomelogado') + '.'}</text>
+            <Typography variant='p' disable>{'Olá,' + localStorage.getItem('nomelogado') + '.'}</Typography>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -550,16 +550,11 @@ export default function Gerenciamento() {
 
           <Typography paragraph>
             Essa rota de gerenciamento permite aos administradores da plataforma ter acesso  às
-            solicitações de adesão a um posto de coleta. Uma vez analisadas essas propostas, um
-            contato será realizado com cada local para analisar a viabilidade de sua adesão  em
-            atender as requisitos mínimos de coleta e armazenagem correta até que  os  produtos
-            reciclados possam ser retirados.
+            solicitações e análises do sistema.
           </Typography>
           <Typography paragraph>
-            Também acessamos os postos de coletas para manutenções cadastrais, como  atualização
-            de dados, inclusão e exclusão, além de vincular sua posição  geográfica  no  intuito
-            de facilitar aos usuários o acesso mais rápido e fácil de chegar até o  endereço  do
-            posto de coleta desejado.
+            Também acessamos para manutenções cadastrais, como  atualização
+            de dados, inclusão e exclusão.
           </Typography>
           <Typography paragraph>
             Clicando Em Avaliações do site, acessamos um gráfico de satisfação de nosso  projeto 

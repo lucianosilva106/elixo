@@ -1,7 +1,9 @@
 import * as React from 'react';
 import firebase from '../../firebaseConnection';
 import 'firebase/auth';
+import 'firebase/storage';
 import './header.css';
+import { useEffect, useState } from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
@@ -87,6 +89,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function Header() {
 
+  var storage = firebase.storage();
+  const [pathimagem, setPathimagem] = useState('');
+
+  var storage = firebase.storage();
+
   async function checkLogin() {
 
     if (localStorage.getItem('nomelogado') == null) {
@@ -94,6 +101,7 @@ export default function Header() {
     } else {
       window.location.href = '/produto';
     }
+   
   }
 
   const HomeClick = () => {
@@ -232,6 +240,24 @@ export default function Header() {
     setAnchorElUser(null);
   };
 
+  useEffect(() => {
+    async function checkCad() {
+      await firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          await firebase.firestore().collection('usuarios')
+            .doc(user.uid)
+            .get()
+            .then((snapshot) => {
+              setPathimagem(snapshot.data().pathimagem)
+            })
+        } 
+      })
+    }
+
+    checkCad();
+
+  }, [])
+
   return (
 
     <header>
@@ -343,7 +369,7 @@ export default function Header() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Login">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar sx={{border: 2, borderColor: 'secondary.main'}} alt="imagem" src={pathimagem} />
                   </IconButton>
                 </Tooltip>
                 <Menu
