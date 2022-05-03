@@ -26,6 +26,7 @@ import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
 import Slide from '@material-ui/core/Slide';
+import ProdutosPDF from '../Relatorios/Produtos/index'
 import './admprod.css'
 
 const theme = createTheme({
@@ -206,6 +207,7 @@ function Admproduto() {
             <Typography variant="h3" gutterBottom component="div" align="center">
               Produtos cadastrados
             </Typography>
+            <button onClick={(e) => ProdutosPDF(produtos) }>Gera PDF</button>
           </Container>
           <Container fixed>
             <TableContainer component={Paper}>

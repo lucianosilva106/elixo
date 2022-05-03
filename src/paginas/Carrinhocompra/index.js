@@ -495,6 +495,15 @@ function Carrinhocompra() {
                   <Stack direction={{ sm: 'row' }}
                     spacing={{ xs: 1, sm: 2, md: 12 }} alignItems="center" justifyContent="space-evenly">
                     <Box>
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        size="small"
+                        id="outlined-required"
+                        type="date"
+                        defaultValue="Data da Venda"
+                        value={datavenda} onChange={(e) => setDatavenda(e.target.value)} />
+
                       <InputLabel id="demo-simple-select-helper-label">Forma de Pagamento</InputLabel>
                       <Select
                         fullWidth

@@ -1,4 +1,4 @@
- {
+{
   "name": "etrash",
   "version": "0.1.0",
   "private": true,
@@ -23,10 +23,11 @@
     "lottie-react": "^2.2.1",
     "lottie-web": "^5.9.1",
     "multer": "^1.4.4",
-    "pdfmake": "^0.2.2",
+    "pdfmake": "^0.2.5",
     "react": "^17.0.2",
     "react-admin": "^3.18.3",
     "react-bootstrap": "^1.6.4",
+    "react-chat-engine": "^1.11.22",
     "react-datocms": "^1.6.3",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
