@@ -2,7 +2,7 @@ import firebase from '../../firebaseConnection';
 import 'firebase/auth';
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Tab, Tabs, Card, CardContent, IconButton } from "@material-ui/core";
 import PropTypes from 'prop-types';
@@ -26,6 +26,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
+import Paypal from '../Paypal/index';
 
 const theme = createTheme({
   palette: {
@@ -176,7 +177,7 @@ function Carrinhocompra() {
   }
 
   checkLogin();
-
+  
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -217,8 +218,12 @@ function Carrinhocompra() {
   var ano = data.getFullYear();
   dataAtual = dia + '/' + mes + '/' + ano;
 
-  function fechaCompra() {
-    gravarCompra();
+  function pagarPaypal(total) {
+    alert('vai passar parametro para pagar')
+    window.location.href='/paypal'
+//    return(
+//      Paypalpagar(total)
+//    )
   }
 
   var carrinho = JSON.parse(localStorage.getItem('produtocarrinho'));
@@ -587,7 +592,7 @@ function Carrinhocompra() {
                         disableElevation sx={{
                           color: 'white',
                           mt: 2,
-                        }} onClick={fechaCompra}>Finalizar compra</Button>
+                        }} onClick={() => pagarPaypal(total)}>Finalizar compra</Button>
                     </Box>
 
                   </Stack>

@@ -157,6 +157,7 @@ function Meucadastro() {
   }, [])
 
   async function atualizaUsuario() {
+    alert(imageAsUrl)
     await firebase.firestore().collection('usuarios')
       .doc(idusuario)
       .update({
@@ -167,7 +168,7 @@ function Meucadastro() {
         cidade: cidade,
         estado: estado,
         whatsapp: whatsapp,
-        pathimagem: pathimagem
+        pathimagem: imageAsUrl
       })
     firebase.firestore().collection('usuarios')
       .doc(idusuario)
@@ -200,6 +201,7 @@ function Meucadastro() {
         setImageAsUrl(newurl)
         console.log("url:" + newurl)
       })
+      alert(imageAsUrl)
 
     }, function (error) {
       console.log("Erro ao salvar arquivo!")

@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Home from './paginas/Home';
 import Erro from './paginas/Erro';
@@ -26,6 +26,7 @@ import Admaprovacao from './paginas/Admaprovacao';
 import Meuproduto from './paginas/Meusprodutos';
 import Chat from './paginas/Chat';
 import Relatorio from './paginas/Relatorios';
+import Paypal from './paginas/Paypal';
 
 const Routes = () => {
     return(
@@ -51,6 +52,7 @@ const Routes = () => {
                 <Route exact path="/admaprovacao" component={Admaprovacao} />
                 <Route exact path="/carrinhocompra" component={Carrinhocompra} />
                 <Route exact path="/minhatransacao" component={Minhatransacao} />
+                <Route exact path="/paypal" component={Paypal} />
                 <Route exact path="/chat" component={Chat} />
                 <Route exact path="/relatorios" component={Relatorio} />
                 <Route exact path="/landingpage" component={Landingpage} />

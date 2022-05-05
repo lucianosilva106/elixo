@@ -134,6 +134,7 @@ function Cadastro() {
             estado: estado,
             whatsapp: whatsapp,
             tipo: 'Usuario',
+            pathimagem: '',
           })
         firebase.auth().signOut();
         localStorage.clear();
