@@ -16,6 +16,10 @@ header{
 #logo{
     background-image: url(/src/paginas/img/logo_transparent_new.svg);
 }
+#headerlogo{
+    background-image: url(/src/paginas/img/reuser_NEW_LOGO.svg);
+}
+
 
 @media only screen and (max-width: 600px) {
     

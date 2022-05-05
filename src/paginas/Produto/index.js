@@ -614,7 +614,7 @@ function Produtos() {
                             <DialogActions>
                               <Button variant="contained" autoFocus disableElevation size="small"
                                 //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
-                                onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)} autoFocus>
+                                onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)}>
                                 Adicionar ao carrinho
                               </Button>
                               <Button variant="outlined" disableElevation size="small"

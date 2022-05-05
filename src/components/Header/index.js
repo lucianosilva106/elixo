@@ -296,11 +296,13 @@ export default function Header() {
           <Container maxWidth="xl" sx={{ color: 'secondary.main' }}>
             <Toolbar disableGutters sx={{ color: 'secondary.main' }}>
 
+            
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover' }}
                 onClick={checkLogin}
               >
                 Re-user
