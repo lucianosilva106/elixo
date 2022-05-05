@@ -320,6 +320,27 @@ const card7 = (
     </ThemeProvider>
   </React.Fragment>
 );
+const card9 = (
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+    <CardContent>
+      <Typography variant="h6" component="div">
+        Relatórios
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Menu de relatórios da plataforma
+      </Typography>
+      <Typography variant="p">
+        Emitir relatorios de vendas, comissões, clientes e produtos
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button href="/relatorios" size="small" variant="contained" 
+      disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
+    </CardActions>
+    </ThemeProvider>
+  </React.Fragment>
+);
 
 
 
@@ -516,6 +537,14 @@ export default function Gerenciamento() {
               bgcolor: '#fafafa'
               }}>{card7}</Card>
             </Box>
+            <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined"
+              sx={{
+              maxWidth: '100%',
+              bgcolor: '#fafafa'
+              }}>{card9}</Card>
+            </Box>
+
           </Stack>
           <br />
 

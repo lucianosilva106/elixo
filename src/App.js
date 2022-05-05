@@ -21,8 +21,7 @@ import { IconButton } from '@material-ui/core';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-import {ptBR} from '@material-ui/core/locale'
-
+import {ptBR} from '@material-ui/core/locale';
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
   allArtigos(first: $limit) {
