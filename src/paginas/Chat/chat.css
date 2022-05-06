@@ -35,7 +35,7 @@
 
 .ce-primary-button {
   border-radius: 6px !important;
-  background-color: #7554a0 !important;
+  background-color: #107e02 !important;
   position: relative;
   bottom: 1px;
 }
@@ -84,13 +84,13 @@
 }
 
 .chat-title {
-  color: #7554a0;
+  color: #107e02;
   font-weight: 800;
   font-size: 24px;
 }
 
 .chat-subtitle {
-  color: #7554a0;
+  color: #107e02;
   font-weight: 600;
   font-size: 12px;
   padding-top: 4px;
@@ -124,6 +124,7 @@
   font-size: 16px;
   border-radius: 6px;
   max-width: 60%;
+  border-color: #107e02;
 }
 
 .message-image {
