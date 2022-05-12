@@ -325,23 +325,22 @@ const card9 = (
     <ThemeProvider theme={theme}>
     <CardContent>
       <Typography variant="h6" component="div">
-        Relatórios
+        Transações
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        Menu de relatórios da plataforma
+        Fecha comissão
       </Typography>
       <Typography variant="p">
-        Emitir relatorios de vendas, comissões, clientes e produtos
+        Exibir as transações feitas na plataforma e gerar comissões
       </Typography>
     </CardContent>
     <CardActions>
-      <Button href="/relatorios" size="small" variant="contained" 
+      <Button href="/transacao" size="small" variant="contained" 
       disableElevation sx={{bgcolor:'secondary.main', color: 'primary.main'}} >Abrir</Button>
     </CardActions>
     </ThemeProvider>
   </React.Fragment>
 );
-
 
 
 export default function Gerenciamento() {
@@ -485,59 +484,35 @@ export default function Gerenciamento() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{justifyContent: 'center'}}>
-            <Box sx={{ minWidth: 275, }}>
+            <Box sx={{ minWidth: 220, }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card1}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card2}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card3}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined"
-              sx={{
-              maxWidth: '100%',
-              bgcolor: '#fafafa'
-              }}>{card4}</Card>
-            </Box>
-            </Stack>
-            <br />
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{justifyContent: 'center'}}>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 220 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card5}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 220 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card6}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 220 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',
               bgcolor: '#fafafa'
               }}>{card7}</Card>
             </Box>
-            <Box sx={{ minWidth: 275 }}>
+            <Box sx={{ minWidth: 220 }}>
               <Card variant="outlined"
               sx={{
               maxWidth: '100%',

@@ -26,7 +26,8 @@ import Container from '@material-ui/core/Container';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography } from '@material-ui/core';
 import Slide from '@material-ui/core/Slide';
-import ProdutosPDF from '../Relatorios/Produtos/index'
+import ProdutosPDF from '../Relatorios/Produtos/index';
+import ChatPage from '../ChatPage';
 import './admprod.css'
 
 const theme = createTheme({
@@ -43,9 +44,12 @@ const theme = createTheme({
 
 function Admproduto() {
 
+    const [userid, setUserid] = useState('');
+
     async function checkLogin(){
       await firebase.auth().onAuthStateChanged((user) => {
         if(user){
+          setUserid(user.uid);
           }else{
             firebase.auth().signOut();
             localStorage.clear();
@@ -235,7 +239,14 @@ function Admproduto() {
                           variant="outlined" startIcon={<DeleteIcon />}
                           onClick={() => pegaProduto(produto.id)}
                           sx={{ margin: 1 }}
-                          color="secondary">Alterar</Button>                       
+                          color="secondary">Alterar</Button>  
+           
+                        <Button
+                          variant="outlined" startIcon={<DeleteIcon />}
+                          sx={{ margin: 1 }}
+                          color="secondary"
+                          href={`/chatpage/${produto.id}/${userid}`}>Chat</Button>                       
+                     
                       </TableRow>
                     )
                   })}

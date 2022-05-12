@@ -25,8 +25,9 @@ import Landingpage from './paginas/Landingpage';
 import Admaprovacao from './paginas/Admaprovacao';
 import Meuproduto from './paginas/Meusprodutos';
 import Chat from './paginas/Chat';
-import Relatorio from './paginas/Relatorios';
+import Transacao from './paginas/Transacao';
 import Paypal from './paginas/Paypal';
+import ChatPage from './paginas/ChatPage';
 
 const Routes = () => {
     return(
@@ -54,7 +55,8 @@ const Routes = () => {
                 <Route exact path="/minhatransacao" component={Minhatransacao} />
                 <Route exact path="/paypal" component={Paypal} />
                 <Route exact path="/chat" component={Chat} />
-                <Route exact path="/relatorios" component={Relatorio} />
+                <Route exact path="/chatpage/:idp/:idu" component={ChatPage} />
+                <Route exact path="/transacao" component={Transacao} />
                 <Route exact path="/landingpage" component={Landingpage} />
                 <Route exact path="/produtoupload" component={Produtoupload} />
                 <Route exact path="/meusprodutos" component={Meuproduto} />

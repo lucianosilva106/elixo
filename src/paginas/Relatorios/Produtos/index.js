@@ -3,7 +3,6 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 
 function ProdutosPDF(produtos){
 
-    alert('to aqui')
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const reportTitle=[
@@ -56,7 +55,6 @@ function ProdutosPDF(produtos){
     const docDefinitions = {
         pageSize: 'A4',
         pageMargins: [15,50,15,40],
-
         header: [reportTitle],
         content: [details],
         footer: Rodape

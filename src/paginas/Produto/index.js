@@ -31,6 +31,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, blueGrey, grey, green } from '@material-ui/core/colors';
+import ChatPage from '../ChatPage/index.js';
 import '../Produto/produto.css'
 
 const theme = createTheme({
@@ -208,7 +209,8 @@ function Produtos() {
           doc.forEach((item) => {
             //          if (item.data().idproduto == true){
             meusChats.push({
-              mensagem: item.data().mensagem
+              mensagem: item.data().mensagem,
+              remetente: item.data().remetente
             })
             //          }
           })
@@ -254,9 +256,10 @@ function Produtos() {
 
   }
 
-  const abreChat = () => {
-
-    setOpenchat(true);
+  function abreChat(produto) {
+    alert('estou aqui')
+//    setOpenchat(true);
+    ChatPage(produto);
 
   }
 
@@ -618,7 +621,7 @@ function Produtos() {
                                 Adicionar ao carrinho
                               </Button>
                               <Button variant="outlined" disableElevation size="small"
-                                onClick={() => abreChat(listaproduto.id)} >
+                                onClick={ChatPage(listaproduto.descricao)} >
                                 Falar com vendedor
                               </Button>
 
@@ -631,24 +634,6 @@ function Produtos() {
                             </Alert>
                           </Snackbar>
 
-                        </div>
-                      )}
-                      {listaproduto.isOpen && (
-                        <div>
-                          <Dialog
-                            open={openchat}
-                            onClose={handleOnClose}
-                            //                      scroll={scroll}
-                            aria-labelledby="scroll-dialog-title"
-                            aria-describedby="scroll-dialog-description"
-                          >
-                            <DialogTitle id="scroll-dialog-title">Chat do Produto {listaproduto.descricao}</DialogTitle>
-                            {listaprodutos
-                              .map((listaprodutos) =>
-                                `teste.`
-                      , )
-                              .join('\n')}
-                          </Dialog>
                         </div>
                       )}
 
