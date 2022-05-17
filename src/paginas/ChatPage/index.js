@@ -132,6 +132,7 @@ function ChatPage(props) {
               nomevendedor: item.data().nomevendedor,
               remetente: item.data().remetente,
               pathimagem: item.data().pathimagem,
+//              datamsg: item.data().datamsg.toDate()
               datamsg: "12/05/2022"
             })
           }
@@ -148,7 +149,7 @@ function ChatPage(props) {
     await firebase.firestore().collection('chats')
       .add({
         idproduto: idprod,
-        nomevendedor: nomevendedor,
+        nomevendedor: vendedornome,
         remetente: localStorage.getItem('nomelogado'),
         datamsg: firebase.firestore.Timestamp.now(),
         pathimagem: pathimagem,
