@@ -2,7 +2,7 @@ import firebase from '../../firebaseConnection';
 import 'firebase/auth';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Stack } from "@material-ui/core";
 import { orange, green, grey } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography, Container, Avatar, Grid, Box } from '@material-ui/core';
@@ -69,6 +69,15 @@ theme.typography.p = {
   },
   [theme.breakpoints.up('md')]: {
     fontSize: '1rem',
+  },
+};
+theme.typography.data = {
+  fontSize: '0.5rem',
+  '@media (min-width:600px)': {
+    fontSize: '0.6rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '0.8rem',
   },
 };
 
@@ -174,24 +183,37 @@ function ChatPage(props) {
 
       <>
 
-        <Container align="center">
-          <Typography variant="h3">Chat do Produto - {nomeproduto}</Typography>
-        </Container>
-
+      <Box
+          sx={{
+            bgcolor: '#e8f5e9',
+            pt: 8,
+            pb: 5,
+          }}
+        >
+          <Container maxWidth="md">
+            <Typography
+              component="h1"
+              variant="h3"
+              align="center"
+              gutterBottom
+              sx={{ color: 'textos.main', }}
+            >
+              Chat - {nomeproduto}
+            </Typography>
+            <Typography variant="h5" align="center" sx={{ color: 'textos.main' }} paragraph>
+              Tire suas dúvidas sobre a compra e venda desse produto. 
+            </Typography>
+          </Container>
+        </Box>
 
         {messages.map((message) => {
           if (message.remetente === message.nomevendedor) {
             //            alert('left' + localStorage.getItem('nomelogado') + ' = ' + nomevendedor);
             return (
 
-              <Container maxWidth="sm" sx={{marginTop: 2}}>
-                <Grid container spacing={0.5}>
-                  <Grid item xs={4}>
-                    <Avatar sx={{ border: 2, borderColor: 'primary.main' }}
-                      src={message.pathimagem} height="60" width="80" />
-                    <Typography variant='p'>{message.remetente}</Typography>
-                  </Grid>
-                  <Grid item xs={8}>
+              <Container maxWidth="md" sx={{marginTop: 2, }}>
+                <Grid container spacing={0.5} sx={{ textAlign: 'center', alignItems: 'center', }}>
+                <Grid item xs={8}>
                   <Box sx={{
                       bgcolor: '#e8f5e9',
                       pt: 2,
@@ -199,8 +221,16 @@ function ChatPage(props) {
                       textAlign: 'center',
                       borderRadius: 3
                     }}>
-                    <Typography variant='p'>{message.datamsg} - {message.mensagem}</Typography>
+                    <Typography noWrap variant='p'>{message.mensagem}</Typography>
                   </Box>
+                  </Grid>
+                  <Grid item xs={4} sx={{ textAlign: 'center', alignItems: 'center', maxWidth: '30%'}}>
+                  <Stack direction="column" spacing={0.5}>
+                    <Avatar sx={{ border: 2, borderColor: 'primary.main', alignSelf: 'center' }}
+                      src={message.pathimagem} height="60" width="80" />
+                      <Typography noWrap variant='data'>{message.datamsg}</Typography>
+                    <Typography variant='p'>{message.remetente}</Typography>
+                    </Stack>
                   </Grid>
                 </Grid>
 
@@ -210,20 +240,25 @@ function ChatPage(props) {
             //            alert('rigth' + localStorage.getItem('nomelogado') + ' = ' + nomevendedor);
             return (
               <Container maxWidth="md" sx={{marginTop: 2}}>
-                <Grid container spacing={0.5}>
+                <Grid container spacing={0.5} sx={{ textAlign: 'center', alignItems: 'center', }}>
+                <Grid item xs={4} sx={{ textAlign: 'center', alignItems: 'center', maxWidth: '30%'}}>
+                  <Stack direction="column" spacing={0.5}>
+                    <Avatar sx={{ border: 2, borderColor: 'primary.main', alignSelf: 'center', }}
+                      src={message.pathimagem} height="60" width="80" />
+                      <Typography noWrap variant='data'>{message.datamsg}</Typography>
+                    <Typography noWrap variant='p'>{message.remetente}</Typography>     
+                    </Stack>            
+                  </Grid>
                   <Grid item xs={8}>
                     <Box sx={{
                       bgcolor: '#fafafa',
                       pt: 2,
                       pb: 2,
+                      textAlign: 'center',
+                      borderRadius: 3
                     }}>
-                      <Typography variant='p'>{message.mensagem} : {message.datamsg}</Typography>
+                      <Typography variant='p'>{message.mensagem}</Typography>
                     </Box>
-                  </Grid>
-                  <Grid item xs={4} sx={{ textAlign: 'center', alignItems: 'center' }}>
-                    <Avatar sx={{ border: 2, borderColor: 'primary.main' }}
-                      src={message.pathimagem} height="60" width="80" />
-                    <Typography variant='p'>{message.remetente}</Typography>
                   </Grid>
                 </Grid>
 
@@ -232,7 +267,7 @@ function ChatPage(props) {
           }
         })
         }
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{marginTop: 3}}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
 
