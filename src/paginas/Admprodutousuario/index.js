@@ -200,7 +200,8 @@ function Admprodutousuario() {
         pathimagem: imageAsUrl,
         percentual: percentual,
         aprovado: false,
-        idusuario: userlog
+        idusuario: userlog,
+        nomevendedor: localStorage.getItem('nomelogado')
       })
       .then(() => {
         handleClick();

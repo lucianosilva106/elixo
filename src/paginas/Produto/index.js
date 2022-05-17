@@ -109,6 +109,19 @@ theme.typography.tag = {
 
 function Produtos() {
 
+  const [userid, setUserid] = useState('');
+
+  async function checkLogin(){
+    await firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        setUserid(user.uid);
+        }else{
+      }
+    })
+  }
+
+  checkLogin();
+
   const BootstrapDialogTitle = (props) => {
     const { children, onClose, ...other } = props;
 
@@ -233,11 +246,6 @@ function Produtos() {
   var ano = data.getFullYear();
   dataAtual = dia + '/' + mes + '/' + ano;
 
-  function irCarrinho() {
-    alert('vai para o carrinho')
-    window.location.href = '/carrinho';
-  }
-
   function salvarProdutocarrinho(idproduto, descricao, preco, pathimg) {
 
     var new_data = { idprod: idproduto, descprod: descricao, valor: preco, imgpath: pathimg };
@@ -252,7 +260,7 @@ function Produtos() {
 
     localStorage.setItem("produtocarrinho", JSON.stringify(old_data));
 
-    alert("Array salvo com sucesso");
+    setAddcar(true);
 
   }
 
@@ -621,7 +629,7 @@ function Produtos() {
                                 Adicionar ao carrinho
                               </Button>
                               <Button variant="outlined" disableElevation size="small"
-                                onClick={ChatPage(listaproduto.descricao)} >
+                                href={`/chatpage/${listaproduto.id}/${userid}`}>
                                 Falar com vendedor
                               </Button>
 
