@@ -7,7 +7,8 @@ import { orange, green, grey } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography, Container, Avatar, Grid, Box } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
-import { DateTimeInput } from 'react-admin';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/core/Alert';
 
 const theme = createTheme({
   palette: {
@@ -89,10 +90,20 @@ function ChatPage(props) {
 
   const [idvendedor, setIdvendedor] = useState('');
   const [vendedornome, setVendedornome] = useState('');
-  const [nomevendedor, setNomevendedor] = useState('');
   const [pathimagem, setPathimagem] = useState('');
   const [nomeproduto, setNomeproduto] = useState('');
+  const [remetentenome, setRemetentenome] = useState('');
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
+  const [open, setOpen, aberto] = React.useState(false);
+  
+  const handleClick = () => {
+    setOpen(true);
+  };
+  
   async function pegaProduto(idprod) {
     await firebase.firestore().collection('produtos')
       .doc(idprod)
@@ -112,6 +123,7 @@ function ChatPage(props) {
       .get()
       .then((snapshot) => {
         setPathimagem(snapshot.data().pathimagem);
+        setRemetentenome(snapshot.data().nome);
       })
   }
 
@@ -119,12 +131,31 @@ function ChatPage(props) {
 
   const [messages, setMessages] = useState([]);
 
+  var dt = ({
+    seconds: '',
+    nanoseconds: ''
+  })
+
+  const [isTyping, setTyping] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
   useEffect(() => {
     async function loadMessages() {
       await firebase.firestore().collection('chats').orderBy('datamsg')
       .onSnapshot((doc) => {
         let minhasMensagens = [];
         doc.forEach((item) => {
+          dt = item.data().datamsg;
+          let tseg = dt.seconds;
+          console.log(tseg);
           if (item.data().idproduto === idprod) {
             minhasMensagens.push({
               id: item.id,
@@ -132,12 +163,13 @@ function ChatPage(props) {
               nomevendedor: item.data().nomevendedor,
               remetente: item.data().remetente,
               pathimagem: item.data().pathimagem,
-//              datamsg: item.data().datamsg.toDate()
+//              datamsg: tseg
               datamsg: "12/05/2022"
             })
           }
         })
         setMessages(minhasMensagens)
+        
       })
     }
     loadMessages();
@@ -157,8 +189,18 @@ function ChatPage(props) {
       })
       .then(() => {
         setFormvalue('');
-        alert('mensagem gravada com sucesso');
+        setTyping(false);
+        handleClick();
       });
+  }
+
+  const handleChange = (event) => {
+    setFormvalue(event.target.value);
+    if (formvalue.length > 0){
+      setTyping(true);
+    }else{
+      setTyping(false);
+    }
   }
 
   return (
@@ -250,6 +292,7 @@ function ChatPage(props) {
         <Container maxWidth="md" sx={{marginTop: 3}}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
+              {isTyping ? <div>{remetentenome} está digitando...</div> : <div/>}
               <TextField
                 multiline
                 fullWidth
@@ -259,7 +302,7 @@ function ChatPage(props) {
                 id="descricao-form"
                 label="Digite sua mensagem aqui"
                 defaultValue="Mensagem_default"
-                value={formvalue} onChange={(e) => setFormvalue(e.target.value)} />
+                value={formvalue} onChange={handleChange} />
 
             </Grid>
             <Grid item xs={4}>
@@ -270,6 +313,12 @@ function ChatPage(props) {
                 }} onClick={sendMessage} endIcon={<SendIcon />}>Enviar</Button>
 
             </Grid>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Mensagem enviada com sucesso!
+              </Alert>
+            </Snackbar>
+
           </Grid>
         </Container>
       </>
