@@ -11,11 +11,12 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { InputLabel } from "@material-ui/core";
+import { InputLabel, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
+import TermosUso from '../TermosUso/index.js'
 
 const theme = createTheme({
   palette: {
@@ -103,11 +104,18 @@ function Cadastro() {
   const [open, setOpen] = React.useState(false);
   const [aberto, setAberto] = React.useState(false);
 
+  const [scroll, setScroll] = React.useState('paper');
+  const [termo, setTermo] = React.useState(false);
+
   const handleClick1 = () => {
     setOpen(true);
   };
   const handleClick2 = () => {
     setAberto(true);
+  };
+  const handleClick3 = (scrollType) => () => {
+    setTermo(true);
+    setScroll(scrollType);
   };
 
   const handleClose = (event, reason) => {
@@ -116,8 +124,18 @@ function Cadastro() {
     }
     setAberto(false);
     setOpen(false);
+    setTermo(false);
   };
 
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (termo) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [termo]);
 
   async function handleAdd() {
     await firebase.auth().createUserWithEmailAndPassword(email, senha)
@@ -287,6 +305,10 @@ function Cadastro() {
                   variant="h4"
                   label="Concordo e estou ciente dos Termos de Uso e Privacidade presentes nessa plataforma."
                 />
+                <br /><br />
+                <Link onClick={handleClick3('paper')} underline="always">
+                  {'Termos de Uso e Privacidade'}
+                </Link>
               </Grid>
             </Grid>
             <Button fullWidth variant="contained" disableElevation sx={{ mt: 3, mb: 2, color: 'white' }}
@@ -312,6 +334,30 @@ function Cadastro() {
           </Alert>
         </Snackbar>
       </Stack>
+
+      <Dialog
+        open={termo}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Termos de Uso e Privacidade</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            <TermosUso />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Fechar</Button>
+        </DialogActions>
+      </Dialog>
+
+
     </ThemeProvider>
   );
 }

@@ -9,14 +9,9 @@ import {
 } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import { orange, green, grey } from '@material-ui/core/colors';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { InputLabel } from "@material-ui/core";
 import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
@@ -27,7 +22,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
-import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -122,7 +116,6 @@ function Admproduto() {
   };
 
   const [userid, setUserid] = useState('');
-
   async function checkLogin() {
     await firebase.auth().onAuthStateChanged((user) => {
       if (user) {

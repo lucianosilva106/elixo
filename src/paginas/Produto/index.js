@@ -111,11 +111,11 @@ function Produtos() {
 
   const [userid, setUserid] = useState('');
 
-  async function checkLogin(){
+  async function checkLogin() {
     await firebase.auth().onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         setUserid(user.uid);
-        }else{
+      } else {
       }
     })
   }
@@ -266,7 +266,7 @@ function Produtos() {
 
   function abreChat(produto) {
     alert('estou aqui')
-//    setOpenchat(true);
+    //    setOpenchat(true);
     ChatPage(produto);
 
   }
@@ -296,7 +296,7 @@ function Produtos() {
                       component="img"
                       height="350"
                       elevation={0}
-                      sx={{ border: 0 }}/>
+                      sx={{ border: 0 }} />
                     <CardContent elevation={0} className='card-content'>
                       <Typography gutterBottom color="white" variant="h4">
                         Encontre seu usado
@@ -519,143 +519,122 @@ function Produtos() {
         </Stack>
       </Grid>
 
-      <Box
-        sx={{
-          pt: 8,
-          pb: 15,
-          alignItems: 'center',
-          alignContent: 'center',
-          alignSelf: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <Container maxWidth="lg">
-          <Paper elevation={0}
-            sx={{
-              minHeight: '450px',
-              bgcolor: 'primary.main',
-              alignItems: 'center',
-              alignContent: 'center',
-              alignSelf: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-            }}>
-              <Typography variant='h2' gutterBottom
-              sx={{color:'white', marginTop: '3%', }}>Últimas Ofertas</Typography>
 
-            <Container fixed
-              sx={{ marginTop: '1%', }}>
+      <Container maxWidth="lg" wrap='noWrap' sx={{
+        marginTop: 10,
+        bgcolor: 'primary.main',
+        alignItems: 'center',
+        alignContent: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderRadius: 2
+      }}>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }}
-                spacing={{ md: 1 }}
-                alignItems="center"
-                justifyContent="center"
-                sx={{
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  justifySelf: 'center',
-                }}>
+        <Typography variant='h2' gutterBottom
+          sx={{ color: 'white', marginTop: '3%', }}>Últimas Ofertas</Typography>
 
-                {listaprodutos.map((listaproduto) => {
-                  posicao = posicao + 1;
-                  return (
-                    <Grid xs zeroMinWidth sx={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginTop: '10%',
-                    }}
-                    
-                      key={listaproduto.id}>
 
-                      <Card sx={{ maxWidth: 250, minWidth: 50, backgroundColor: '#fafafa', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="140"
-                            image={listaproduto.pathimagem}
-                            alt="produto"
-                          />
-                          <CardContent sx={{
-                            justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
-                            justifySelf: 'center'
-                          }}>
-                            <Typography gutterBottom component="div"> {listaproduto.descricao} </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                        <Button fullWidth variant="outlined" disableElevation
-                          size='small' onClick={() => handleOnOpen(listaproduto.id)}>Adicionar ao Carrinho</Button>
-                      </Card>
-                      <Typography gutterBottom variant='p'>{listaproduto.isOpen}</Typography>
-                      {listaproduto.isOpen && (
-                        <div>
-                          <Dialog
-                            open={open}
-                            onClose={() => handleOnClose(listaproduto.id)}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <Avatar variant="rounded" src={listaproduto.pathimagem} 
-                            sx={{ width: 150, height: 150, marginTop: 3, alignItems: 'center', alignContent: 'center', alignSelf: 'center',
-                            justifyContent: 'center', textAlign: 'center', color: 'primary.main', border: 3, borderRadius: 1, }} />
-                            <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
-                              {listaproduto.descricao}
-                            </DialogTitle>
-                            
-                            <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                            <Box sx={{ bgcolor: 'primary.main', width: '20%', alignContent: 'center', color:'white',
+        
+
+          <Grid container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+            {listaprodutos.map((listaproduto) => {
+              posicao = posicao + 1;
+              return (
+                <Grid item xs={2} sm={4} md={4} lg 
+
+                  key={listaproduto.id}>
+
+                  <Card sx={{ maxWidth: 250, minWidth: 200, backgroundColor: '#fafafa',  }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={listaproduto.pathimagem}
+                        alt="produto"
+                      />
+                      <CardContent sx={{
+                        justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
+                        justifySelf: 'center'
+                      }}>
+                        <Typography gutterBottom component="div"> {listaproduto.descricao} </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <Button fullWidth variant="outlined" disableElevation
+                      size='small' onClick={() => handleOnOpen(listaproduto.id)}>Adicionar ao Carrinho</Button>
+                  </Card>
+                  <Typography gutterBottom variant='p'>{listaproduto.isOpen}</Typography>
+                  {listaproduto.isOpen && (
+                    <div>
+                      <Dialog
+                        open={open}
+                        onClose={() => handleOnClose(listaproduto.id)}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <Avatar variant="rounded" src={listaproduto.pathimagem}
+                          sx={{
+                            width: 150, height: 150, marginTop: 3, alignItems: 'center', alignContent: 'center', alignSelf: 'center',
+                            justifyContent: 'center', textAlign: 'center', color: 'primary.main', border: 3, borderRadius: 1,
+                          }} />
+                        <DialogTitle variant="h5" sx={{ color: 'primary.main' }} id="alert-dialog-title">
+                          {listaproduto.descricao}
+                        </DialogTitle>
+
+                        <DialogContent>
+                          <DialogContentText id="alert-dialog-description">
+                            <Box sx={{
+                              bgcolor: 'primary.main', width: '20%', alignContent: 'center', color: 'white',
                               alignItems: 'center', alignContent: 'center', justifyContent: 'center', textAlign: 'center',
-                               borderRadius: 1, textJustify: 'center',}}>
-                            <Typography variant="tag" gutterBottom>USADO</Typography>
+                              borderRadius: 1, textJustify: 'center',
+                            }}>
+                              <Typography variant="tag" gutterBottom>USADO</Typography>
                             </Box>
-                            </DialogContentText>
-                              <DialogContentText id="alert-dialog-description">
-                                <Typography variant="h6" gutterBottom>Informações</Typography>
-                                <Typography variant="p" gutterBottom>{listaproduto.info}</Typography>
-                              </DialogContentText>
-                              <DialogContentText sx={{marginTop: 2}} id="alert-dialog-description">
-                                <Box sx={{ bgcolor: '#fafafa', width: '20%', minHeight: 30, alignContent: 'center',
+                          </DialogContentText>
+                          <DialogContentText id="alert-dialog-description">
+                            <Typography variant="h6" gutterBottom>Informações</Typography>
+                            <Typography variant="p" gutterBottom>{listaproduto.info}</Typography>
+                          </DialogContentText>
+                          <DialogContentText sx={{ marginTop: 2 }} id="alert-dialog-description">
+                            <Box sx={{
+                              bgcolor: '#fafafa', width: '20%', minHeight: 30, alignContent: 'center',
                               alignItems: 'center', alignContent: 'center', justifyContent: 'center', textAlign: 'center',
-                              color: 'primary.main', border: 2, borderRadius: 1, textJustify: 'center',}}>
+                              color: 'primary.main', border: 2, borderRadius: 1, textJustify: 'center',
+                            }}>
                               <Typography variant="p" gutterBottom>R$ {listaproduto.preco}</Typography>
-                              </Box>
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button variant="contained" autoFocus disableElevation size="small"
-                                //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
-                                onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)}>
-                                Adicionar ao carrinho
-                              </Button>
-                              <Button variant="outlined" disableElevation size="small"
-                                href={`/chatpage/${listaproduto.id}/${userid}`}>
-                                Falar com vendedor
-                              </Button>
+                            </Box>
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button variant="contained" autoFocus disableElevation size="small"
+                            //                          onClick={() => adicionarCarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, posicao)} autoFocus>
+                            onClick={() => salvarProdutocarrinho(listaproduto.id, listaproduto.descricao, listaproduto.preco, listaproduto.pathimagem)}>
+                            Adicionar ao carrinho
+                          </Button>
+                          <Button variant="outlined" disableElevation size="small"
+                            href={`/chatpage/${listaproduto.id}/${userid}`}>
+                            Falar com vendedor
+                          </Button>
 
-                            </DialogActions>
-                          </Dialog>
+                        </DialogActions>
+                      </Dialog>
 
-                          <Snackbar open={addcar} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                              Produto adicionado ao carrinho!
-                            </Alert>
-                          </Snackbar>
+                      <Snackbar open={addcar} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                          Produto adicionado ao carrinho!
+                        </Alert>
+                      </Snackbar>
 
-                        </div>
-                      )}
+                    </div>
+                  )}
 
-                    </Grid>
-                  )
-                })}
-              </Stack>
-
-            </Container>
-
-          </Paper>
-        </Container>
-      </Box>
-
+                </Grid>
+              )
+            })}
+          </Grid>
+        
+      </Container>
 
     </ThemeProvider>
   )

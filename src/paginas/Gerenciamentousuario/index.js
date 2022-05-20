@@ -314,7 +314,7 @@ export default function Gerenciamentousuario() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-evenly'}}>
+      <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         <AppBar position="fixed" color="secondary" open={open} elevation={0}>
           <Toolbar>
@@ -324,21 +324,25 @@ export default function Gerenciamentousuario() {
               onClick={handleDrawerOpen}
               edge="start"
               sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
+                marginRight: 5, ...(open && { display: 'none' }),
               }}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" color="primary">
-              Dashboard - Re-User
-            </Typography>
+            <Box id="dashlogo"
+              noWrap
+                sx={{
+                  mr: 2, display: { xs: 'none', md: 'flex' },
+                  backgroundRepeat: 'no-repeat',
+                  width: 50,
+                  height: 50,
+                }} />
             <IconButton
               size="large"
               aria-label="account of current user"
               onClick={handleMenu}
               color="primary"
-              sx={{justifyContent: 'space-evenly'}}
+              
             >
               <AccountCircle />
             </IconButton>

@@ -8,3 +8,6 @@
     cursor: pointer;
     text-align: center;
   }
+  #dashlogo{
+    background-image: url(/src/paginas/img/reuser_NEW_LOGO.svg);
+}

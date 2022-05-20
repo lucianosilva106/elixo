@@ -101,11 +101,11 @@ export default function Header() {
     } else {
       window.location.href = '/produto';
     }
-   
+
   }
 
   const HomeClick = () => {
-    window.location.href = '/';
+    window.location.href = '/landingpage';
   };
   const QuemClick = () => {
     window.location.href = '/quemsomos';
@@ -250,7 +250,7 @@ export default function Header() {
             .then((snapshot) => {
               setPathimagem(snapshot.data().pathimagem)
             })
-        } 
+        }
       })
     }
 
@@ -296,8 +296,8 @@ export default function Header() {
           <Container maxWidth="xl" sx={{ color: 'secondary.main' }}>
             <Toolbar disableGutters sx={{ color: 'secondary.main' }}>
 
-            
-              <Typography
+
+              {/* <Typography
                 variant="h6"
                 noWrap
                 component="div"
@@ -306,7 +306,17 @@ export default function Header() {
                 onClick={checkLogin}
               >
                 Re-user
-              </Typography>
+      </Typography>*/}
+
+              <Box id="headerlogo"
+              noWrap
+                onClick={checkLogin}
+                sx={{
+                  mr: 2, display: { xs: 'none', md: 'flex' },
+                  backgroundRepeat: 'no-repeat',
+                  width: 50,
+                  height: 50,
+                }} />
 
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: 'secondary.main' }}>
                 <IconButton
@@ -345,19 +355,18 @@ export default function Header() {
                 </Menu>
               </Box>
 
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+              <Box id="headerlogo"
                 onClick={checkLogin}
-              >
-                Re-User
-              </Typography>
+                sx={{
+                  backgroundRepeat: 'no-repeat',
+                  width: 50,
+                  height: 50,
+                  flexGrow: 1, display: { xs: 'flex', md: 'none' } 
+                }} />
 
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: 'textos.main' }}>
                 <Typography className="geral">
-                  <Button color="secondary" href="/">Home</Button>
+                  <Button color="secondary" href="/landingpage">Home</Button>
                   <Button color="secondary" href="/quemsomos">Quem Somos</Button>
                   <Button color="secondary" href="/noticia">Saiba Mais</Button>
                   <Button color="secondary" onClick={checkLogin} variant="outlined" endIcon={<AccountCircleIcon />}>Entrar</Button>
@@ -365,13 +374,13 @@ export default function Header() {
               </Box>
 
               <IconButton aria-label="cart" onClick={MeuCarrinhoClick} >
-                    <ShoppingCartIcon />
-                </IconButton>
+                <ShoppingCartIcon />
+              </IconButton>
 
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Login">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{border: 2, borderColor: 'secondary.main'}} alt="imagem" src={pathimagem} />
+                    <Avatar sx={{ border: 2, borderColor: 'secondary.main' }} alt="imagem" src={pathimagem} />
                   </IconButton>
                 </Tooltip>
                 <Menu
