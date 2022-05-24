@@ -180,7 +180,6 @@ function Admproduto() {
           setProdutos(meusProdutos);
         })
     }
-
     loadProdutos();
 
   }, [])
@@ -271,6 +270,12 @@ function Admproduto() {
       })
   }
 
+  const [busca, setBusca] = useState('');
+
+//  const produtosfiltrados = produtos;
+
+//  const produtosfiltrados = produtos.filter((produto) => produto.includes(busca));
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -330,6 +335,19 @@ function Admproduto() {
             <Typography variant="h2" align="center" color="text.secondary" paragraph>
               Itens cadastrados para venda na plataforma.
             </Typography>
+            <TextField
+                multiline
+                fullWidth
+                margin="normal"
+                required
+                size="small"
+                type="text"
+                id="filtro-form"
+                label="Filtro"
+                defaultValue="filtro_default"
+                value={busca} 
+                onChange={(ev) => setBusca(ev.target.value)} />
+
           </Container>
         </Box>
 

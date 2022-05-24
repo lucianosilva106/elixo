@@ -154,8 +154,7 @@ function ChatPage(props) {
         let minhasMensagens = [];
         doc.forEach((item) => {
           dt = item.data().datamsg;
-          let tseg = dt.seconds;
-          console.log(tseg);
+          console.log(dt.seconds);
           if (item.data().idproduto === idprod) {
             minhasMensagens.push({
               id: item.id,
@@ -163,8 +162,7 @@ function ChatPage(props) {
               nomevendedor: item.data().nomevendedor,
               remetente: item.data().remetente,
               pathimagem: item.data().pathimagem,
-//              datamsg: tseg
-              datamsg: "12/05/2022"
+              datamsg: dt.seconds
             })
           }
         })
@@ -206,9 +204,7 @@ function ChatPage(props) {
   return (
 
     <ThemeProvider theme={theme}>
-
       <>
-
       <Box
           sx={{
             bgcolor: '#e8f5e9',

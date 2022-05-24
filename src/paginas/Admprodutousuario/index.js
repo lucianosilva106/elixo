@@ -201,6 +201,7 @@ function Admprodutousuario() {
         percentual: percentual,
         aprovado: false,
         idusuario: userlog,
+        categoria: "",
         nomevendedor: localStorage.getItem('nomelogado')
       })
       .then(() => {

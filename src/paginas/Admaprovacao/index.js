@@ -97,7 +97,7 @@ function Admaprovacao() {
         .onSnapshot((doc) => {
           let meusProdutos = [];
           doc.forEach((item) => {
-            if (item.data().aprovado == false)
+            if (item.data().aprovado === false)
             {
               meusProdutos.push({
                 id: item.id,
@@ -122,6 +122,28 @@ function Admaprovacao() {
       .delete()
       .then(() => {
         handleClick();
+        recarregaProdutos();
+      })
+  }
+
+  async function recarregaProdutos() {
+    await firebase.firestore().collection('produtos')
+      .onSnapshot((doc) => {
+        let meusProdutos = [];
+        doc.forEach((item) => {
+          if (item.data().aprovado === false)
+          {
+            meusProdutos.push({
+              id: item.id,
+              descricao: item.data().descricao,
+              info: item.data().info,
+              preco: item.data().preco,
+              pathimagem: item.data().pathimagem,
+            })
+          }
+        })
+
+        setProdutos(meusProdutos);
       })
   }
 
@@ -131,7 +153,8 @@ function Admaprovacao() {
           aprovado: true
       })
       .then(() => {
-            handleClickAprov();
+          handleClickAprov();
+          recarregaProdutos();
       })
       .catch((error) =>{
           alert('Erro ao aprovar produto: ' + error)
