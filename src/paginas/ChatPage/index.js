@@ -9,6 +9,7 @@ import { Typography, Container, Avatar, Grid, Box } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
+import datetime from 'react-datetime';
 
 const theme = createTheme({
   palette: {
@@ -131,11 +132,6 @@ function ChatPage(props) {
 
   const [messages, setMessages] = useState([]);
 
-  var dt = ({
-    seconds: '',
-    nanoseconds: ''
-  })
-
   const [isTyping, setTyping] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -153,16 +149,16 @@ function ChatPage(props) {
       .onSnapshot((doc) => {
         let minhasMensagens = [];
         doc.forEach((item) => {
-          dt = item.data().datamsg;
-          console.log(dt.seconds);
           if (item.data().idproduto === idprod) {
+            console.log(new Date(item.data().datamsg));
             minhasMensagens.push({
               id: item.id,
               mensagem: item.data().mensagem,
               nomevendedor: item.data().nomevendedor,
               remetente: item.data().remetente,
               pathimagem: item.data().pathimagem,
-              datamsg: dt.seconds
+              msgdata: item.data().msgdata,
+              msghora: item.data().msghora
             })
           }
         })
@@ -175,7 +171,18 @@ function ChatPage(props) {
 
   const [formvalue, setFormvalue] = useState('');
 
-  async function sendMessage() {
+  async function sendMessage() {  
+    var dataAtual = '';
+    var horaAtual = '';
+    var data = new Date();
+    var dia = String(data.getDate()).padStart(2, '0');
+    var mes = String(data.getMonth() + 1).padStart(2, '0');
+    var ano = data.getFullYear();
+    dataAtual = dia + '/' + mes + '/' + ano;
+    var hora = String(data.getHours());
+    var minuto = String(data.getMinutes() + 1).padStart(2, '0');
+    horaAtual = hora + ':' + minuto;
+    
     await firebase.firestore().collection('chats')
       .add({
         idproduto: idprod,
@@ -183,7 +190,9 @@ function ChatPage(props) {
         remetente: localStorage.getItem('nomelogado'),
         datamsg: firebase.firestore.Timestamp.now(),
         pathimagem: pathimagem,
-        mensagem: formvalue
+        mensagem: formvalue,
+        msgdata: dataAtual,
+        msghora: horaAtual
       })
       .then(() => {
         setFormvalue('');
@@ -247,7 +256,7 @@ function ChatPage(props) {
                   <Stack direction="column" spacing={0.5}>
                     <Avatar sx={{ border: 2, borderColor: 'primary.main', alignSelf: 'center' }}
                       src={message.pathimagem} height="60" width="80" />
-                      <Typography noWrap variant='data'>{message.datamsg}</Typography>
+                      <Typography>{message.msgdata} - {message.msghora}</Typography>
                     <Typography variant='p'>{message.remetente}</Typography>
                     </Stack>
                   </Grid>
@@ -263,7 +272,7 @@ function ChatPage(props) {
                   <Stack direction="column" spacing={0.5}>
                     <Avatar sx={{ border: 2, borderColor: 'primary.main', alignSelf: 'center', }}
                       src={message.pathimagem} height="60" width="80" />
-                      <Typography noWrap variant='data'>{message.datamsg}</Typography>
+                      <Typography noWrap variant='p'>{message.msgdata} - {message.msghora}</Typography>
                     <Typography noWrap variant='p'>{message.remetente}</Typography>     
                     </Stack>            
                   </Grid>

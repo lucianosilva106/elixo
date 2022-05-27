@@ -29,6 +29,7 @@ import Transacao from './paginas/Transacao';
 import Paypal from './paginas/Paypal';
 import ChatPage from './paginas/ChatPage';
 import TermosUso from './paginas/TermosUso';
+import Termo from './paginas/Termo';
 
 const Routes = () => {
     return(
@@ -63,6 +64,7 @@ const Routes = () => {
                 <Route exact path="/meusprodutos" component={Meuproduto} />
                 <Route exact path="/info/:id" component={Info} />
                 <Route exact path="/termosuso" component={TermosUso} />
+                <Route exact path="/termo" component={Termo} />
                 <Route path="*" component={Erro} />
             </Switch>
         </BrowserRouter>
