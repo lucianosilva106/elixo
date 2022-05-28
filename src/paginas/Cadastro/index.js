@@ -16,7 +16,7 @@ import Stack from '@material-ui/core/Stack'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/core/Alert';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
-import TermosUso from '../TermosUso/index.js'
+import Termo from '../Termo/index.js'
 
 const theme = createTheme({
   palette: {
@@ -349,7 +349,7 @@ function Cadastro() {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <TermosUso />
+            <Termo />
           </DialogContentText>
         </DialogContent>
         <DialogActions>

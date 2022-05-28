@@ -131,7 +131,9 @@ function Termo() {
         <Typography variant='p'> {termouso}</Typography><br/>
 
         <br/><Typography variant='h6'> 1. Do objeto </Typography><br/>
-        <Typography variant='p'>{objeto}</Typography><br/>
+        <Typography variant='p'>A plataforma Re-User Lixo Eletrônico, visa aproximar vendedores e compradores interessados em produtos eletrônicos usados. 
+A plataforma caracteriza-se pela prestação do seguinte serviço: Intermediação de compra e venda de produtos eletrônicos usados.
+</Typography><br/>
 
 <br/><Typography variant='h6'>2. Da aceitação</Typography><br/>
 <Typography variant='p'>O presente Termo estabelece obrigações contratadas de livre e espontânea vontade, por tempo indeterminado, entre a plataforma e as pessoas físicas ou jurídicas, usuárias do site e do aplicativo.

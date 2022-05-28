@@ -116,6 +116,9 @@ export default function Header() {
   const NoticiaClick = () => {
     window.location.href = '/noticia';
   };
+  const TermoClick = () => {
+    window.location.href = '/termo';
+  };
   const MeuCadastroClick = () => {
     if (localStorage.getItem('nomelogado') == null) {
       window.location.href = '/login';
@@ -403,7 +406,7 @@ export default function Header() {
                   <Divider />
                   <MenuItem textAlign="center" onClick={MeuCadastroClick}>Meu Perfil</MenuItem>
                   <MenuItem textAlign="center" onClick={painelClick}>Painel de Controle</MenuItem>
-                  <MenuItem textAlign="center" onClick={NoticiaClick}>Ajuda</MenuItem>
+                  <MenuItem textAlign="center" onClick={TermoClick}>Ajuda</MenuItem>
                   <MenuItem textAlign="center" onClick={fazerLogout}>Logout</MenuItem>
                 </Menu>
               </Box>
